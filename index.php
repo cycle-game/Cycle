@@ -108,7 +108,7 @@ if (isset($_POST['pseudo']) && isset($_POST['lvl'])) {
 
   <div id="JeuEtShare">
       
-      <div id="AinsiVientLeJeu"></div>
+      <div id="cycleCanvas"></div>
       
       <p id="ScoreSharing" class="hidden">Partagez votre score :<br/>
       <a href="#" id="OnWall">sur votre mur Facebook</a><br/>

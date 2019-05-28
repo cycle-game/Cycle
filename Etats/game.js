@@ -2,7 +2,7 @@
 // https://creativecommons.org/licenses/by-nc/2.0/fr/
 
 // Variable de jeu
-var game = new Phaser.Game(c, c, Phaser.CANVAS, 'AinsiVientLeJeu');
+var game = new Phaser.Game(c, c, Phaser.CANVAS, 'cycleCanvas');
 
 // Les états du jeu
 game.state.add('Boot', GameState.Boot);
