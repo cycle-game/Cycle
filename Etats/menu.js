@@ -5,7 +5,7 @@
 GameState.Explain = function (game) { };
 
 GameState.Explain.prototype = {
-	create: function() {
+    create: function() {
         
         // Un équivalent d'écouteur d'évènement (si on veut)
         this.space_key = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -13,39 +13,39 @@ GameState.Explain.prototype = {
         // Retour au menu avec Échap
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
         
-		// Présentation du jeu
+        // Présentation du jeu
         cliquable(c/2, c/2.5, lang.Presentation, 25, 0.5, 0.5, 0, 500, null, this);
-		
-		// Difficulté
-		this.choix_diff = [];
-		difficultes(this);
-		
+        
+        // Difficulté
+        this.choix_diff = [];
+        difficultes(this);
+        
         if (isNaN(Stats.diff))
             Stats.diff = 1;
         
-		this.choix_diff[Stats.diff].setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
-	},
-	souligne: function(sprite) {
-		
-		for (var val in this.choix_diff) {
-			this.choix_diff[val].setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
-		}
-		
-		sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
+        this.choix_diff[Stats.diff].setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
+    },
+    souligne: function(sprite) {
+        
+        for (var val in this.choix_diff) {
+            this.choix_diff[val].setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
+        }
+        
+        sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
         
         reset(Stats);
         Stats.diff = sprite.diff;
-		
-	},
+        
+    },
     update: function() {
         
         // Retour au menu
         if (this.esc_key.isDown)
             this.game.state.start('Menu');
         
-		// Démarrage du jeu
-		if (this.space_key.isDown)
-			this.game.state.start('Play');
+        // Démarrage du jeu
+        if (this.space_key.isDown)
+            this.game.state.start('Play');
     },
 };
 
@@ -53,9 +53,9 @@ GameState.Explain.prototype = {
 GameState.Menu = function (game) { };
 
 GameState.Menu.prototype = {
-	create: function() {
+    create: function() {
         
-		// Tout les labels sont créés aec la fonction cliquable prenant en para:
+        // Tout les labels sont créés aec la fonction cliquable prenant en para:
         // x, y, text, size, anchor x, anchor y, delay, speed, onDown, context
         var play = cliquable(c/2, c/2.2, lang.Jeu, 50, 0.5, 0.5, 0, 500, this.play, this);
         var or = cliquable(c/2, c/1.5, lang.Ou, 23, 0.5, 0.5, 300, 500, null, this);
@@ -72,17 +72,17 @@ GameState.Menu.prototype = {
         var logo = this.game.add.sprite(c/2, plataille, 'logo');
         logo.anchor.setTo(0.5,0);
         
-	},
-	raz: function() {
-		
-		// Remise à zero des scores
-		reset(Stats);
-		this.game.state.start('Menu');
-		
-	},
-	scores: function() {
+    },
+    raz: function() {
+        
+        // Remise à zero des scores
+        reset(Stats);
+        this.game.state.start('Menu');
+        
+    },
+    scores: function() {
         this.game.state.start('Scores');
-	},
+    },
     play: function() {
         this.game.state.start('Explain');
     },
@@ -90,9 +90,9 @@ GameState.Menu.prototype = {
         this.game.state.start('Edit');
     },
     update: function() {
-		
-		// Logo animé
-		this.logo_c.angle += .7;
-		
+        
+        // Logo animé
+        this.logo_c.angle += .7;
+        
     },
 };

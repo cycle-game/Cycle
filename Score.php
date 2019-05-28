@@ -92,15 +92,15 @@ else {
             text-align:center;
         }
         a {
-			display:inline-block;
-			padding:.3em;
-			background-color:#fbf3b4;
-			color:#040c4b;
-		}
-		a:hover {
-			background-color:#040c4b;
-			color:#fbf3b4;
-		}
+            display:inline-block;
+            padding:.3em;
+            background-color:#fbf3b4;
+            color:#040c4b;
+        }
+        a:hover {
+            background-color:#040c4b;
+            color:#fbf3b4;
+        }
     </style>
 </head>
 

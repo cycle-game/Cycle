@@ -1,7 +1,7 @@
 GameState.Scores = function (game) { };
 
 GameState.Scores.prototype = {
-	create: function() {
+    create: function() {
         
         var highscores = scores().split('|||');
         
@@ -10,21 +10,21 @@ GameState.Scores.prototype = {
         // Retour au menu
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
         
-		// Difficulté
-		this.choix_diff = [];
-		difficultes(this);
-		
+        // Difficulté
+        this.choix_diff = [];
+        difficultes(this);
+        
         if (isNaN(Stats.diff))
             Stats.diff = 1;
         
         this.diff = Stats.diff;
         
-		// Affichage des scores
+        // Affichage des scores
         this.scores = [];
         var margey = 70;
         var margex = 150;
         
-		for (var val in this.choix_diff) {
+        for (var val in this.choix_diff) {
             
             this.scores[val] = this.game.add.group();
             
@@ -57,27 +57,27 @@ GameState.Scores.prototype = {
             
         }
         
-		this.choix_diff[Stats.diff].setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
+        this.choix_diff[Stats.diff].setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
         
-	},
-	souligne: function(sprite) {
-		
+    },
+    souligne: function(sprite) {
+        
         // Selection
-		for (var val in this.choix_diff) {
-			this.choix_diff[val].setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
+        for (var val in this.choix_diff) {
+            this.choix_diff[val].setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
             this.scores[val].alpha = 0;
-		}
-		
-		sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
+        }
+        
+        sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
         this.diff = sprite.diff;
         this.scores[this.diff].alpha = 1;
-		
-	},
+        
+    },
     update: function() {
-		
+        
         // Retour au menu
         if (this.esc_key.isDown)
             this.game.state.start('Menu');
-		
+        
     }
 };

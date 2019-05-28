@@ -17,33 +17,33 @@ FB.init({
   version    : 'v2.0'
 });
 
-	facebook_share = function() {
-		 FB.ui(
-			  {
-			   method: 'share_open_graph',
+    facebook_share = function() {
+         FB.ui(
+              {
+               method: 'share_open_graph',
                 action_type: 'og.likes',
-			   name: 'And the amaaaziiiing name',
-			   caption: 'This is the amazing caption',
+               name: 'And the amaaaziiiing name',
+               caption: 'This is the amazing caption',
   action_properties: JSON.stringify({
       object:'http://cycle.ppersonne.fr/Score.php?pseudo=DanyPanda&lvl=16&score=1382&diff=0',
   }),
-			   description: (
-				  'A small JavaScript library that allows you to harness ' +
-				  'the power of Facebook, bringing the user\'s identity, ' +
-				  'AMAZIIING.'
-			   ),
-			   link: 'http://cycle.ppersonne.fr',
-			   picture: 'http://cycle.ppersonne.fr/Ressources/Facebook/Logo_only.png'
-			  },
-			  function(response) {
-				if (response && response.post_id) {
-				  //alert('Post was published.');
-				} else {
-				  //alert('Post was not published.');
-				}
-			  }
-			);
-		};
+               description: (
+                  'A small JavaScript library that allows you to harness ' +
+                  'the power of Facebook, bringing the user\'s identity, ' +
+                  'AMAZIIING.'
+               ),
+               link: 'http://cycle.ppersonne.fr',
+               picture: 'http://cycle.ppersonne.fr/Ressources/Facebook/Logo_only.png'
+              },
+              function(response) {
+                if (response && response.post_id) {
+                  //alert('Post was published.');
+                } else {
+                  //alert('Post was not published.');
+                }
+              }
+            );
+        };
     
 facebook_share();
     

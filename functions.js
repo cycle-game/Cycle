@@ -7,33 +7,33 @@ FB.init({
   version    : 'v2.0'
 });
 
-	facebook_share = function() {
-		 FB.ui(
-			  {
-			   method: 'share_open_graph',
+    facebook_share = function() {
+         FB.ui(
+              {
+               method: 'share_open_graph',
                 action_type: 'og.likes',
-			   name: 'And the amaaaziiiing name',
-			   caption: 'This is the amazing caption',
+               name: 'And the amaaaziiiing name',
+               caption: 'This is the amazing caption',
   action_properties: JSON.stringify({
       object:'http://cycle.ppersonne.fr/ScoreTest.php',
   }),
-			   description: (
-				  'A small JavaScript library that allows you to harness ' +
-				  'the power of Facebook, bringing the user\'s identity, ' +
-				  'AMAZIIING.'
-			   ),
-			   link: 'http://cycle.ppersonne.fr',
-			   picture: 'http://cycle.ppersonne.fr/Ressources/Facebook/Logo_only.png'
-			  },
-			  function(response) {
-				if (response && response.post_id) {
-				  //alert('Post was published.');
-				} else {
-				  //alert('Post was not published.');
-				}
-			  }
-			);
-		};
+               description: (
+                  'A small JavaScript library that allows you to harness ' +
+                  'the power of Facebook, bringing the user\'s identity, ' +
+                  'AMAZIIING.'
+               ),
+               link: 'http://cycle.ppersonne.fr',
+               picture: 'http://cycle.ppersonne.fr/Ressources/Facebook/Logo_only.png'
+              },
+              function(response) {
+                if (response && response.post_id) {
+                  //alert('Post was published.');
+                } else {
+                  //alert('Post was not published.');
+                }
+              }
+            );
+        };
     
 facebook_share();
     
@@ -74,94 +74,94 @@ function sociaux(Stats, pseudo, lng) {
 // Sauvegarde des scores
 function save(Stats) {
 
-	var data = "lvl="+Stats.level+"&score="+Stats.score+"&diff="+Stats.diff;
+    var data = "lvl="+Stats.level+"&score="+Stats.score+"&diff="+Stats.diff;
 
-	var request = new XMLHttpRequest();
-	request.open('POST', './BDD/Session.php', true);
-	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	request.onload = function() {
-	  if (request.status >= 200 && request.status < 400){
-		// Success!
-	  } else {
-		// Error
-	  }
-	};
-	request.send( data );
+    var request = new XMLHttpRequest();
+    request.open('POST', './BDD/Session.php', true);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400){
+        // Success!
+      } else {
+        // Error
+      }
+    };
+    request.send( data );
 }
 
 // Sauvegarde du (high)score
 function toHigh(Stats, pseudo) {
-	
-	var data = "lvl="+Stats.level+"&score="+Math.round(Stats.score)+"&pseudo="+pseudo+"&diff="+Stats.diff;
+    
+    var data = "lvl="+Stats.level+"&score="+Math.round(Stats.score)+"&pseudo="+pseudo+"&diff="+Stats.diff;
 
-	var request = new XMLHttpRequest();
-	request.open('POST', './BDD/HighScore.php', false);
-	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	request.onload = function() {
-	  if (request.status >= 200 && request.status < 400){
-		// Success!
-		console.log(request)
-	  } else {
-		// Error
-	  }
-	};
-	request.send( data );
-	
+    var request = new XMLHttpRequest();
+    request.open('POST', './BDD/HighScore.php', false);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400){
+        // Success!
+        console.log(request)
+      } else {
+        // Error
+      }
+    };
+    request.send( data );
+    
 }
 
 function scores() {
-	
-	var request = new XMLHttpRequest();
-	request.open('POST', './BDD/HighScore.php', false);
-	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	request.onload = function() {
-	  if (request.status >= 200 && request.status < 400){
-		// Success!
-	  } else {
-		return null;
-	  }
-	};
-	request.send();
-	// On peut retourner ça grâce à la désactivation de l'asynchrone
-	return request.response;
+    
+    var request = new XMLHttpRequest();
+    request.open('POST', './BDD/HighScore.php', false);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400){
+        // Success!
+      } else {
+        return null;
+      }
+    };
+    request.send();
+    // On peut retourner ça grâce à la désactivation de l'asynchrone
+    return request.response;
 }
 
 // Average d'un tableau
 function average(tableau) {
-	
-	var sum = 0;
-	
-	for(var x = 0; x < tableau.length; x++)
-	{
-	  sum += tableau[x];
-	}
+    
+    var sum = 0;
+    
+    for(var x = 0; x < tableau.length; x++)
+    {
+      sum += tableau[x];
+    }
 
-	return (sum / tableau.length);
+    return (sum / tableau.length);
 }
 
 // Création d'un texte cliquable (ou non)
 function cliquable(x, y, text, taille, anchor_x, anchor_y, delay, speed, onDown, context) {
-	
-	// Label
-	var toReturn = context.game.add.text(x, y, text,
-		{ font: taille+'px Arial', fill: '#'+bleu, align: 'center' });
-	toReturn.anchor.setTo(anchor_x, anchor_y);
-	toReturn.alpha = 0;
-	
-	// Animation
+    
+    // Label
+    var toReturn = context.game.add.text(x, y, text,
+        { font: taille+'px Arial', fill: '#'+bleu, align: 'center' });
+    toReturn.anchor.setTo(anchor_x, anchor_y);
+    toReturn.alpha = 0;
+    
+    // Animation
     if (speed != null)
-	   context.game.add.tween(toReturn).delay(delay).to({ alpha: 1}, speed).start();
-	
+       context.game.add.tween(toReturn).delay(delay).to({ alpha: 1}, speed).start();
+    
     var test = 2;
     
-	// Inputs
-	if (onDown != null) {
-		toReturn.inputEnabled = true;
-		toReturn.input.useHandCursor = true;
-		toReturn.events.onInputDown.add(onDown, context);
-	}
-	
-	return toReturn;
+    // Inputs
+    if (onDown != null) {
+        toReturn.inputEnabled = true;
+        toReturn.input.useHandCursor = true;
+        toReturn.events.onInputDown.add(onDown, context);
+    }
+    
+    return toReturn;
 }
 
 function reset(Stats) {

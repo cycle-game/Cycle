@@ -14,19 +14,19 @@ body, html {
 
 /* -------------------------------------------------------------------- Liens */
 a {
-	display:inline-block;
-	padding:.3em;
-	background-color:#fbf3b4;
-	color:#040c4b;
+    display:inline-block;
+    padding:.3em;
+    background-color:#fbf3b4;
+    color:#040c4b;
 }
 a:hover {
-	background-color:#040c4b;
-	color:#fbf3b4;
+    background-color:#040c4b;
+    color:#fbf3b4;
 }
 .credits a {
-	color:inherit;
-	background-color:inherit;
-	padding:inherit;
+    color:inherit;
+    background-color:inherit;
+    padding:inherit;
 }
 
 /* ------------------------------------------------------------ Score sharing */
@@ -53,8 +53,8 @@ a:hover {
     margin:auto;
 }
 #fbpage {
-	display:block;
-	text-align:center;
+    display:block;
+    text-align:center;
 }
 p {
     text-align:center;
@@ -105,13 +105,13 @@ p {
 
 
 @media screen and (max-width: 1000px) {
-	#ScoreSharing {
-		position:inherit;
-		top:auto;
-		right:auto;
-		text-align: center;
-		margin-right:auto;
-	}
+    #ScoreSharing {
+        position:inherit;
+        top:auto;
+        right:auto;
+        text-align: center;
+        margin-right:auto;
+    }
 }
 
 @media screen and (max-width: 800px) {
