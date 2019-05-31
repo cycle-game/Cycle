@@ -147,7 +147,7 @@ if (isset($_POST['pseudo']) && isset($_POST['lvl'])) {
 
     <!-- Scripts -->
 
-  <script type="text/javascript" src="phaser.min.js?<?php echo $v; ?>"></script>
+  <script type="text/javascript" src="http://div.ppersonne.fr/Cycle/phaser.min.js?<?php echo $v; ?>"></script>
   
   <script type="text/javascript" src="variables.js?<?php echo $v; ?>"></script>
   <script type="text/javascript" src="functions.js?<?php echo $v; ?>"></script>
