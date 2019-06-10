@@ -1,0 +1,24 @@
+{
+  "name": "cycle-game",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/cycle-game/Cycle.git",
+  "author": "Rémi Perrot",
+  "contributors": [
+    {
+      "name": "Rémi Perrot"
+    },
+    {
+      "name": "Julien Giovaresco"
+    },
+    {
+      "name": "Gaëtan Maisse",
+      "email": "gaetanmaisse@gmail.com"
+    },
+    {
+      "name": "Marc Schaller"
+    }
+  ],
+  "license": "MIT",
+  "private": false
+}
