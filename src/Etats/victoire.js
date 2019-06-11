@@ -1,8 +1,4 @@
-// On crée l'état du menu
-GameState.Victoire = function (game) {
-};
-
-GameState.Victoire.prototype = {
+export const Victoire = {
   create: function () {
 
     var label = cliquable(c / 2, c / 4, lang.Victoire + "\n\n" + Math.round(Stats.score), 25, 0.5, 0.5, 0, 500, null, this);

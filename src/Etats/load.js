@@ -1,17 +1,18 @@
 // Cycle || CC BY-NC 2.0 FR Rémi Perrot 2014
 // https://creativecommons.org/licenses/by-nc/2.0/fr/
+import { c, jaune } from '../variables';
+import { en, fr } from './levels';
 
 // Variable globale
-GameState = {};
+export let preloading2;
+export let preloading1;
 
 // Création de l'objet boot contenant les méthodes par défaut de Phaser
-GameState.Boot = function (game) {
-};
+
 
 // On utilise la propriété prototype pour remplir notre GameState.Boot
 // On aurait pu faire une variable : var blabla = { preload:function(){} }
-GameState.Boot.prototype = {
-
+export const Boot = {
   preload: function () {
     // Couleur de fond
     this.game.stage.setBackgroundColor(jaune);
@@ -28,15 +29,12 @@ GameState.Boot.prototype = {
 };
 
 // L'état où le loader se lohad.
-GameState.Load = function (game) {
-};
-
-GameState.Load.prototype = {
+export const Load = {
   preload: function () {
 
     // Ici on crée deux sprites, un en fond et un au dessus
-    preloading2 = game.add.sprite(0, 0, 'load_plein');
-    preloading1 = game.add.sprite(0, 0, 'load_vide');
+    preloading2 = this.game.add.sprite(0, 0, 'load_plein');
+    preloading1 = this.game.add.sprite(0, 0, 'load_vide');
 
     // Celui du dessus sera révélé petit à petit
     this.game.load.setPreloadSprite(preloading1);
@@ -69,13 +67,12 @@ GameState.Load.prototype = {
   }
 };
 
-GameState.Langue = function (game) {
-};
+export let lang;
 
-GameState.Langue.prototype = {
+export const Langue = {
   create: function () {
 
-    var lang = this.game.add.sprite(0, 0, 'lang');
+    lang = this.game.add.sprite(0, 0, 'lang');
 
     // Handcursor
     lang.inputEnabled = true;

@@ -1,7 +1,4 @@
-GameState.Scores = function (game) {
-};
-
-GameState.Scores.prototype = {
+export const Scores = {
   create: function () {
 
     var highscores = scores().split('|||');

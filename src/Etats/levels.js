@@ -3,7 +3,7 @@
 
 
 // fr_FR
-var fr = {
+export const fr = {
   Lang: "fr",
   Tester: "Tester",
   Presentation: "Bienvenue !\n\nDéplacez vous avec les flèches du clavier.\nUtilisez espace pour sauter.\nP pour mettre en pause.\n\nAtteignez le dernier niveau afin de\nsauvegarder et partager votre score !\n\n\nAppuyez sur espace pour commencer\n\nFuyez la nuit !",
@@ -23,7 +23,7 @@ var fr = {
 };
 
 // en_UK
-var en = {
+export const en = {
   Lang: "en",
   Tester: "Try",
   Presentation: "Looking for adventures ?\nMove yourself with the arrow keys.\nUse space to jump.\nP to pause.\n\nReach the last level for\nsaving & sharing your score !\n\n\nPush space to start\n\nDon't get hit by the night !",
@@ -43,7 +43,7 @@ var en = {
 };
 
 // Niveaux
-var levels = [
+export const levels = [
   /* 1 */ {
     plateformes: [[46.45161290322581, 0], [81.29032258064515, 0], [116.1290322580645, 0], [150.96774193548387, 0], [185.80645161290326, 0], [220.64516129032265, 0], [255.48387096774204, 0], [290.3225806451614, 0], [325.1612903225808, 0]],
     pieges: [],
