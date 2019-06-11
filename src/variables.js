@@ -15,7 +15,7 @@ var type = "plat";
 var invert_redim = 1;
 
 var pi180 = Math.PI / 180;
-var pi180_invers = 1/pi180;
+var pi180_invers = 1 / pi180;
 
 var edited_lvl = {};
 
@@ -33,7 +33,7 @@ var Stats = {level: 0, score: 0, diff: 1};
 var nb_tours = 0;
 var nb_etoiles = 0;
 
-var cplan = c/1.8;
+var cplan = c / 1.8;
 /* Positions des plateformes
 // (taille de la planête = c/3)
 var c_gen = ( (cplan - c/6) / 4 );
@@ -50,7 +50,7 @@ var nuit_depart = -10;
 //var pre_calcul_dplct = (vrotate * 360) / 2 * Math.PI;
 // Scale
 var s = 1;
-var s_invers = 1/s;
+var s_invers = 1 / s;
 
 // Taille des plateformes
 var plataille = 20;
