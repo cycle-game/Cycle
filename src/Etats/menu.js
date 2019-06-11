@@ -1,11 +1,11 @@
 // Cycle || CC BY-NC 2.0 FR Rémi Perrot 2014
 // https://creativecommons.org/licenses/by-nc/2.0/fr/
-
 // On crée l'état du menu
-GameState.Explain = function (game) {
-};
+import { cliquable, difficultes, reset } from "../functions";
+import { c, plataille, Stats } from '../variables';
+import { lang } from './load';
 
-GameState.Explain.prototype = {
+export const Explain = {
   create: function () {
 
     // Un équivalent d'écouteur d'évènement (si on veut)
@@ -51,10 +51,7 @@ GameState.Explain.prototype = {
 };
 
 // Précédant les explications : choix entre editor et game
-GameState.Menu = function (game) {
-};
-
-GameState.Menu.prototype = {
+export const Menu = {
   create: function () {
 
     // Tout les labels sont créés aec la fonction cliquable prenant en para:

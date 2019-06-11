@@ -49,13 +49,16 @@ facebook_share();
 }(document, 'script', 'facebook-jssdk'));
 */
 
+import { bleu, c, plataille } from './variables';
+import { lang } from './Etats/load';
+
 //http://forum.webrankinfo.com/equivalent-urlencode-javascript-t51434.html
-function urlencode(str) {
+export function urlencode(str) {
   return escape(str.replace(/%/g, '%25').replace(/\+/g, '%2B')).replace(/%25/g, '%');
 }
 
 // Pré-partage pour les réseaux sociaux
-function sociaux(Stats, pseudo, lng) {
+export function sociaux(Stats, pseudo, lng) {
 
   var url = 'http://cycle.ppersonne.fr/Score.php?pseudo=' + pseudo +
     '&lvl=' + Stats.level +
@@ -74,7 +77,7 @@ function sociaux(Stats, pseudo, lng) {
 }
 
 // Sauvegarde des scores
-function save(Stats) {
+export function save(Stats) {
 
   var data = "lvl=" + Stats.level + "&score=" + Stats.score + "&diff=" + Stats.diff;
 
@@ -92,7 +95,7 @@ function save(Stats) {
 }
 
 // Sauvegarde du (high)score
-function toHigh(Stats, pseudo) {
+export function toHigh(Stats, pseudo) {
 
   var data = "lvl=" + Stats.level + "&score=" + Math.round(Stats.score) + "&pseudo=" + pseudo + "&diff=" + Stats.diff;
 
@@ -111,7 +114,7 @@ function toHigh(Stats, pseudo) {
 
 }
 
-function scores() {
+export function scores() {
 
   var request = new XMLHttpRequest();
   request.open('POST', './BDD/HighScore.php', false);
@@ -129,7 +132,7 @@ function scores() {
 }
 
 // Average d'un tableau
-function average(tableau) {
+export function average(tableau) {
 
   var sum = 0;
 
@@ -141,7 +144,7 @@ function average(tableau) {
 }
 
 // Création d'un texte cliquable (ou non)
-function cliquable(x, y, text, taille, anchor_x, anchor_y, delay, speed, onDown, context) {
+export function cliquable(x, y, text, taille, anchor_x, anchor_y, delay, speed, onDown, context) {
 
   // Label
   var toReturn = context.game.add.text(x, y, text,
@@ -165,13 +168,13 @@ function cliquable(x, y, text, taille, anchor_x, anchor_y, delay, speed, onDown,
   return toReturn;
 }
 
-function reset(Stats) {
+export function reset(Stats) {
   Stats.level = 0;
   Stats.score = 0;
   Stats.diff = 1;
 }
 
-function ecart(nombre, marge) {
+export function ecart(nombre, marge) {
 
   var plan = c - 2 * marge;
 
@@ -182,7 +185,7 @@ function ecart(nombre, marge) {
 }
 
 // Choix de la difficulté
-function difficultes(contexte, Stats) {
+export function difficultes(contexte, Stats) {
 
   // Mise en place des difficultés
   var marge = 100;
@@ -197,7 +200,7 @@ function difficultes(contexte, Stats) {
 
 }
 
-function choix(sprite) {
+export function choix(sprite) {
 
   if (!isNaN(sprite)) {
 

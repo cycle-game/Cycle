@@ -1,14 +1,40 @@
 // Cycle || CC BY-NC 2.0 FR Rémi Perrot 2014
 // https://creativecommons.org/licenses/by-nc/2.0/fr/
+import {
+  anim as animVar,
+  bleu,
+  c,
+  cplan,
+  edited_lvl,
+  fps_adapt as fps_adaptVar,
+  fps_array,
+  nb_etoiles as nb_etoilesVar,
+  nb_tours as nb_toursVar,
+  nuit_depart,
+  nuit_rotat as nuit_rotatVar,
+  nuit_rotat_diff,
+  pi180,
+  plataille,
+  rotat,
+  s as sVar,
+  s_invers as s_inversVar,
+  Stats,
+} from '../variables';
+import { average, save } from "../functions";
+import { levels } from "./levels";
+
+let nuit_rotat = nuit_rotatVar;
+let nb_tours = nb_toursVar;
+let nb_etoiles = nb_etoilesVar;
+let s = sVar;
+let s_invers = s_inversVar;
+let anim = animVar;
+let fps_adapt = fps_adaptVar;
 
 // Attention,  ici on a une grosse partie du jeu
 // C'est l'état (state) où tout les niveaux seront
 // mis en place.
-
-GameState.Play = function (game) {
-};
-
-GameState.Play.prototype = {
+export const Play = {
   create: function () {
 
     this.game.paused = true;

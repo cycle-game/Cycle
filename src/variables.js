@@ -1,69 +1,69 @@
-var c = 600; // Sera la variable de base, mais on dézoomera dans certains niveau
-var sound = true;
-var dead = 0;
-var bleu = "040c4b";
-var jaune = 0Xfbf3b4;
-var lang = {};
+export const c = 600; // Sera la variable de base, mais on dézoomera dans certains niveau
+export const sound = true;
+export const dead = 0;
+export const bleu = "040c4b";
+export const jaune = 0Xfbf3b4;
+export const lang = {};
 
 // -- \\
 
-var hauteur = 10;
+export const hauteur = 10;
 
-var alph = 0.5;
-var inac = 0.05;
-var type = "plat";
-var invert_redim = 1;
+export const alph = 0.5;
+export const inac = 0.05;
+export const type = "plat";
+export const invert_redim = 1;
 
-var pi180 = Math.PI / 180;
-var pi180_invers = 1 / pi180;
+export const pi180 = Math.PI / 180;
+export const pi180_invers = 1 / pi180;
 
-var edited_lvl = {};
+export const edited_lvl = {};
 
 // -- \\
 
 
 // Level actuel
-var Stats = {level: 0, score: 0, diff: 1};
+export const Stats = {level: 0, score: 0, diff: 1};
 // 4 types de difficultés :
 // _ 0 = facile
 // _ 1 = normal
 // _ 2 = difficile
 // _ 3 = inhumain
 
-var nb_tours = 0;
-var nb_etoiles = 0;
+export let nb_tours = 0;
+export const nb_etoiles = 0;
 
-var cplan = c / 1.8;
+export const cplan = c / 1.8;
 /* Positions des plateformes
 // (taille de la planête = c/3)
-var c_gen = ( (cplan - c/6) / 4 );
-var c1 = c_gen * 3;
-var c2 = c_gen * 2;
-var c3 = c_gen * 1;
+export const c_gen = ( (cplan - c/6) / 4 );
+export const c1 = c_gen * 3;
+export const c2 = c_gen * 2;
+export const c3 = c_gen * 1;
 */
 // Vitesse de rotation
-var rotat = 2;
-var nuit_rotat = 1.3;
-var nuit_rotat_diff = [0.9, 1.1, 1.3];
-var nuit_depart = -10;
-//var vrotate = 1.5;
-//var pre_calcul_dplct = (vrotate * 360) / 2 * Math.PI;
+export const rotat = 2;
+export let nuit_rotat = 1.3;
+export const nuit_rotat_diff = [0.9, 1.1, 1.3];
+export const nuit_depart = -10;
+//export const vrotate = 1.5;
+//export const pre_calcul_dplct = (vrotate * 360) / 2 * Math.PI;
 // Scale
-var s = 1;
-var s_invers = 1 / s;
+export const s = 1;
+export const s_invers = 1 / s;
 
 // Taille des plateformes
-var plataille = 20;
+export const plataille = 20;
 
 // FPS
-var fps_adapt = 1;
-var fps_array = [];
+export const fps_adapt = 1;
+export const fps_array = [];
 
 // Animation de fin et de début
-var anim = true;
+export const anim = true;
 
-//var enregistrement = false;
+//export const enregistrement = false;
 
 // -- \\
 
-var pseudo = "";
+export const pseudo = "";
