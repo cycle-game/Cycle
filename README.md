@@ -1,7 +1,8 @@
 # Cycle
 HTML5 game made with Phaser
 
-## Deploy locally
+## Run locally
 
-1. Clone the repository
-2. In a browser, open `Test.html`
+1. Clone the repository: `git clone https://github.com/cycle-game/Cycle.git`
+2. Install dependencies: `yarn install`
+3. Start Webpack dev server: `yarn start:dev`
