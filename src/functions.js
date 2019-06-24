@@ -148,13 +148,13 @@ export function cliquable(x, y, text, taille, anchor_x, anchor_y, delay, speed, 
 
   // Label
   var toReturn = context.game.add.text(x, y, text,
-    {font: taille + 'px Arial', fill: '#' + bleu, align: 'center'});
+    { font: taille + 'px Arial', fill: '#' + bleu, align: 'center' });
   toReturn.anchor.setTo(anchor_x, anchor_y);
   toReturn.alpha = 0;
 
   // Animation
   if (speed != null)
-    context.game.add.tween(toReturn).delay(delay).to({alpha: 1}, speed).start();
+    context.game.add.tween(toReturn).delay(delay).to({ alpha: 1 }, speed).start();
 
   var test = 2;
 

@@ -258,10 +258,10 @@ export const Play = {
 
     // Dans le cas où c'est le premier passage, petite animation posée
     if (anim) {
-      this.dude.scale = {x: 1, y: 0.01};
+      this.dude.scale = { x: 1, y: 0.01 };
       this.dude.body.gravity.y = 0;
       //anim = false;
-      var t = this.game.add.tween(this.dude.scale).to({x: 1, y: 1}, 350).start();
+      var t = this.game.add.tween(this.dude.scale).to({ x: 1, y: 1 }, 350).start();
       t.onComplete.add(function () {
         this.dude.body.gravity.y = 1000;
         anim = false;
@@ -482,7 +482,7 @@ export const Play = {
     /* */
     etoile.alive = false;
     /* */
-    var t = this.game.add.tween(etoile.scale).to({x: 0, y: 0}, 300).start();
+    var t = this.game.add.tween(etoile.scale).to({ x: 0, y: 0 }, 300).start();
     /* */
     t.onComplete.add(function () {
       this.kill();
@@ -504,7 +504,7 @@ export const Play = {
       // ------------- Animation de fin de niveau //
       this.dude.body.gravity.y = 0;
       anim = true;
-      var t = this.game.add.tween(this.dude.scale).to({x: 1, y: 0.01}, 200).start();
+      var t = this.game.add.tween(this.dude.scale).to({ x: 1, y: 0.01 }, 200).start();
       t.onComplete.add(function () {
 
         // ------------ ----- Changement d'état //
