@@ -1,7 +1,3 @@
-// Cycle || CC BY-NC 2.0 FR Rémi Perrot 2014
-// https://creativecommons.org/licenses/by-nc/2.0/fr/
-
-
 export const Edit = {
   create: function () {
 

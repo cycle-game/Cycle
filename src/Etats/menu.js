@@ -1,5 +1,3 @@
-// Cycle || CC BY-NC 2.0 FR Rémi Perrot 2014
-// https://creativecommons.org/licenses/by-nc/2.0/fr/
 // On crée l'état du menu
 import { cliquable, difficultes, reset } from "../functions";
 import { c, plataille, Stats } from '../variables';
