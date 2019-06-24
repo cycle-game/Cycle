@@ -3,13 +3,12 @@ import p2 from 'p2';
 import Phaser from 'phaser';
 
 import { c } from '../variables';
-import { Victoire } from "./victoire";
-import { Boot, Langue, Load } from "./load";
-import { Explain, Menu } from "./menu";
-import { Edit } from "./edit";
-import { Scores } from "./scores";
-import { Play } from "./play";
-
+import { Victoire } from './victoire';
+import { Boot, Langue, Load } from './load';
+import { Explain, Menu } from './menu';
+import { Edit } from './edit';
+import { Scores } from './scores';
+import { Play } from './play';
 
 // Variable de jeu
 export const game = new Phaser.Game(c, c, Phaser.CANVAS, 'cycleCanvas');
