@@ -29,10 +29,14 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.3",
+    "expose-loader": "^0.7.5",
     "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.33.0",
     "webpack-cli": "^3.3.3",
     "webpack-dev-server": "^3.7.1"
+  },
+  "dependencies": {
+    "phaser": "2.5.0"
   }
 }
