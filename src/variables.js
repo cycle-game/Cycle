@@ -1,8 +1,8 @@
 export const c = 600; // Sera la variable de base, mais on dézoomera dans certains niveau
 export const sound = true;
 export const dead = 0;
-export const bleu = "040c4b";
-export const jaune = 0Xfbf3b4;
+export const bleu = '040c4b';
+export const jaune = 0xfbf3b4;
 export const lang = {};
 
 // -- \\
@@ -11,7 +11,7 @@ export const hauteur = 10;
 
 export const alph = 0.5;
 export const inac = 0.05;
-export const type = "plat";
+export const type = 'plat';
 export const invert_redim = 1;
 
 export const pi180 = Math.PI / 180;
@@ -20,7 +20,6 @@ export const pi180_invers = 1 / pi180;
 export const edited_lvl = {};
 
 // -- \\
-
 
 // Level actuel
 export const Stats = { level: 0, score: 0, diff: 1 };
@@ -66,4 +65,4 @@ export const anim = true;
 
 // -- \\
 
-export const pseudo = "";
+export const pseudo = '';

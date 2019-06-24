@@ -1,509 +1,462 @@
 import {
-  c,
-  hauteur,
-  inac,
-  invert_redim as invert_redimVar,
-  plataille,
-  edited_lvl,
-  alph,
-  pi180_invers
-} from "../variables";
-import { Play } from "./play";
-import { fr as lang } from "./levels";
+    c,
+    hauteur,
+    inac,
+    invert_redim as invert_redimVar,
+    plataille,
+    edited_lvl,
+    alph,
+    pi180_invers,
+} from '../variables';
+import { Play } from './play';
+import { fr as lang } from './levels';
 
 let invert_redim = invert_redimVar;
 
 export const Edit = {
-  create: function () {
+    create: function() {
+        // ------------------------------------------------------------------ //
+        // --------------------------------------------------- Retour au menu //
 
-    // ------------------------------------------------------------------ //
-    // --------------------------------------------------- Retour au menu //
+        this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
-    this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------ Conteneur général //
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------ Conteneur général //
+        this.general = this.game.add.group();
 
-    this.general = this.game.add.group();
+        this.general.x = c / 2;
+        this.general.y = c / 2; // Ici, on centre la planete
 
-    this.general.x = c / 2;
-    this.general.y = c / 2; // Ici, on centre la planete
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // -------------------------------------------- Personnage et planete //
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // -------------------------------------------- Personnage et planete //
+        this.dude = this.general.create(0, -c / 3, 'dude');
+        this.dude.anchor.set(0.5);
+        this.dude.alpha = 0.3;
 
-    this.dude = this.general.create(0, -c / 3, 'dude');
-    this.dude.anchor.set(0.5);
-    this.dude.alpha = 0.3;
+        this.plnte = this.general.create(0, 0, 'planete');
+        this.plnte.anchor.set(0.5);
 
-    this.plnte = this.general.create(0, 0, 'planete');
-    this.plnte.anchor.set(0.5);
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------ Redimensionnement //
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------ Redimensionnement //
+        var maxPlat = (hauteur * plataille + c / 6 + plataille + this.dude.height) * 2;
 
-    var maxPlat = ((hauteur * plataille + c / 6) + plataille + this.dude.height) * 2;
+        if (maxPlat > c)
+            // Redimensionnement
+            this.redimensionne(c / maxPlat);
 
-    if (maxPlat > c)
-    // Redimensionnement
-      this.redimensionne(c / maxPlat);
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ----------------------------------------------------------- Objets //
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ----------------------------------------------------------- Objets //
+        this.plateformes = this.game.add.group(this.general);
+        this.pieges = this.game.add.group(this.general);
 
-    this.plateformes = this.game.add.group(this.general);
-    this.pieges = this.game.add.group(this.general);
+        this.etoiles = this.game.add.group(this.general);
+        // Décalage d'une demie-plateforme (raison inconnue)
 
-    this.etoiles = this.game.add.group(this.general);
-    // Décalage d'une demie-plateforme (raison inconnue)
+        this.etoile_pos = this.general.create(0, 0, 'et');
+        this.etoile_pos.alpha = 0;
+        this.etoile_pos.anchor.set(0.6);
+        // Rajout d'informations liées au sprite
+        this.etoile_pos.calculDeg = 0;
+        this.etoile_pos.calculLvl = 0;
 
-    this.etoile_pos = this.general.create(0, 0, "et");
-    this.etoile_pos.alpha = 0;
-    this.etoile_pos.anchor.set(0.6);
-    // Rajout d'informations liées au sprite
-    this.etoile_pos.calculDeg = 0;
-    this.etoile_pos.calculLvl = 0;
+        this.makeSprite();
 
-    this.makeSprite();
+        this.menu = this.game.add.group(this.general);
+        this.menu.x = maxPlat / 2;
+        this.menu.y = -maxPlat / 2;
 
-    this.menu = this.game.add.group(this.general);
-    this.menu.x = maxPlat / 2;
-    this.menu.y = -maxPlat / 2;
+        // Choix du type d'objets
+        this.plateforme = this.menu.create(-plataille * 1.5, plataille * 0.5, 'plt');
+        this.piege = this.menu.create(-plataille * 3, plataille * 0.5, 'pie');
+        this.etoile = this.menu.create(-plataille * 1, plataille * 2.5, 'et');
+        this.etoile.anchor.set(0.5);
 
-    // Choix du type d'objets
-    this.plateforme = this.menu.create(-plataille * 1.5,
-      plataille * .5, 'plt');
-    this.piege = this.menu.create(-plataille * 3,
-      plataille * .5, 'pie');
-    this.etoile = this.menu.create(-plataille * 1,
-      plataille * 2.5, 'et');
-    this.etoile.anchor.set(0.5);
+        this.launch = this.game.add.text(plataille, plataille, lang.Tester);
+        this.launch.anchor.setTo(0, 0);
 
-    this.launch = this.game.add.text(plataille, plataille, lang.Tester);
-    this.launch.anchor.setTo(0, 0);
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ---------------------------------------------- Gestion des cliques //
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ---------------------------------------------- Gestion des cliques //
+        this.menu.forEachAlive(this.menuForeach, this);
 
-    this.menu.forEachAlive(this.menuForeach, this);
+        this.plateformes.forEachAlive(function(c) {
+            c.inputEnabled = true;
+            c.input.useHandCursor = true;
+            c.events.onInputDown.add(alpha, this);
+            c.events.onInputOver.add(over, this);
+            c.events.onInputOut.add(out, this);
+        });
 
-    this.plateformes.forEachAlive(function (c) {
-      c.inputEnabled = true;
-      c.input.useHandCursor = true;
-      c.events.onInputDown.add(alpha, this);
-      c.events.onInputOver.add(over, this);
-      c.events.onInputOut.add(out, this);
-    });
+        this.pieges.forEachAlive(function(c) {
+            c.inputEnabled = true;
+            c.input.useHandCursor = true;
+            c.events.onInputDown.add(alpha, this);
+            c.events.onInputOver.add(over, this);
+            c.events.onInputOut.add(out, this);
+            c.inputEnabled = false;
+        });
 
-    this.pieges.forEachAlive(function (c) {
-      c.inputEnabled = true;
-      c.input.useHandCursor = true;
-      c.events.onInputDown.add(alpha, this);
-      c.events.onInputOver.add(over, this);
-      c.events.onInputOut.add(out, this);
-      c.inputEnabled = false;
-    });
+        this.game.input.onDown.add(this.clickGeneral, this);
 
-    this.game.input.onDown.add(this.clickGeneral, this);
+        this.launch.inputEnabled = true;
+        this.launch.input.useHandCursor = true;
+        this.launch.events.onInputDown.add(this.letsTry, this);
 
-    this.launch.inputEnabled = true;
-    this.launch.input.useHandCursor = true;
-    this.launch.events.onInputDown.add(this.letsTry, this);
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+    },
+    letsTry: function() {
+        // ------------------------------------------------------------------ //
+        // ---------------------------------- Mise-en-place du niveau d'essai //
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-  },
-  letsTry: function () {
+        edited_lvl.plateformes = [];
+        edited_lvl.etoiles = [];
+        edited_lvl.pieges = [];
 
-    // ------------------------------------------------------------------ //
-    // ---------------------------------- Mise-en-place du niveau d'essai //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ----------------------------------------- Écriture des plateformes //
 
-    edited_lvl.plateformes = [];
-    edited_lvl.etoiles = [];
-    edited_lvl.pieges = [];
+        this.plateformes.forEachAlive(function(c) {
+            if (c.alpha > alph) edited_lvl.plateformes.push([c.calculDeg, c.calculLvl]);
+        }, this);
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ----------------------------------------- Écriture des plateformes //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ---------------------------------------------- Écriture des pièges //
 
-    this.plateformes.forEachAlive(function (c) {
-      if (c.alpha > alph)
-        edited_lvl.plateformes.push([c.calculDeg, c.calculLvl]);
-    }, this);
+        this.pieges.forEachAlive(function(c) {
+            if (c.alpha > alph) edited_lvl.pieges.push([c.calculDeg, c.calculLvl]);
+        }, this);
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ---------------------------------------------- Écriture des pièges //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // --------------------------------------------- Écriture des étoiles //
 
-    this.pieges.forEachAlive(function (c) {
-      if (c.alpha > alph)
-        edited_lvl.pieges.push([c.calculDeg, c.calculLvl]);
-    }, this);
+        if (this.etoile_pos.alpha > 0) this.etoiles.getTop().kill(); // Detruit la dernière étoile (position du curseur)
+        this.etoiles.forEachAlive(function(c) {
+            if (c.alpha > alph) edited_lvl.etoiles.push([c.calculDeg, c.calculLvl]);
+        }, this);
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // --------------------------------------------- Écriture des étoiles //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
 
-    if (this.etoile_pos.alpha > 0)
-      this.etoiles.getTop().kill(); // Detruit la dernière étoile (position du curseur)
-    this.etoiles.forEachAlive(function (c) {
-      if (c.alpha > alph)
-        edited_lvl.etoiles.push([c.calculDeg, c.calculLvl]);
-    }, this);
+        // Le level est prêt à être testé
+        edited_lvl.edited = true;
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
+        // Exportation du niveau
+        var export_lvl =
+            '{' +
+            'plateformes: [' +
+            this.objToString(edited_lvl.plateformes) +
+            '], ' +
+            'pieges: [' +
+            this.objToString(edited_lvl.pieges) +
+            '], ' +
+            'etoiles: [' +
+            this.objToString(edited_lvl.etoiles) +
+            ']' +
+            '}';
+        window.document.getElementById('export_lvl').value = export_lvl;
 
-    // Le level est prêt à être testé
-    edited_lvl.edited = true;
+        // Affichage pour l'envoi
+        window.document.getElementById('SendMeLvl').className = '';
 
-    // Exportation du niveau
-    var export_lvl = '{'
-      + 'plateformes: [' + this.objToString(edited_lvl.plateformes) + '], ' +
-      'pieges: [' + this.objToString(edited_lvl.pieges) + '], ' +
-      'etoiles: [' + this.objToString(edited_lvl.etoiles) + ']' +
-      '}';
-    window.document.getElementById("export_lvl").value = export_lvl;
+        this.game.state.start('Play');
 
-    // Affichage pour l'envoi
-    window.document.getElementById("SendMeLvl").className = "";
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+    },
+    objToString: function(obj) {
+        // Conversion d'un objet en chaîne de caractère symbolisant un tableau
+        // javascript.
 
-    this.game.state.start('Play');
+        var str = '';
+        var tmp = [];
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-  },
-  objToString: function (obj) {
-
-    // Conversion d'un objet en chaîne de caractère symbolisant un tableau
-    // javascript.
-
-    var str = '';
-    var tmp = [];
-
-    for (var val in obj) {
-      tmp.push('[' + obj[val].join(', ') + ']');
-    }
-
-    str = tmp.join(', ');
-
-    return str;
-
-  },
-  clickGeneral: function () {
-
-    // Pour les étoiles les positions ne sont pas prédéfinies
-
-    if (this.etoile_pos.alpha > 0) {
-
-      var newetoile;
-
-      // Vérification : l'étoile existe-t-elle déjà ou non ?
-      this.etoiles.forEachAlive(function (c) {
-
-        if (c.calculLvl == this.etoile_pos.calculLvl
-          && c.calculDeg == this.etoile_pos.calculDeg) {
-          newetoile = c;
+        for (var val in obj) {
+            tmp.push('[' + obj[val].join(', ') + ']');
         }
 
-      }, this);
+        str = tmp.join(', ');
 
-      if (newetoile) {
+        return str;
+    },
+    clickGeneral: function() {
+        // Pour les étoiles les positions ne sont pas prédéfinies
 
-        // Dans le cas de l'existence, on la supprime
-        newetoile.kill();
+        if (this.etoile_pos.alpha > 0) {
+            var newetoile;
 
-      } else {
+            // Vérification : l'étoile existe-t-elle déjà ou non ?
+            this.etoiles.forEachAlive(function(c) {
+                if (c.calculLvl == this.etoile_pos.calculLvl && c.calculDeg == this.etoile_pos.calculDeg) {
+                    newetoile = c;
+                }
+            }, this);
 
-        // Sinon on en crée une nouvelle
-        newetoile = this.etoiles.create(this.etoile_pos.x, this.etoile_pos.y, 'et');
-        newetoile.anchor.set(0.6);
-        newetoile.angle = this.etoile_pos.angle;
-        newetoile.calculLvl = this.etoile_pos.calculLvl;
-        newetoile.calculDeg = this.etoile_pos.calculDeg;
+            if (newetoile) {
+                // Dans le cas de l'existence, on la supprime
+                newetoile.kill();
+            } else {
+                // Sinon on en crée une nouvelle
+                newetoile = this.etoiles.create(this.etoile_pos.x, this.etoile_pos.y, 'et');
+                newetoile.anchor.set(0.6);
+                newetoile.angle = this.etoile_pos.angle;
+                newetoile.calculLvl = this.etoile_pos.calculLvl;
+                newetoile.calculDeg = this.etoile_pos.calculDeg;
+            }
+        }
+    },
+    choix: function(sprite) {
+        // Avant toute chose : suppression de la dernière étoile ajoutée, si
+        // on était en mode "étoile"
 
-      }
-    }
+        if (this.etoile_pos.alpha > 0) this.etoiles.getTop().kill();
 
-  },
-  choix: function (sprite) {
+        // Pour savoir où on clique, on regarde le sprite utilisé
 
-    // Avant toute chose : suppression de la dernière étoile ajoutée, si
-    // on était en mode "étoile"
+        if (sprite.key == 'plt') {
+            // Plateforme
 
-    if (this.etoile_pos.alpha > 0)
-      this.etoiles.getTop().kill();
+            this.changeInputEnabled(this.plateformes, true);
+            this.changeInputEnabled(this.pieges, false);
+            this.etoile_pos.alpha = 0;
+        } else if (sprite.key == 'pie') {
+            // Piege
 
-    // Pour savoir où on clique, on regarde le sprite utilisé
+            this.changeInputEnabled(this.plateformes, false);
+            this.changeInputEnabled(this.pieges, true);
+            this.etoile_pos.alpha = 0;
+        } else if (sprite.key == 'et') {
+            // Etoile
 
-    if (sprite.key == "plt") { // Plateforme
+            this.etoile_pos.alpha = alph;
 
-      this.changeInputEnabled(this.plateformes, true);
-      this.changeInputEnabled(this.pieges, false);
-      this.etoile_pos.alpha = 0;
+            this.changeInputEnabled(this.plateformes, false);
+            this.changeInputEnabled(this.pieges, false);
+        }
+    },
+    changeInputEnabled: function(group, inputEnabled) {
+        // En fonction du choix d'édition, on active ou désactive, et affiche
+        // on cache les sprites correspondant
 
-    } else if (sprite.key == "pie") { // Piege
+        if (inputEnabled) {
+            group.forEachAlive(function(c) {
+                c.inputEnabled = true;
+                c.alpha = c.alpha > alph ? c.alpha : inac;
+            });
+        } else {
+            group.forEachAlive(function(c) {
+                c.inputEnabled = false;
+                c.alpha = c.alpha > alph ? c.alpha : 0;
+            });
+        }
+    },
+    menuForeach: function(c) {
+        // Simplification pour mettre en place les inputs
 
-      this.changeInputEnabled(this.plateformes, false);
-      this.changeInputEnabled(this.pieges, true);
-      this.etoile_pos.alpha = 0;
-
-    } else if (sprite.key == "et") { // Etoile
-
-      this.etoile_pos.alpha = alph;
-
-      this.changeInputEnabled(this.plateformes, false);
-      this.changeInputEnabled(this.pieges, false);
-
-    }
-
-  },
-  changeInputEnabled: function (group, inputEnabled) {
-
-    // En fonction du choix d'édition, on active ou désactive, et affiche
-    // on cache les sprites correspondant
-
-    if (inputEnabled) {
-
-      group.forEachAlive(function (c) {
         c.inputEnabled = true;
-        c.alpha = (c.alpha > alph) ? c.alpha : inac;
-      });
+        c.input.useHandCursor = true;
+        c.events.onInputDown.add(this.choix, this);
+    },
+    makeSprite: function() {
+        // Toutes les variables qui seront utilisés dans cette fonction
+        var cx, rayon, perimetre, nbr_plat, deg, tmp, elt;
 
-    } else {
+        // Parcourt du niveau de haut en bas (rayon du cercle)
+        for (var i = 0; i < hauteur; i++) {
+            // -------------------------------------------------------------- //
+            // ---------------- Calcul du positionnement pour les plateformes //
 
-      group.forEachAlive(function (c) {
-        c.inputEnabled = false;
-        c.alpha = (c.alpha > alph) ? c.alpha : 0;
-      });
+            cx = i * plataille;
 
-    }
+            rayon = c / 6 + cx;
 
-  },
-  menuForeach: function (c) {
+            perimetre = rayon * Math.PI * 2;
 
-    // Simplification pour mettre en place les inputs
+            nbr_plat = Math.round(perimetre / plataille);
 
-    c.inputEnabled = true;
-    c.input.useHandCursor = true;
-    c.events.onInputDown.add(this.choix, this);
+            deg = 360 / nbr_plat;
 
-  },
-  makeSprite: function () {
+            // -------------------------------------------------------------- //
+            // -------------------------------------------------------------- //
 
-    // Toutes les variables qui seront utilisés dans cette fonction
-    var cx, rayon, perimetre, nbr_plat, deg, tmp, elt;
+            // Parcourt du périmètre du cercle
+            for (var j = 0; j < 360; j += deg) {
+                // Positions et rotation pour les sprites
+                tmp = Play.placement(j, rayon);
 
-    // Parcourt du niveau de haut en bas (rayon du cercle)
-    for (var i = 0; i < hauteur; i++) {
+                // ---------------------------------------------------------- //
+                // ---------------------------------------------- Plateformes //
 
-      // -------------------------------------------------------------- //
-      // ---------------- Calcul du positionnement pour les plateformes //
+                elt = this.plateformes.create(tmp[0], tmp[1], 'plt');
+                elt.anchor.set(0.5, 1);
+                elt.angle = tmp[2];
+                elt.alpha = inac;
+                elt.calculLvl = i;
+                elt.calculDeg = j;
 
-      cx = i * plataille;
+                // Si on revient d'un test, il faut réafficher les éléments choisis
+                if (edited_lvl.edited) {
+                    for (var val in edited_lvl.plateformes) {
+                        if (
+                            edited_lvl.plateformes[val][0] == elt.calculDeg &&
+                            edited_lvl.plateformes[val][1] == elt.calculLvl
+                        )
+                            elt.alpha = 1;
+                    }
+                }
 
-      rayon = c / 6 + cx;
+                // ---------------------------------------------------------- //
+                // ---------------------------------------------------------- //
+                // --------------------------------------------------- Pièges //
 
-      perimetre = rayon * Math.PI * 2;
+                elt = this.pieges.create(tmp[0], tmp[1], 'pie');
+                elt.anchor.set(0.5, 1);
+                elt.angle = tmp[2];
+                elt.alpha = 0;
+                elt.calculLvl = i;
+                elt.calculDeg = j;
 
-      nbr_plat = Math.round(perimetre / plataille);
+                if (edited_lvl.edited) {
+                    for (var val in edited_lvl.pieges) {
+                        if (edited_lvl.pieges[val][0] == elt.calculDeg && edited_lvl.pieges[val][1] == elt.calculLvl)
+                            elt.alpha = 1;
+                    }
+                }
 
-      deg = 360 / nbr_plat;
-
-      // -------------------------------------------------------------- //
-      // -------------------------------------------------------------- //
-
-      // Parcourt du périmètre du cercle
-      for (var j = 0; j < 360; j += deg) {
-
-        // Positions et rotation pour les sprites
-        tmp = Play.placement(j, rayon);
-
-        // ---------------------------------------------------------- //
-        // ---------------------------------------------- Plateformes //
-
-        elt = this.plateformes.create(tmp[0], tmp[1], 'plt');
-        elt.anchor.set(0.5, 1);
-        elt.angle = tmp[2];
-        elt.alpha = inac;
-        elt.calculLvl = i;
-        elt.calculDeg = j;
-
-        // Si on revient d'un test, il faut réafficher les éléments choisis
-        if (edited_lvl.edited) {
-          for (var val in edited_lvl.plateformes) {
-            if (edited_lvl.plateformes[val][0] == elt.calculDeg
-              && edited_lvl.plateformes[val][1] == elt.calculLvl)
-              elt.alpha = 1;
-          }
+                // ---------------------------------------------------------- //
+                // ---------------------------------------------------------- //
+            }
         }
 
-        // ---------------------------------------------------------- //
-        // ---------------------------------------------------------- //
-        // --------------------------------------------------- Pièges //
-
-        elt = this.pieges.create(tmp[0], tmp[1], 'pie');
-        elt.anchor.set(0.5, 1);
-        elt.angle = tmp[2];
-        elt.alpha = 0;
-        elt.calculLvl = i;
-        elt.calculDeg = j;
+        // ------------------------------------------------------------------ //
+        // ---------------------------- Remise en place des étoiles au besoin //
 
         if (edited_lvl.edited) {
-          for (var val in edited_lvl.pieges) {
-            if (edited_lvl.pieges[val][0] == elt.calculDeg
-              && edited_lvl.pieges[val][1] == elt.calculLvl)
-              elt.alpha = 1;
-          }
+            for (var val in edited_lvl.etoiles) {
+                rayon = (edited_lvl.etoiles[val][1] + 0.5) * plataille + c / 6;
+
+                var tmp = Play.placement(edited_lvl.etoiles[val][0], rayon);
+
+                var elt = this.etoiles.create(tmp[0], tmp[1], 'et');
+
+                elt.angle = tmp[2];
+                elt.anchor.set(0.6);
+                elt.calculLvl = edited_lvl.etoiles[val][1];
+                elt.calculDeg = edited_lvl.etoiles[val][0];
+            }
         }
 
-        // ---------------------------------------------------------- //
-        // ---------------------------------------------------------- //
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+    },
+    update: function() {
+        this.etoile.angle += 4;
 
-      }
-    }
+        // ------------------------------------------------------------------ //
+        // ---------------------- Calcul de la position de l'"étoile-curseur" //
 
-    // ------------------------------------------------------------------ //
-    // ---------------------------- Remise en place des étoiles au besoin //
+        if (this.etoile_pos.alpha > 0) {
+            var x_pointer = this.game.input.x * invert_redim - this.general.x;
+            var y_pointer = this.game.input.y * invert_redim - this.general.y;
+            var tmp = this.unPeuDeTrigo(x_pointer, y_pointer);
 
-    if (edited_lvl.edited) {
+            var placement = Play.placement(tmp[1], tmp[0]);
 
-      for (var val in edited_lvl.etoiles) {
+            this.etoile_pos.x = placement[0];
+            this.etoile_pos.y = placement[1];
+            this.etoile_pos.angle = placement[2];
+            this.etoile_pos.calculLvl = (tmp[0] - c / 6) / plataille - 0.5;
+            this.etoile_pos.calculDeg = tmp[1];
+        }
 
-        rayon = (edited_lvl.etoiles[val][1] + .5) * plataille + c / 6;
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+        // --------------------------------------------------- Retour au menu //
 
-        var tmp = Play.placement(edited_lvl.etoiles[val][0], rayon);
+        if (this.esc_key.isDown) {
+            this.redimensionne(1);
+            edited_lvl.edited = false;
+            this.game.state.start('Menu');
+        }
 
-        var elt = this.etoiles.create(tmp[0], tmp[1], 'et');
+        // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
+    },
+    unPeuDeTrigo: function(x, y) {
+        // Pour l'étoile
 
-        elt.angle = tmp[2];
-        elt.anchor.set(0.6);
-        elt.calculLvl = edited_lvl.etoiles[val][1];
-        elt.calculDeg = edited_lvl.etoiles[val][0];
+        // Dans cette fonction on renvoie une position en valeur trigonométrique
+        // en accord avec le nombre de niveau choisis et arrondi au degrée.
 
-      }
+        var rayon = Math.sqrt(x * x + y * y);
 
-    }
+        // tangente de l'angle = opposé / adjacent
+        var radian = Math.atan(y / x);
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
+        var degrees = radian * pi180_invers + 90;
 
-  },
-  update: function () {
+        // On a les degrees sur de 0 à 180 pour chaque face du cercle
+        // Donc si on est sur la face gauche, on ajoute 180°
 
-    this.etoile.angle += 4;
+        if (x < 0) degrees += 180;
 
-    // ------------------------------------------------------------------ //
-    // ---------------------- Calcul de la position de l'"étoile-curseur" //
+        // Dépassement
+        if (rayon < c / 6) rayon = c / 6 + plataille / 2;
+        else if (rayon > c / 6 + hauteur * plataille) rayon = c / 6 + hauteur * plataille + plataille / 2;
+        // Maintenant on arrondi tout
+        else rayon = Math.round((rayon - c / 6 - plataille / 2) / plataille) * plataille + c / 6 + plataille / 2;
 
-    if (this.etoile_pos.alpha > 0) {
+        degrees = Math.round(degrees);
 
-      var x_pointer = this.game.input.x * invert_redim - this.general.x;
-      var y_pointer = this.game.input.y * invert_redim - this.general.y;
-      var tmp = this.unPeuDeTrigo(x_pointer, y_pointer);
+        return [rayon, degrees];
+    },
+    redimensionne: function(s) {
+        // Redimensionnement de la fenêtre en fonction de la hauteur (rayon)
 
-      var placement = Play.placement(tmp[1], tmp[0]);
+        var s_invers = 1 / s;
 
-      this.etoile_pos.x = placement[0];
-      this.etoile_pos.y = placement[1];
-      this.etoile_pos.angle = placement[2];
-      this.etoile_pos.calculLvl = (tmp[0] - c / 6) / plataille - 0.5;
-      this.etoile_pos.calculDeg = tmp[1];
+        this.game.camera.scale.y = s;
+        this.game.camera.scale.x = s;
 
-    }
+        this.general.x += (c * s_invers * (1 - s)) / 2;
+        this.general.y += (c * s_invers * (1 - s)) / 2;
 
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-    // --------------------------------------------------- Retour au menu //
-
-    if (this.esc_key.isDown) {
-      this.redimensionne(1);
-      edited_lvl.edited = false;
-      this.game.state.start('Menu');
-    }
-
-    // ------------------------------------------------------------------ //
-    // ------------------------------------------------------------------ //
-
-  },
-  unPeuDeTrigo: function (x, y) {
-
-    // Pour l'étoile
-
-    // Dans cette fonction on renvoie une position en valeur trigonométrique
-    // en accord avec le nombre de niveau choisis et arrondi au degrée.
-
-    var rayon = Math.sqrt(x * x + y * y);
-
-    // tangente de l'angle = opposé / adjacent
-    var radian = Math.atan(y / x);
-
-    var degrees = radian * pi180_invers + 90;
-
-    // On a les degrees sur de 0 à 180 pour chaque face du cercle
-    // Donc si on est sur la face gauche, on ajoute 180°
-
-    if (x < 0)
-      degrees += 180;
-
-    // Dépassement
-    if (rayon < c / 6)
-      rayon = c / 6 + plataille / 2;
-    else if (rayon > (c / 6 + hauteur * plataille))
-      rayon = c / 6 + hauteur * plataille + plataille / 2;
-    else
-    // Maintenant on arrondi tout
-      rayon = Math.round((rayon - c / 6 - plataille / 2) / plataille) * plataille + c / 6 + plataille / 2;
-
-    degrees = Math.round(degrees);
-
-    return [rayon, degrees];
-
-  },
-  redimensionne: function (s) {
-
-    // Redimensionnement de la fenêtre en fonction de la hauteur (rayon)
-
-    var s_invers = 1 / s;
-
-    this.game.camera.scale.y = s;
-    this.game.camera.scale.x = s;
-
-    this.general.x += ((c * s_invers) * (1 - s)) / 2;
-    this.general.y += ((c * s_invers) * (1 - s)) / 2;
-
-    invert_redim = s_invers;
-
-  },
-  render: function () {
-
-  }
+        invert_redim = s_invers;
+    },
+    render: function() {},
 };
 
 // On déclare les fonctions à l'extérieur, puisque lors de l'appel on est
 // déjà dans une fonction ...
 function alpha(sprite) {
-  sprite.alpha = (sprite.alpha > alph) ? alph : 1;
+    sprite.alpha = sprite.alpha > alph ? alph : 1;
 }
 
 function over(sprite) {
-  sprite.alpha = (sprite.alpha < alph) ? alph : 1;
+    sprite.alpha = sprite.alpha < alph ? alph : 1;
 }
 
 function out(sprite) {
-  sprite.alpha = (sprite.alpha > alph) ? 1 : inac;
+    sprite.alpha = sprite.alpha > alph ? 1 : inac;
 }
