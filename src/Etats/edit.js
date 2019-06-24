@@ -1,3 +1,18 @@
+import {
+  c,
+  hauteur,
+  inac,
+  invert_redim as invert_redimVar,
+  plataille,
+  edited_lvl,
+  alph,
+  pi180_invers
+} from "../variables";
+import { Play } from "./play";
+import { fr as lang } from "./levels";
+
+let invert_redim = invert_redimVar;
+
 export const Edit = {
   create: function () {
 
@@ -72,7 +87,7 @@ export const Edit = {
       plataille * 2.5, 'et');
     this.etoile.anchor.set(0.5);
 
-    this.launch = game.add.text(plataille, plataille, lang.Tester);
+    this.launch = this.game.add.text(plataille, plataille, lang.Tester);
     this.launch.anchor.setTo(0, 0);
 
     // ------------------------------------------------------------------ //
@@ -316,7 +331,7 @@ export const Edit = {
       for (var j = 0; j < 360; j += deg) {
 
         // Positions et rotation pour les sprites
-        tmp = GameState.Play.prototype.placement(j, rayon);
+        tmp = Play.placement(j, rayon);
 
         // ---------------------------------------------------------- //
         // ---------------------------------------------- Plateformes //
@@ -371,7 +386,7 @@ export const Edit = {
 
         rayon = (edited_lvl.etoiles[val][1] + .5) * plataille + c / 6;
 
-        var tmp = GameState.Play.prototype.placement(edited_lvl.etoiles[val][0], rayon);
+        var tmp = Play.placement(edited_lvl.etoiles[val][0], rayon);
 
         var elt = this.etoiles.create(tmp[0], tmp[1], 'et');
 
@@ -401,7 +416,7 @@ export const Edit = {
       var y_pointer = this.game.input.y * invert_redim - this.general.y;
       var tmp = this.unPeuDeTrigo(x_pointer, y_pointer);
 
-      var placement = GameState.Play.prototype.placement(tmp[1], tmp[0]);
+      var placement = Play.placement(tmp[1], tmp[0]);
 
       this.etoile_pos.x = placement[0];
       this.etoile_pos.y = placement[1];

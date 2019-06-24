@@ -1,3 +1,7 @@
+import { c, plataille, Stats } from "../variables";
+import { cliquable, difficultes, ecart, scores } from "../functions";
+import { fr as lang } from "./levels";
+
 export const Scores = {
   create: function () {
 
