@@ -16,7 +16,7 @@ export const Victoire = {
     // Retour
     var back = this.game.input.keyboard.addKey(Phaser.Keyboard.BACKSPACE);
 
-    save({level: 0, score: 0, diff: Stats.diff});
+    save({ level: 0, score: 0, diff: Stats.diff });
 
   },
   addToPseudo: function (letter) {

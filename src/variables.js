@@ -23,7 +23,7 @@ export const edited_lvl = {};
 
 
 // Level actuel
-export const Stats = {level: 0, score: 0, diff: 1};
+export const Stats = { level: 0, score: 0, diff: 1 };
 // 4 types de difficultés :
 // _ 0 = facile
 // _ 1 = normal
