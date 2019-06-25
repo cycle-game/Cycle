@@ -1,5 +1,3 @@
-import pixi from 'pixi';
-import p2 from 'p2';
 import Phaser from 'phaser';
 
 import { c } from '../variables';

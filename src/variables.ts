@@ -17,7 +17,7 @@ export const invert_redim = 1;
 export const pi180 = Math.PI / 180;
 export const pi180_invers = 1 / pi180;
 
-export const edited_lvl = {};
+export const edited_lvl: any = {};
 
 // -- \\
 

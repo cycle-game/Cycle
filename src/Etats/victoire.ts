@@ -1,3 +1,10 @@
+import { cliquable, reset, save, sociaux, toHigh } from '../functions';
+import { c, pseudo as pseudoVar, Stats } from '../variables';
+import Phaser from 'phaser';
+import { fr as lang } from './levels';
+
+let pseudo = pseudoVar;
+
 export const Victoire = {
     create: function() {
         var label = cliquable(
@@ -23,7 +30,7 @@ export const Victoire = {
         // Clavier
         this.game.input.keyboard.addCallbacks(this, this.tape);
 
-        // Retour
+        // Retourw
         var back = this.game.input.keyboard.addKey(Phaser.Keyboard.BACKSPACE);
 
         save({ level: 0, score: 0, diff: Stats.diff });

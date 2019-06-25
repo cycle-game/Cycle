@@ -1,19 +1,20 @@
 import { c, plataille, Stats } from '../variables';
 import { cliquable, difficultes, ecart, scores } from '../functions';
 import { fr as lang } from './levels';
+import Phaser from 'phaser';
 
 export const Scores = {
     create: function() {
-        var highscores = scores().split('|||');
+        const highscores = scores().split('|||');
 
-        var label = cliquable(c / 2, plataille, lang.UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
+        const label = cliquable(c / 2, plataille, lang.UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
 
         // Retour au menu
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Difficulté
         this.choix_diff = [];
-        difficultes(this);
+        difficultes(this, null);
 
         if (isNaN(Stats.diff)) Stats.diff = 1;
 
@@ -21,23 +22,23 @@ export const Scores = {
 
         // Affichage des scores
         this.scores = [];
-        var margey = 70;
-        var margex = 150;
+        const margey = 70;
+        const margex = 150;
 
-        for (var val in this.choix_diff) {
+        for (let val in this.choix_diff) {
             this.scores[val] = this.game.add.group();
 
-            var specific_highscores = highscores[val].split('><');
-            var espace_y = ecart(specific_highscores.length, margey);
+            const specific_highscores = highscores[val].split('><');
+            const espace_y = ecart(specific_highscores.length, margey);
 
             // Parcourt en y
-            for (var i = 0; i < specific_highscores.length; i++) {
-                var specific_player = specific_highscores[i].split('::');
-                var espace_x = ecart(specific_player.length, margex);
+            for (let i = 0; i < specific_highscores.length; i++) {
+                const specific_player = specific_highscores[i].split('::');
+                const espace_x = ecart(specific_player.length, margex);
 
                 // Parcourt en x
-                for (var j = 0; j < specific_highscores.length; j++) {
-                    var tmp = cliquable(
+                for (let j = 0; j < specific_highscores.length; j++) {
+                    const tmp = cliquable(
                         margex + j * espace_x,
                         margey + i * espace_y,
                         specific_player[j],
@@ -64,7 +65,7 @@ export const Scores = {
     },
     souligne: function(sprite) {
         // Selection
-        for (var val in this.choix_diff) {
+        for (let val in this.choix_diff) {
             this.choix_diff[val].setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
             this.scores[val].alpha = 0;
         }
