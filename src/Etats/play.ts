@@ -18,8 +18,10 @@ import {
     s_invers as s_inversVar,
     Stats,
 } from '../variables';
-import { average, save } from '../functions';
-import { levels } from './levels';
+import { average, reset, save } from '../functions';
+import { levels, fr as lang } from './levels';
+import Phaser from 'phaser';
+import { game } from './game';
 
 let nuit_rotat = nuit_rotatVar;
 let nb_tours = nb_toursVar;
@@ -63,8 +65,8 @@ export const Play = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------ Pause //
 
-        var pause = this.game.input.keyboard.addKey(Phaser.Keyboard.P);
-        pause.onDown.add(function() {
+      const pause = this.game.input.keyboard.addKey(Phaser.Keyboard.P);
+      pause.onDown.add(function() {
             if (this.game.paused == true) this.game.paused = false;
             else this.game.paused = true;
         });
@@ -108,7 +110,7 @@ export const Play = {
         nb_tours = 0;
 
         if (this.general) {
-            for (var val in this.tweenTab) {
+            for (let val in this.tweenTab) {
                 this.tweenTab[val].stop();
             }
 
@@ -187,9 +189,9 @@ export const Play = {
         this.plateformes = this.game.add.group(this.planete);
 
         // On lance la fonction qui va créer les plateformes
-        var maxPlat = this.makePlateformes();
+      let maxPlat = this.makePlateformes();
 
-        // Étoiles
+      // Étoiles
         this.etoiles = this.game.add.group(this.planete);
         this.makeEtoiles();
 
@@ -207,6 +209,7 @@ export const Play = {
         this.nuit = this.general.create(0, 0, 'nuit');
         this.nuit.anchor.set(0.5, 0);
         this.nuit.angle = nuit_depart; // Rotation de départ
+        // @ts-ignore
         this.nuit.blendMode = PIXI.blendModes.DIFFERENCE; // Inverse les couleurs
 
         // ------------------------------------------------------------------ //
@@ -222,10 +225,10 @@ export const Play = {
         this.dudeTest = this.game.add.group(this.general);
 
         // Rotation gauche et droite
-        var dudeT1 = this.dudeTest.create(0, 0, 'predic');
-        var dudeT2 = this.dudeTest.create(0, 0, 'predic');
+      const dudeT1 = this.dudeTest.create(0, 0, 'predic');
+      const dudeT2 = this.dudeTest.create(0, 0, 'predic');
 
-        // L'ancre est en haut au milieu, car le body du sprite 'dude' est placé
+      // L'ancre est en haut au milieu, car le body du sprite 'dude' est placé
         // en haut à gauche (on s'intéresse pas à la position x)
         dudeT1.anchor.set(0.5, 0);
         dudeT1.alpha = 0;
@@ -265,11 +268,11 @@ export const Play = {
             this.dude.scale = { x: 1, y: 0.01 };
             this.dude.body.gravity.y = 0;
             //anim = false;
-            var t = this.game.add
-                .tween(this.dude.scale)
-                .to({ x: 1, y: 1 }, 350)
-                .start();
-            t.onComplete.add(function() {
+          const t = this.game.add
+            .tween(this.dude.scale)
+            .to({ x: 1, y: 1 }, 350)
+            .start();
+          t.onComplete.add(function() {
                 this.dude.body.gravity.y = 1000;
                 anim = false;
             }, this);
@@ -294,7 +297,7 @@ export const Play = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------ Redimensionnement //
 
-        var maxPlat = (maxPlat + plataille + this.dude.body.height) * 2;
+        maxPlat = (maxPlat + plataille + this.dude.body.height) * 2;
 
         if (maxPlat >= c) this.redimensionne(c / maxPlat);
         else this.redimensionne(1);
@@ -333,9 +336,9 @@ export const Play = {
         // Permet de ne pas ralentir le jeu (du moins, au minimum), lorsqu'il
         // y a une perte d'images par seconde
 
-        var fps = this.game.time.fps;
+      let fps = this.game.time.fps;
 
-        // Rajout d'une difficulté : en mode hardcore (3), on change la vitesse
+      // Rajout d'une difficulté : en mode hardcore (3), on change la vitesse
         if (Stats.diff >= 3) fps += Math.round((Math.random() - 0.5) * 55);
 
         if (fps > 0) fps_array.push(fps);
@@ -371,10 +374,10 @@ export const Play = {
             this.game.physics.arcade.collide(this.dude, this.plateformes);
 
             // Overlap sur les plateformes avec les prédicteurs de position
-            var overlap_right = this.game.physics.arcade.overlap(this.dudeTest.getAt(0), this.plateformes);
-            var overlap_left = this.game.physics.arcade.overlap(this.dudeTest.getAt(1), this.plateformes);
+          const overlap_right = this.game.physics.arcade.overlap(this.dudeTest.getAt(0), this.plateformes);
+          const overlap_left = this.game.physics.arcade.overlap(this.dudeTest.getAt(1), this.plateformes);
 
-            this.game.physics.arcade.overlap(this.dude, this.etoiles, this.takeEtoiles, null, this);
+          this.game.physics.arcade.overlap(this.dude, this.etoiles, this.takeEtoiles, null, this);
 
             // ------------------------------------------------------------------ //
             // ------------------------------------------------------------------ //
@@ -543,29 +546,29 @@ export const Play = {
     },
     makePlateformes: function() {
         // Création des sprites par rapport aux données des niveaux
-
+        let plateformes;
         // En fonction on est en édition ou on est en jeu ..
-        if (edited_lvl.edited) var plateformes = edited_lvl.plateformes;
+        if (edited_lvl.edited) plateformes = edited_lvl.plateformes;
         else if (levels[Stats.level])
             // Vérification de l'existence du level
-            var plateformes = levels[Stats.level].plateformes;
+            plateformes = levels[Stats.level].plateformes;
         else {
             // S'il n'existe pas il y a une erreur; reboot du début
-            var plateformes = levels[0].plateformes;
+            plateformes = levels[0].plateformes;
             reset(Stats);
         }
 
         // Hauteur maximale des plateformes
-        var maxPlat = 0;
+      let maxPlat = 0;
 
-        // Parcourt des plateformes
-        for (var val in plateformes) {
+      // Parcourt des plateformes
+        for (let val in plateformes) {
             // On déplace une partie de la trigo ici (gain de temps)
-            var cx = plateformes[val][1] * plataille;
+          const cx = plateformes[val][1] * plataille;
 
-            var rayon = c / 6 + cx;
+          const rayon = c / 6 + cx;
 
-            // -------------------------------------------------------------- //
+          // -------------------------------------------------------------- //
             /* -------- Ces calculs ont été déplacé dans l'éditeur de niveau
 
       var perimetre = rayon * Math.PI * 2;
@@ -587,11 +590,11 @@ export const Play = {
             // -------------------------------------------------------------- //
 
             // Positionnement et rotation
-            var tmp = this.placement(plateformes[val][0], rayon);
+          const tmp = this.placement(plateformes[val][0], rayon);
 
-            // Création de la plateforme
-            var plt = this.plateformes.create(tmp[0], tmp[1], 'plt');
-            plt.anchor.set(0.5, 1);
+          // Création de la plateforme
+          const plt = this.plateformes.create(tmp[0], tmp[1], 'plt');
+          plt.anchor.set(0.5, 1);
             plt.angle = tmp[2];
 
             // Plateforme la plus haute
@@ -602,35 +605,39 @@ export const Play = {
     },
     makeEtoiles: function() {
         // Même principe que makePlateformes
+        let etoiles;
+        if (edited_lvl.edited) etoiles = edited_lvl.etoiles;
+        else etoiles = levels[Stats.level].etoiles;
 
-        if (edited_lvl.edited) var etoiles = edited_lvl.etoiles;
-        else var etoiles = levels[Stats.level].etoiles;
+        for (let val in etoiles) {
+          const rayon = c / 6 + etoiles[val][1] * plataille + plataille / 2;
 
-        for (var val in etoiles) {
-            var rayon = c / 6 + etoiles[val][1] * plataille + plataille / 2;
+          const tmp = this.placement(etoiles[val][0], rayon);
 
-            var tmp = this.placement(etoiles[val][0], rayon);
-
-            var et = this.etoiles.create(tmp[0], tmp[1], 'et');
-            et.anchor.set(0.6);
+          const et = this.etoiles.create(tmp[0], tmp[1], 'et');
+          et.anchor.set(0.6);
             et.angle = tmp[2];
         }
 
         nb_etoiles = this.etoiles.countLiving();
     },
     makePiegesMWAHAHAHAHA: function() {
+        let pieges;
         // Même principe que makePlateformes
 
-        if (edited_lvl.edited) var pieges = edited_lvl.pieges;
-        else var pieges = levels[Stats.level].pieges;
+        if (edited_lvl.edited) {
+            pieges = edited_lvl.pieges;
+        } else {
+            pieges = levels[Stats.level].pieges;
+        }
 
-        for (var val in pieges) {
-            var rayon = c / 6 + pieges[val][1] * plataille;
+        for (let val in pieges) {
+          const rayon = c / 6 + pieges[val][1] * plataille;
 
-            var tmp = this.placement(pieges[val][0], rayon);
+          const tmp = this.placement(pieges[val][0], rayon);
 
-            var plt = this.pieges.create(tmp[0], tmp[1], 'pie');
-            plt.anchor.set(0.5, 1);
+          const plt = this.pieges.create(tmp[0], tmp[1], 'pie');
+          plt.anchor.set(0.5, 1);
             plt.angle = tmp[2];
         }
     },
@@ -641,13 +648,13 @@ export const Play = {
 
         // On commence le level en haut au milieu.
         // Et pusiqu'on donne la variable en degrée ...
-        var radian = (degrees - 90) * pi180;
+      const radian = (degrees - 90) * pi180;
 
-        // Ainsi on obtient miraculeusement les valeurs x/y
-        var pos_x = rayon * Math.cos(radian);
-        var pos_y = rayon * Math.sin(radian);
+      // Ainsi on obtient miraculeusement les valeurs x/y
+      const pos_x = rayon * Math.cos(radian);
+      const pos_y = rayon * Math.sin(radian);
 
-        // ------------------------------------------------------------------ //
+      // ------------------------------------------------------------------ //
 
         // Maintenant on place la plateforme (dans le groupe des plateformes)
         return [pos_x, pos_y, degrees];

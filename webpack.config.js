@@ -9,7 +9,7 @@ const pixi = path.join(phaserModule, 'build/custom/pixi.js');
 const p2 = path.join(phaserModule, 'build/custom/p2.js');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     path: __dirname + '/dist',
     filename: 'main.js'
@@ -42,7 +42,8 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
-      }
+      },
+      { test: /\.tsx?$/, loader: "ts-loader" }
     ]
   },
   resolve: {
@@ -50,6 +51,7 @@ module.exports = {
       'phaser': phaser,
       'pixi': pixi,
       'p2': p2
-    }
+    },
+    extensions: [".ts", ".tsx", ".js"]
   }
 };

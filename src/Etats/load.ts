@@ -71,7 +71,8 @@ export const Langue = {
         lang.input.useHandCursor = true;
 
         this.cache = this.game.add.sprite(0, 0, 'cache');
-        this.cache.blendMode = PIXI.blendModes.DIFFERENCE;
+        // @ts-ignore
+      this.cache.blendMode = PIXI.blendModes.DIFFERENCE;
 
         //this.fs = this.game.add.sprite(c/2, c/2, 'fs');
         //this.fs.blendMode = PIXI.blendModes.DIFFERENCE;

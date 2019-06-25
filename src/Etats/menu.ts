@@ -2,6 +2,7 @@
 import { cliquable, difficultes, reset } from '../functions';
 import { c, plataille, Stats } from '../variables';
 import { lang } from './load';
+import Phaser from 'phaser';
 
 export const Explain = {
     create: function() {
@@ -16,7 +17,7 @@ export const Explain = {
 
         // Difficulté
         this.choix_diff = [];
-        difficultes(this);
+        difficultes(this, null);
 
         if (isNaN(Stats.diff)) Stats.diff = 1;
 
