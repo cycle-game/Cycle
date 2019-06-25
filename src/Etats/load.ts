@@ -1,28 +1,6 @@
-import { c, jaune } from '../variables';
-import { en, fr } from './levels';
-
 // Variable globale
 export let preloading2;
 export let preloading1;
-
-// Création de l'objet boot contenant les méthodes par défaut de Phaser
-
-// On utilise la propriété prototype pour remplir notre GameState.Boot
-// On aurait pu faire une variable : var blabla = { preload:function(){} }
-export const Boot = {
-    preload: function() {
-        // Couleur de fond
-        this.game.stage.setBackgroundColor(jaune);
-
-        // Images pour le loader
-        this.game.load.image('load_plein', 'Ressources/Phaser/LoaderPlein.png');
-        this.game.load.image('load_vide', 'Ressources/Phaser/LoaderVide.png');
-    },
-    create: function() {
-        // On passe à l'état de chargement
-        this.game.state.start('Load');
-    },
-};
 
 // L'état où le loader se lohad.
 export const Load = {
@@ -60,44 +38,3 @@ export const Load = {
     },
 };
 
-export let lang;
-
-export const Langue = {
-    create: function() {
-        lang = this.game.add.sprite(0, 0, 'lang');
-
-        // Handcursor
-        lang.inputEnabled = true;
-        lang.input.useHandCursor = true;
-
-        this.cache = this.game.add.sprite(0, 0, 'cache');
-        // @ts-ignore
-      this.cache.blendMode = PIXI.blendModes.DIFFERENCE;
-
-        //this.fs = this.game.add.sprite(c/2, c/2, 'fs');
-        //this.fs.blendMode = PIXI.blendModes.DIFFERENCE;
-
-        //this.game.input.onDown.add(this.clickGeneral, this);
-    },
-
-    update: function() {
-        // Position de la souris
-        var x_pointer = this.game.input.x;
-        var y_pointer = this.game.input.y;
-
-        // Changement de position du cache (inversant les couleurs)
-        if (x_pointer <= c / 2) this.cache.x = 0;
-        else this.cache.x = c / 2;
-
-        // Au clique ...
-        if (this.game.input.mousePointer.isDown) {
-            if (x_pointer <= c / 2) lang = fr;
-            else lang = en;
-
-            this.game.state.start('Menu');
-        }
-
-        //this.fs.x = x_pointer - 50;
-        //this.fs.y = y_pointer - 50;
-    },
-};

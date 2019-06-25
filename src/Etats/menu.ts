@@ -1,7 +1,7 @@
 // On crée l'état du menu
 import { cliquable, difficultes, reset } from '../functions';
 import { c, plataille, Stats } from '../variables';
-import { lang } from './load';
+import { lang } from './langue';
 import Phaser from 'phaser';
 
 export const Explain = {
