@@ -50,7 +50,7 @@ facebook_share();
 */
 
 import { bleu, c, plataille } from './variables';
-import { lang } from './Etats/load';
+import { lang } from './Etats/langue';
 
 //http://forum.webrankinfo.com/equivalent-urlencode-javascript-t51434.html
 export function urlencode(str) {
