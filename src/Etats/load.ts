@@ -1,5 +1,6 @@
 // Variable globale
 import {
+    DEBUG_POINT,
     LANG,
     LANG_SELECTOR,
     LOADER_EMPTY,
@@ -46,7 +47,8 @@ export const Load = {
         this.game.load.image(LOGO_WITHOUT_C, 'Ressources/Phaser/logo-without-c.png');
         this.game.load.image(LOGO_C, 'Ressources/Phaser/logo-c.png');
         this.game.load.image(LOGO_C_MASK, 'Ressources/Phaser/logo-c-mask.png');
-        this.game.load.image('debug_point', 'Ressources/Phaser/Point.png');
+
+        this.game.load.image(DEBUG_POINT, 'Ressources/Phaser/debug-point.png');
     },
     create: function() {
         // Et on passe à la sélection de langue
