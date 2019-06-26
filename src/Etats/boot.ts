@@ -1,5 +1,6 @@
 import { jaune } from '../variables';
 import { game } from './game';
+import { LOADER_EMPTY, LOADER_FULL } from './resoucesNames';
 
 export const Boot = {
     preload: () => {
@@ -7,8 +8,8 @@ export const Boot = {
         game.stage.setBackgroundColor(jaune);
 
         // Images pour le loader
-        game.load.image('load_plein', 'Ressources/Phaser/LoaderPlein.png');
-        game.load.image('load_vide', 'Ressources/Phaser/LoaderVide.png');
+        game.load.image(LOADER_FULL, 'Ressources/Phaser/loader-full.png');
+        game.load.image(LOADER_EMPTY, 'Ressources/Phaser/loader-empty.png');
     },
     create: () => {
         // On passe à l'état de chargement

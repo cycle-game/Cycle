@@ -1,4 +1,6 @@
 // Variable globale
+import { LOADER_EMPTY, LOADER_FULL } from './resoucesNames';
+
 export let preloading2;
 export let preloading1;
 
@@ -6,8 +8,8 @@ export let preloading1;
 export const Load = {
     preload: function() {
         // Ici on crée deux sprites, un en fond et un au dessus
-        preloading2 = this.game.add.sprite(0, 0, 'load_plein');
-        preloading1 = this.game.add.sprite(0, 0, 'load_vide');
+        preloading2 = this.game.add.sprite(0, 0, LOADER_FULL);
+        preloading1 = this.game.add.sprite(0, 0, LOADER_EMPTY);
 
         // Celui du dessus sera révélé petit à petit
         this.game.load.setPreloadSprite(preloading1);
@@ -37,4 +39,3 @@ export const Load = {
         this.game.state.start('Langue');
     },
 };
-

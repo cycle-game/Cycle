@@ -65,8 +65,8 @@ export const Play = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------ Pause //
 
-      const pause = this.game.input.keyboard.addKey(Phaser.Keyboard.P);
-      pause.onDown.add(function() {
+        const pause = this.game.input.keyboard.addKey(Phaser.Keyboard.P);
+        pause.onDown.add(function() {
             if (this.game.paused == true) this.game.paused = false;
             else this.game.paused = true;
         });
@@ -189,9 +189,9 @@ export const Play = {
         this.plateformes = this.game.add.group(this.planete);
 
         // On lance la fonction qui va créer les plateformes
-      let maxPlat = this.makePlateformes();
+        let maxPlat = this.makePlateformes();
 
-      // Étoiles
+        // Étoiles
         this.etoiles = this.game.add.group(this.planete);
         this.makeEtoiles();
 
@@ -225,10 +225,10 @@ export const Play = {
         this.dudeTest = this.game.add.group(this.general);
 
         // Rotation gauche et droite
-      const dudeT1 = this.dudeTest.create(0, 0, 'predic');
-      const dudeT2 = this.dudeTest.create(0, 0, 'predic');
+        const dudeT1 = this.dudeTest.create(0, 0, 'predic');
+        const dudeT2 = this.dudeTest.create(0, 0, 'predic');
 
-      // L'ancre est en haut au milieu, car le body du sprite 'dude' est placé
+        // L'ancre est en haut au milieu, car le body du sprite 'dude' est placé
         // en haut à gauche (on s'intéresse pas à la position x)
         dudeT1.anchor.set(0.5, 0);
         dudeT1.alpha = 0;
@@ -268,11 +268,11 @@ export const Play = {
             this.dude.scale = { x: 1, y: 0.01 };
             this.dude.body.gravity.y = 0;
             //anim = false;
-          const t = this.game.add
-            .tween(this.dude.scale)
-            .to({ x: 1, y: 1 }, 350)
-            .start();
-          t.onComplete.add(function() {
+            const t = this.game.add
+                .tween(this.dude.scale)
+                .to({ x: 1, y: 1 }, 350)
+                .start();
+            t.onComplete.add(function() {
                 this.dude.body.gravity.y = 1000;
                 anim = false;
             }, this);
@@ -336,9 +336,9 @@ export const Play = {
         // Permet de ne pas ralentir le jeu (du moins, au minimum), lorsqu'il
         // y a une perte d'images par seconde
 
-      let fps = this.game.time.fps;
+        let fps = this.game.time.fps;
 
-      // Rajout d'une difficulté : en mode hardcore (3), on change la vitesse
+        // Rajout d'une difficulté : en mode hardcore (3), on change la vitesse
         if (Stats.diff >= 3) fps += Math.round((Math.random() - 0.5) * 55);
 
         if (fps > 0) fps_array.push(fps);
@@ -374,10 +374,10 @@ export const Play = {
             this.game.physics.arcade.collide(this.dude, this.plateformes);
 
             // Overlap sur les plateformes avec les prédicteurs de position
-          const overlap_right = this.game.physics.arcade.overlap(this.dudeTest.getAt(0), this.plateformes);
-          const overlap_left = this.game.physics.arcade.overlap(this.dudeTest.getAt(1), this.plateformes);
+            const overlap_right = this.game.physics.arcade.overlap(this.dudeTest.getAt(0), this.plateformes);
+            const overlap_left = this.game.physics.arcade.overlap(this.dudeTest.getAt(1), this.plateformes);
 
-          this.game.physics.arcade.overlap(this.dude, this.etoiles, this.takeEtoiles, null, this);
+            this.game.physics.arcade.overlap(this.dude, this.etoiles, this.takeEtoiles, null, this);
 
             // ------------------------------------------------------------------ //
             // ------------------------------------------------------------------ //
@@ -559,16 +559,16 @@ export const Play = {
         }
 
         // Hauteur maximale des plateformes
-      let maxPlat = 0;
+        let maxPlat = 0;
 
-      // Parcourt des plateformes
+        // Parcourt des plateformes
         for (let val in plateformes) {
             // On déplace une partie de la trigo ici (gain de temps)
-          const cx = plateformes[val][1] * plataille;
+            const cx = plateformes[val][1] * plataille;
 
-          const rayon = c / 6 + cx;
+            const rayon = c / 6 + cx;
 
-          // -------------------------------------------------------------- //
+            // -------------------------------------------------------------- //
             /* -------- Ces calculs ont été déplacé dans l'éditeur de niveau
 
       var perimetre = rayon * Math.PI * 2;
@@ -590,11 +590,11 @@ export const Play = {
             // -------------------------------------------------------------- //
 
             // Positionnement et rotation
-          const tmp = this.placement(plateformes[val][0], rayon);
+            const tmp = this.placement(plateformes[val][0], rayon);
 
-          // Création de la plateforme
-          const plt = this.plateformes.create(tmp[0], tmp[1], 'plt');
-          plt.anchor.set(0.5, 1);
+            // Création de la plateforme
+            const plt = this.plateformes.create(tmp[0], tmp[1], 'plt');
+            plt.anchor.set(0.5, 1);
             plt.angle = tmp[2];
 
             // Plateforme la plus haute
@@ -610,12 +610,12 @@ export const Play = {
         else etoiles = levels[Stats.level].etoiles;
 
         for (let val in etoiles) {
-          const rayon = c / 6 + etoiles[val][1] * plataille + plataille / 2;
+            const rayon = c / 6 + etoiles[val][1] * plataille + plataille / 2;
 
-          const tmp = this.placement(etoiles[val][0], rayon);
+            const tmp = this.placement(etoiles[val][0], rayon);
 
-          const et = this.etoiles.create(tmp[0], tmp[1], 'et');
-          et.anchor.set(0.6);
+            const et = this.etoiles.create(tmp[0], tmp[1], 'et');
+            et.anchor.set(0.6);
             et.angle = tmp[2];
         }
 
@@ -632,12 +632,12 @@ export const Play = {
         }
 
         for (let val in pieges) {
-          const rayon = c / 6 + pieges[val][1] * plataille;
+            const rayon = c / 6 + pieges[val][1] * plataille;
 
-          const tmp = this.placement(pieges[val][0], rayon);
+            const tmp = this.placement(pieges[val][0], rayon);
 
-          const plt = this.pieges.create(tmp[0], tmp[1], 'pie');
-          plt.anchor.set(0.5, 1);
+            const plt = this.pieges.create(tmp[0], tmp[1], 'pie');
+            plt.anchor.set(0.5, 1);
             plt.angle = tmp[2];
         }
     },
@@ -648,13 +648,13 @@ export const Play = {
 
         // On commence le level en haut au milieu.
         // Et pusiqu'on donne la variable en degrée ...
-      const radian = (degrees - 90) * pi180;
+        const radian = (degrees - 90) * pi180;
 
-      // Ainsi on obtient miraculeusement les valeurs x/y
-      const pos_x = rayon * Math.cos(radian);
-      const pos_y = rayon * Math.sin(radian);
+        // Ainsi on obtient miraculeusement les valeurs x/y
+        const pos_x = rayon * Math.cos(radian);
+        const pos_y = rayon * Math.sin(radian);
 
-      // ------------------------------------------------------------------ //
+        // ------------------------------------------------------------------ //
 
         // Maintenant on place la plateforme (dans le groupe des plateformes)
         return [pos_x, pos_y, degrees];
