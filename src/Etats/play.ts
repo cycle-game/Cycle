@@ -22,7 +22,7 @@ import { average, reset, save } from '../functions';
 import { levels, fr as lang } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
-import { NIGHT_MASK, PLAYER, SELECTOR } from './resoucesNames';
+import { NIGHT_MASK, PLANET, PLAYER, SELECTOR } from './resoucesNames';
 
 let nuit_rotat = nuit_rotatVar;
 let nb_tours = nb_toursVar;
@@ -182,7 +182,7 @@ export const Play = {
         //this.planete.x = c/2; this.planete.y = cplan;
 
         // Le sprite de la planete
-        this.plnte = this.planete.create(0, 0, 'planete');
+        this.plnte = this.planete.create(0, 0, PLANET);
         this.plnte.anchor.set(0.5);
 
         // Hey, j'ai entendu dire que t'aimais les groupes, donc j'ai mis
