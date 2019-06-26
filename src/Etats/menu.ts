@@ -3,6 +3,7 @@ import { cliquable, difficultes, reset } from '../functions';
 import { c, plataille, Stats } from '../variables';
 import { lang } from './langue';
 import Phaser from 'phaser';
+import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from './resoucesNames';
 
 export const Explain = {
     create: function() {
@@ -55,11 +56,11 @@ export const Menu = {
         var scores = cliquable(c / 2, c / 1.7, lang.Scores, 27, 0.5, 0.5, 200, 250, this.scores, this);
 
         // Logo + animation
-        this.logo_c = this.game.add.sprite(c / 2 - 99, plataille + 80, 'logo_c');
+        this.logo_c = this.game.add.sprite(c / 2 - 99, plataille + 80, LOGO_C);
         this.logo_c.anchor.setTo(0.5, 0.5);
-        var logo_c_cache = this.game.add.sprite(c / 2 - 99, plataille + 5, 'logo_c_cache');
+        var logo_c_cache = this.game.add.sprite(c / 2 - 99, plataille + 5, LOGO_C_MASK);
         logo_c_cache.anchor.setTo(0.5, 0);
-        var logo = this.game.add.sprite(c / 2, plataille, 'logo');
+        var logo = this.game.add.sprite(c / 2, plataille, LOGO_WITHOUT_C);
         logo.anchor.setTo(0.5, 0);
     },
     raz: function() {
