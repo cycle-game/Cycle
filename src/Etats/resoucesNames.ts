@@ -1,3 +1,4 @@
+export const DEBUG_POINT = 'debug-point';
 export const LANG = 'lang';
 export const LANG_SELECTOR = 'lang-selector';
 export const LOADER_EMPTY = 'load_vide';
