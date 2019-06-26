@@ -22,7 +22,7 @@ import { average, reset, save } from '../functions';
 import { levels, fr as lang } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
-import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR } from './resoucesNames';
+import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR } from './resoucesNames';
 
 let nuit_rotat = nuit_rotatVar;
 let nb_tours = nb_toursVar;
@@ -615,7 +615,7 @@ export const Play = {
 
             const tmp = this.placement(etoiles[val][0], rayon);
 
-            const et = this.etoiles.create(tmp[0], tmp[1], 'et');
+            const et = this.etoiles.create(tmp[0], tmp[1], STAR);
             et.anchor.set(0.6);
             et.angle = tmp[2];
         }

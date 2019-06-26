@@ -11,7 +11,7 @@ import {
 import { Play } from './play';
 import { fr as lang } from './levels';
 import Phaser from 'phaser';
-import { PLANET, PLATFORM, PLAYER } from './resoucesNames';
+import { PLANET, PLATFORM, PLAYER, STAR } from './resoucesNames';
 
 let invert_redim = invert_redimVar;
 
@@ -66,7 +66,7 @@ export const Edit = {
         this.etoiles = this.game.add.group(this.general);
         // Décalage d'une demie-plateforme (raison inconnue)
 
-        this.etoile_pos = this.general.create(0, 0, 'et');
+        this.etoile_pos = this.general.create(0, 0, STAR);
         this.etoile_pos.alpha = 0;
         this.etoile_pos.anchor.set(0.6);
         // Rajout d'informations liées au sprite
@@ -82,7 +82,7 @@ export const Edit = {
         // Choix du type d'objets
         this.plateforme = this.menu.create(-plataille * 1.5, plataille * 0.5, PLATFORM);
         this.piege = this.menu.create(-plataille * 3, plataille * 0.5, 'pie');
-        this.etoile = this.menu.create(-plataille * 1, plataille * 2.5, 'et');
+        this.etoile = this.menu.create(-plataille * 1, plataille * 2.5, STAR);
         this.etoile.anchor.set(0.5);
 
         this.launch = this.game.add.text(plataille, plataille, lang.Tester);
@@ -220,7 +220,7 @@ export const Edit = {
                 newetoile.kill();
             } else {
                 // Sinon on en crée une nouvelle
-                newetoile = this.etoiles.create(this.etoile_pos.x, this.etoile_pos.y, 'et');
+                newetoile = this.etoiles.create(this.etoile_pos.x, this.etoile_pos.y, STAR);
                 newetoile.anchor.set(0.6);
                 newetoile.angle = this.etoile_pos.angle;
                 newetoile.calculLvl = this.etoile_pos.calculLvl;
@@ -248,7 +248,7 @@ export const Edit = {
             this.changeInputEnabled(this.plateformes, false);
             this.changeInputEnabled(this.pieges, true);
             this.etoile_pos.alpha = 0;
-        } else if (sprite.key == 'et') {
+        } else if (sprite.key == STAR) {
             // Etoile
 
             this.etoile_pos.alpha = alph;
@@ -360,7 +360,7 @@ export const Edit = {
 
                 tmp = Play.placement(edited_lvl.etoiles[val][0], rayon);
 
-                var elt = this.etoiles.create(tmp[0], tmp[1], 'et');
+                var elt = this.etoiles.create(tmp[0], tmp[1], STAR);
 
                 elt.angle = tmp[2];
                 elt.anchor.set(0.6);

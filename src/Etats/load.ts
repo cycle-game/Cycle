@@ -1,5 +1,5 @@
 // Variable globale
-import { LOADER_EMPTY, LOADER_FULL, NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR } from './resoucesNames';
+import { LOADER_EMPTY, LOADER_FULL, NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR } from './resoucesNames';
 
 export let preloading2;
 export let preloading1;
@@ -22,7 +22,7 @@ export const Load = {
         this.game.load.image(PLANET, 'Ressources/Phaser/planet.svg');
 
         this.game.load.image(PLATFORM, 'Ressources/Phaser/platform.png');
-        this.game.load.image('et', 'Ressources/Phaser/Etoile.png');
+        this.game.load.image(STAR, 'Ressources/Phaser/star.png');
         this.game.load.image('pie', 'Ressources/Phaser/Piege.png');
 
         this.game.load.image('lang', 'Ressources/Phaser/Lang.png');
