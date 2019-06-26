@@ -22,6 +22,7 @@ import { average, reset, save } from '../functions';
 import { levels, fr as lang } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
+import { PLAYER } from './resoucesNames';
 
 let nuit_rotat = nuit_rotatVar;
 let nb_tours = nb_toursVar;
@@ -217,7 +218,7 @@ export const Play = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------- Personnage //
 
-        this.dude = this.general.create(0, -c / 3, 'dude');
+        this.dude = this.general.create(0, -c / 3, PLAYER);
         this.dude.anchor.set(0.5);
 
         // Ici on crée un groupe de test, pour prédir si le perso touchera une
