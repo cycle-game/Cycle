@@ -1,5 +1,5 @@
 // Variable globale
-import { LOADER_EMPTY, LOADER_FULL, PLAYER } from './resoucesNames';
+import { LOADER_EMPTY, LOADER_FULL, PLAYER, SELECTOR } from './resoucesNames';
 
 export let preloading2;
 export let preloading1;
@@ -17,7 +17,7 @@ export const Load = {
         // Et pendant se temps on charge toutes les ressources !
 
         this.game.load.image(PLAYER, 'Ressources/Phaser/player.png');
-        this.game.load.image('predic', 'Ressources/Phaser/Predicteur.png');
+        this.game.load.image(SELECTOR, 'Ressources/Phaser/selector.png');
         this.game.load.image('nuit', 'Ressources/Phaser/Nuit.png');
         this.game.load.image('planete', 'Ressources/Phaser/Terre.svg');
 
