@@ -11,7 +11,7 @@ import {
 import { Play } from './play';
 import { fr as lang } from './levels';
 import Phaser from 'phaser';
-import { PLAYER } from './resoucesNames';
+import { PLANET, PLAYER } from './resoucesNames';
 
 let invert_redim = invert_redimVar;
 
@@ -41,7 +41,7 @@ export const Edit = {
         this.dude.anchor.set(0.5);
         this.dude.alpha = 0.3;
 
-        this.plnte = this.general.create(0, 0, 'planete');
+        this.plnte = this.general.create(0, 0, PLANET);
         this.plnte.anchor.set(0.5);
 
         // ------------------------------------------------------------------ //
