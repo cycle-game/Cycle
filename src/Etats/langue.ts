@@ -1,12 +1,13 @@
 import { c } from '../variables';
 import { en, fr } from './levels';
 import { game } from './game';
+import { LANG } from './resoucesNames';
 
 export let lang;
 
 export const Langue = {
     create: () => {
-        lang = game.add.sprite(0, 0, 'lang');
+        lang = game.add.sprite(0, 0, LANG);
 
         // Handcursor
         lang.inputEnabled = true;
