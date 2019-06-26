@@ -1,6 +1,7 @@
 // Variable globale
 import {
     LANG,
+    LANG_SELECTOR,
     LOADER_EMPTY,
     LOADER_FULL,
     NIGHT_MASK,
@@ -37,7 +38,7 @@ export const Load = {
         this.game.load.image(TRAP, 'Ressources/Phaser/trap.png');
 
         this.game.load.image(LANG, 'Ressources/Phaser/lang.png');
-        this.game.load.image('cache', 'Ressources/Phaser/Cache.png');
+        this.game.load.image(LANG_SELECTOR, 'Ressources/Phaser/lang-selector.png');
         this.game.load.image('fs', 'Ressources/Phaser/Follow_Souris.png');
 
         this.game.load.image('logo', 'Ressources/Phaser/Logo_sans_c.png');
