@@ -22,7 +22,7 @@ import { average, reset, save } from '../functions';
 import { levels, fr as lang } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
-import { PLAYER } from './resoucesNames';
+import { PLAYER, SELECTOR } from './resoucesNames';
 
 let nuit_rotat = nuit_rotatVar;
 let nb_tours = nb_toursVar;
@@ -226,8 +226,8 @@ export const Play = {
         this.dudeTest = this.game.add.group(this.general);
 
         // Rotation gauche et droite
-        const dudeT1 = this.dudeTest.create(0, 0, 'predic');
-        const dudeT2 = this.dudeTest.create(0, 0, 'predic');
+        const dudeT1 = this.dudeTest.create(0, 0, SELECTOR);
+        const dudeT2 = this.dudeTest.create(0, 0, SELECTOR);
 
         // L'ancre est en haut au milieu, car le body du sprite 'dude' est placé
         // en haut à gauche (on s'intéresse pas à la position x)
