@@ -4,6 +4,9 @@ import {
     LANG_SELECTOR,
     LOADER_EMPTY,
     LOADER_FULL,
+    LOGO_C,
+    LOGO_C_MASK,
+    LOGO_WITHOUT_C,
     NIGHT_MASK,
     PLANET,
     PLATFORM,
@@ -40,9 +43,9 @@ export const Load = {
         this.game.load.image(LANG, 'Ressources/Phaser/lang.png');
         this.game.load.image(LANG_SELECTOR, 'Ressources/Phaser/lang-selector.png');
 
-        this.game.load.image('logo', 'Ressources/Phaser/Logo_sans_c.png');
-        this.game.load.image('logo_c', 'Ressources/Phaser/Logo_c.png');
-        this.game.load.image('logo_c_cache', 'Ressources/Phaser/Logo_c_cache.png');
+        this.game.load.image(LOGO_WITHOUT_C, 'Ressources/Phaser/logo-without-c.png');
+        this.game.load.image(LOGO_C, 'Ressources/Phaser/logo-c.png');
+        this.game.load.image(LOGO_C_MASK, 'Ressources/Phaser/logo-c-mask.png');
         this.game.load.image('debug_point', 'Ressources/Phaser/Point.png');
     },
     create: function() {
