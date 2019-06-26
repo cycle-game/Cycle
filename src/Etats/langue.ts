@@ -16,11 +16,6 @@ export const Langue = {
         this.cache = game.add.sprite(0, 0, LANG_SELECTOR);
         // @ts-ignore
         this.cache.blendMode = PIXI.blendModes.DIFFERENCE;
-
-        //this.fs = game.add.sprite(c/2, c/2, 'fs');
-        //this.fs.blendMode = PIXI.blendModes.DIFFERENCE;
-
-        //game.input.onDown.add(this.clickGeneral, this);
     },
 
     update: () => {
@@ -39,8 +34,5 @@ export const Langue = {
 
             game.state.start('Menu');
         }
-
-        //this.fs.x = x_pointer - 50;
-        //this.fs.y = y_pointer - 50;
     },
 };

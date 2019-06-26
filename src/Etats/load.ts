@@ -39,7 +39,6 @@ export const Load = {
 
         this.game.load.image(LANG, 'Ressources/Phaser/lang.png');
         this.game.load.image(LANG_SELECTOR, 'Ressources/Phaser/lang-selector.png');
-        this.game.load.image('fs', 'Ressources/Phaser/Follow_Souris.png');
 
         this.game.load.image('logo', 'Ressources/Phaser/Logo_sans_c.png');
         this.game.load.image('logo_c', 'Ressources/Phaser/Logo_c.png');
