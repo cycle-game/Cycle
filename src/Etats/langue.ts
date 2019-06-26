@@ -1,7 +1,7 @@
 import { c } from '../variables';
 import { en, fr } from './levels';
 import { game } from './game';
-import { LANG } from './resoucesNames';
+import { LANG, LANG_SELECTOR } from './resoucesNames';
 
 export let lang;
 
@@ -13,7 +13,7 @@ export const Langue = {
         lang.inputEnabled = true;
         lang.input.useHandCursor = true;
 
-        this.cache = game.add.sprite(0, 0, 'cache');
+        this.cache = game.add.sprite(0, 0, LANG_SELECTOR);
         // @ts-ignore
         this.cache.blendMode = PIXI.blendModes.DIFFERENCE;
 
