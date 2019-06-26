@@ -5,3 +5,4 @@ export const PLANET = 'planet';
 export const PLATFORM = 'platform';
 export const PLAYER = 'dude';
 export const SELECTOR = 'selector';
+export const STAR = 'star';
