@@ -11,7 +11,7 @@ import {
 import { Play } from './play';
 import { fr as lang } from './levels';
 import Phaser from 'phaser';
-import { PLANET, PLAYER } from './resoucesNames';
+import { PLANET, PLATFORM, PLAYER } from './resoucesNames';
 
 let invert_redim = invert_redimVar;
 
@@ -80,7 +80,7 @@ export const Edit = {
         this.menu.y = -maxPlat / 2;
 
         // Choix du type d'objets
-        this.plateforme = this.menu.create(-plataille * 1.5, plataille * 0.5, 'plt');
+        this.plateforme = this.menu.create(-plataille * 1.5, plataille * 0.5, PLATFORM);
         this.piege = this.menu.create(-plataille * 3, plataille * 0.5, 'pie');
         this.etoile = this.menu.create(-plataille * 1, plataille * 2.5, 'et');
         this.etoile.anchor.set(0.5);
@@ -236,7 +236,7 @@ export const Edit = {
 
         // Pour savoir où on clique, on regarde le sprite utilisé
 
-        if (sprite.key == 'plt') {
+        if (sprite.key == PLATFORM) {
             // Plateforme
 
             this.changeInputEnabled(this.plateformes, true);
@@ -310,7 +310,7 @@ export const Edit = {
                 // ---------------------------------------------------------- //
                 // ---------------------------------------------- Plateformes //
 
-                elt = this.plateformes.create(tmp[0], tmp[1], 'plt');
+                elt = this.plateformes.create(tmp[0], tmp[1], PLATFORM);
                 elt.anchor.set(0.5, 1);
                 elt.angle = tmp[2];
                 elt.alpha = inac;

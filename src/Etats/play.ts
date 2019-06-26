@@ -22,7 +22,7 @@ import { average, reset, save } from '../functions';
 import { levels, fr as lang } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
-import { NIGHT_MASK, PLANET, PLAYER, SELECTOR } from './resoucesNames';
+import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR } from './resoucesNames';
 
 let nuit_rotat = nuit_rotatVar;
 let nb_tours = nb_toursVar;
@@ -584,7 +584,7 @@ export const Play = {
       for (var i = plateformes[val][0]; i < plateformes[val][1]; i += deg) {
           var tmp = this.placement(i, rayon);
 
-          var plt = this.plateformes.create(tmp[0], tmp[1], 'plt');
+          var plt = this.plateformes.create(tmp[0], tmp[1], PLATFORM);
           plt.anchor.set(0.5, 1);
           plt.angle = tmp[2];
       }*/
@@ -594,7 +594,7 @@ export const Play = {
             const tmp = this.placement(plateformes[val][0], rayon);
 
             // Création de la plateforme
-            const plt = this.plateformes.create(tmp[0], tmp[1], 'plt');
+            const plt = this.plateformes.create(tmp[0], tmp[1], PLATFORM);
             plt.anchor.set(0.5, 1);
             plt.angle = tmp[2];
 
