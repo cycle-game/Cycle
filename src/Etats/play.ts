@@ -22,7 +22,7 @@ import { average, reset, save } from '../functions';
 import { levels, fr as lang } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
-import { PLAYER, SELECTOR } from './resoucesNames';
+import { NIGHT_MASK, PLAYER, SELECTOR } from './resoucesNames';
 
 let nuit_rotat = nuit_rotatVar;
 let nb_tours = nb_toursVar;
@@ -206,8 +206,8 @@ export const Play = {
         // ----------------------------------------------- Gestion de la nuit //
 
         // On met la nuit en dehors de la planete (rotation calculée by hand)
-        //this.nuit = this.planete.create(0, 0, 'nuit');
-        this.nuit = this.general.create(0, 0, 'nuit');
+        //this.nuit = this.planete.create(0, 0, NIGHT_MASK);
+        this.nuit = this.general.create(0, 0, NIGHT_MASK);
         this.nuit.anchor.set(0.5, 0);
         this.nuit.angle = nuit_depart; // Rotation de départ
         // @ts-ignore
