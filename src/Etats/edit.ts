@@ -11,7 +11,7 @@ import {
 import { Play } from './play';
 import { fr as lang } from './levels';
 import Phaser from 'phaser';
-import { PLANET, PLATFORM, PLAYER, STAR } from './resoucesNames';
+import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from './resoucesNames';
 
 let invert_redim = invert_redimVar;
 
@@ -81,7 +81,7 @@ export const Edit = {
 
         // Choix du type d'objets
         this.plateforme = this.menu.create(-plataille * 1.5, plataille * 0.5, PLATFORM);
-        this.piege = this.menu.create(-plataille * 3, plataille * 0.5, 'pie');
+        this.piege = this.menu.create(-plataille * 3, plataille * 0.5, TRAP);
         this.etoile = this.menu.create(-plataille * 1, plataille * 2.5, STAR);
         this.etoile.anchor.set(0.5);
 
@@ -242,7 +242,7 @@ export const Edit = {
             this.changeInputEnabled(this.plateformes, true);
             this.changeInputEnabled(this.pieges, false);
             this.etoile_pos.alpha = 0;
-        } else if (sprite.key == 'pie') {
+        } else if (sprite.key == TRAP) {
             // Piege
 
             this.changeInputEnabled(this.plateformes, false);
@@ -332,7 +332,7 @@ export const Edit = {
                 // ---------------------------------------------------------- //
                 // --------------------------------------------------- Pièges //
 
-                elt = this.pieges.create(tmp[0], tmp[1], 'pie');
+                elt = this.pieges.create(tmp[0], tmp[1], TRAP);
                 elt.anchor.set(0.5, 1);
                 elt.angle = tmp[2];
                 elt.alpha = 0;

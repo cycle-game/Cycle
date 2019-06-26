@@ -22,7 +22,7 @@ import { average, reset, save } from '../functions';
 import { levels, fr as lang } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
-import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR } from './resoucesNames';
+import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from './resoucesNames';
 
 let nuit_rotat = nuit_rotatVar;
 let nb_tours = nb_toursVar;
@@ -637,7 +637,7 @@ export const Play = {
 
             const tmp = this.placement(pieges[val][0], rayon);
 
-            const plt = this.pieges.create(tmp[0], tmp[1], 'pie');
+            const plt = this.pieges.create(tmp[0], tmp[1], TRAP);
             plt.anchor.set(0.5, 1);
             plt.angle = tmp[2];
         }
