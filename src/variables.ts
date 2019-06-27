@@ -3,8 +3,6 @@ export const BASE_SIZE = 600;
 export const BLUE = '040c4b';
 export const YELLOW = 0xfbf3b4;
 
-export const lang = {};
-
 // -- \\
 
 export const hauteur = 10;
