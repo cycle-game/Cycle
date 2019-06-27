@@ -1,36 +1,30 @@
-import {
-    anim as animVar,
-    BLUE,
-    BASE_SIZE,
-    cplan,
-    edited_lvl,
-    fps_adapt as fps_adaptVar,
-    fps_array,
-    nb_etoiles as nb_etoilesVar,
-    nb_tours as nb_toursVar,
-    nuit_depart,
-    nuit_rotat as nuit_rotatVar,
-    nuit_rotat_diff,
-    pi180,
-    plataille,
-    rotat,
-    s as sVar,
-    s_invers as s_inversVar,
-    Stats,
-} from '../variables';
+import { BLUE, BASE_SIZE, edited_lvl, pi180, plataille, Stats } from '../variables';
 import { average, reset, save } from '../functions';
 import { levels, fr as lang } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from './resoucesNames';
 
-let nuit_rotat = nuit_rotatVar;
-let nb_tours = nb_toursVar;
-let nb_etoiles = nb_etoilesVar;
-let s = sVar;
-let s_invers = s_inversVar;
-let anim = animVar;
-let fps_adapt = fps_adaptVar;
+const cplan = BASE_SIZE / 1.8;
+let nb_tours = 0;
+let nb_etoiles = 0;
+
+// rotation speed
+const rotat = 2;
+let nuit_rotat = 1.3;
+const nuit_rotat_diff = [0.9, 1.1, 1.3];
+const nuit_depart = -10;
+
+// Scale
+let s = 1;
+let s_invers = 1 / s;
+
+// FPS
+let fps_adapt = 1;
+const fps_array = [];
+
+// Animation de fin et de début
+let anim = true;
 
 // Attention,  ici on a une grosse partie du jeu
 // C'est l'état (state) où tout les niveaux seront
