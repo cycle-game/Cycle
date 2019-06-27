@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { c } from '../variables';
+import { BASE_SIZE } from '../variables';
 import { Victoire } from './victoire';
 import { Load } from './load';
 import { Explain, Menu } from './menu';
@@ -11,7 +11,7 @@ import { Boot } from './boot';
 import { Langue } from './langue';
 
 // Variable de jeu
-export const game = new Phaser.Game(c, c, Phaser.CANVAS, 'cycleCanvas');
+export const game = new Phaser.Game(BASE_SIZE, BASE_SIZE, Phaser.CANVAS, 'cycleCanvas');
 
 // Les états du jeu
 game.state.add('Boot', Boot);

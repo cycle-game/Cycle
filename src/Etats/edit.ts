@@ -1,5 +1,5 @@
 import {
-    c,
+    BASE_SIZE,
     hauteur,
     inac,
     invert_redim as invert_redimVar,
@@ -29,15 +29,15 @@ export const Edit = {
 
         this.general = this.game.add.group();
 
-        this.general.x = c / 2;
-        this.general.y = c / 2; // Ici, on centre la planete
+        this.general.x = BASE_SIZE / 2;
+        this.general.y = BASE_SIZE / 2; // Ici, on centre la planete
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
         // -------------------------------------------- Personnage et planete //
 
-        this.dude = this.general.create(0, -c / 3, PLAYER);
+        this.dude = this.general.create(0, -BASE_SIZE / 3, PLAYER);
         this.dude.anchor.set(0.5);
         this.dude.alpha = 0.3;
 
@@ -49,11 +49,11 @@ export const Edit = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------ Redimensionnement //
 
-        const maxPlat = (hauteur * plataille + c / 6 + plataille + this.dude.height) * 2;
+        const maxPlat = (hauteur * plataille + BASE_SIZE / 6 + plataille + this.dude.height) * 2;
 
-        if (maxPlat > c)
+        if (maxPlat > BASE_SIZE)
             // Redimensionnement
-            this.redimensionne(c / maxPlat);
+            this.redimensionne(BASE_SIZE / maxPlat);
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
@@ -291,7 +291,7 @@ export const Edit = {
 
             cx = i * plataille;
 
-            rayon = c / 6 + cx;
+            rayon = BASE_SIZE / 6 + cx;
 
             perimetre = rayon * Math.PI * 2;
 
@@ -356,7 +356,7 @@ export const Edit = {
 
         if (edited_lvl.edited) {
             for (var val in edited_lvl.etoiles) {
-                rayon = (edited_lvl.etoiles[val][1] + 0.5) * plataille + c / 6;
+                rayon = (edited_lvl.etoiles[val][1] + 0.5) * plataille + BASE_SIZE / 6;
 
                 tmp = Play.placement(edited_lvl.etoiles[val][0], rayon);
 
@@ -388,7 +388,7 @@ export const Edit = {
             this.etoile_pos.x = placement[0];
             this.etoile_pos.y = placement[1];
             this.etoile_pos.angle = placement[2];
-            this.etoile_pos.calculLvl = (tmp[0] - c / 6) / plataille - 0.5;
+            this.etoile_pos.calculLvl = (tmp[0] - BASE_SIZE / 6) / plataille - 0.5;
             this.etoile_pos.calculDeg = tmp[1];
         }
 
@@ -424,10 +424,15 @@ export const Edit = {
         if (x < 0) degrees += 180;
 
         // Dépassement
-        if (rayon < c / 6) rayon = c / 6 + plataille / 2;
-        else if (rayon > c / 6 + hauteur * plataille) rayon = c / 6 + hauteur * plataille + plataille / 2;
+        if (rayon < BASE_SIZE / 6) rayon = BASE_SIZE / 6 + plataille / 2;
+        else if (rayon > BASE_SIZE / 6 + hauteur * plataille)
+            rayon = BASE_SIZE / 6 + hauteur * plataille + plataille / 2;
         // Maintenant on arrondi tout
-        else rayon = Math.round((rayon - c / 6 - plataille / 2) / plataille) * plataille + c / 6 + plataille / 2;
+        else
+            rayon =
+                Math.round((rayon - BASE_SIZE / 6 - plataille / 2) / plataille) * plataille +
+                BASE_SIZE / 6 +
+                plataille / 2;
 
         degrees = Math.round(degrees);
 
@@ -441,8 +446,8 @@ export const Edit = {
         this.game.camera.scale.y = s;
         this.game.camera.scale.x = s;
 
-        this.general.x += (c * s_invers * (1 - s)) / 2;
-        this.general.y += (c * s_invers * (1 - s)) / 2;
+        this.general.x += (BASE_SIZE * s_invers * (1 - s)) / 2;
+        this.general.y += (BASE_SIZE * s_invers * (1 - s)) / 2;
 
         invert_redim = s_invers;
     },

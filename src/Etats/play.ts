@@ -1,7 +1,7 @@
 import {
     anim as animVar,
     bleu,
-    c,
+    BASE_SIZE,
     cplan,
     edited_lvl,
     fps_adapt as fps_adaptVar,
@@ -137,7 +137,7 @@ export const Play = {
 
         // Puisque tout est défini par rapport au centre, on applique le 0 à
         // la future position de la planête
-        this.general.x = c / 2;
+        this.general.x = BASE_SIZE / 2;
         this.general.y = cplan;
 
         // Du coup on remplace tout les this.game.add.[..] par this.world.create
@@ -179,7 +179,7 @@ export const Play = {
 
         // Groupe
         this.planete = this.game.add.group(this.general);
-        //this.planete.x = c/2; this.planete.y = cplan;
+        //this.planete.x = BASE_SIZE/2; this.planete.y = cplan;
 
         // Le sprite de la planete
         this.plnte = this.planete.create(0, 0, PLANET);
@@ -218,7 +218,7 @@ export const Play = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------- Personnage //
 
-        this.dude = this.general.create(0, -c / 3, PLAYER);
+        this.dude = this.general.create(0, -BASE_SIZE / 3, PLAYER);
         this.dude.anchor.set(0.5);
 
         // Ici on crée un groupe de test, pour prédir si le perso touchera une
@@ -300,7 +300,7 @@ export const Play = {
 
         maxPlat = (maxPlat + plataille + this.dude.body.height) * 2;
 
-        if (maxPlat >= c) this.redimensionne(c / maxPlat);
+        if (maxPlat >= BASE_SIZE) this.redimensionne(BASE_SIZE / maxPlat);
         else this.redimensionne(1);
 
         // ------------------------------------------------------------------ //
@@ -412,7 +412,7 @@ export const Play = {
 
             this.dudeTest.forEachAlive(function(c) {
                 // Impossible à faire marcher?!
-                //c.pivot.y = (cplan - (this.dude.body.y - this.dude.body.height * (s_invers)) );
+                //BASE_SIZE.pivot.y = (cplan - (this.dude.body.y - this.dude.body.height * (s_invers)) );
                 c.pivot.y = -this.dude.y + this.dude.height / 2;
             }, this);
 
@@ -531,8 +531,8 @@ export const Play = {
         //this.game.camera.y = 300;
         //this.game.camera.focusOnXY(300,300);
         // Du coup on met en place le supergroup this.general
-        this.general.x += (c * s_invers * (1 - s)) / 2;
-        this.general.y += (c * s_invers * (1 - s)) / 2;
+        this.general.x += (BASE_SIZE * s_invers * (1 - s)) / 2;
+        this.general.y += (BASE_SIZE * s_invers * (1 - s)) / 2;
 
         // Les corps ne sont pas à jour :(
         this.dude.body.setSize(this.dude.body.width * s, this.dude.body.height * s, 0, 0);
@@ -567,7 +567,7 @@ export const Play = {
             // On déplace une partie de la trigo ici (gain de temps)
             const cx = plateformes[val][1] * plataille;
 
-            const rayon = c / 6 + cx;
+            const rayon = BASE_SIZE / 6 + cx;
 
             // -------------------------------------------------------------- //
             /* -------- Ces calculs ont été déplacé dans l'éditeur de niveau
@@ -602,7 +602,7 @@ export const Play = {
             if (plateformes[val][1] > maxPlat) maxPlat = plateformes[val][1];
         }
 
-        return maxPlat * plataille + c / 6;
+        return maxPlat * plataille + BASE_SIZE / 6;
     },
     makeEtoiles: function() {
         // Même principe que makePlateformes
@@ -611,7 +611,7 @@ export const Play = {
         else etoiles = levels[Stats.level].etoiles;
 
         for (let val in etoiles) {
-            const rayon = c / 6 + etoiles[val][1] * plataille + plataille / 2;
+            const rayon = BASE_SIZE / 6 + etoiles[val][1] * plataille + plataille / 2;
 
             const tmp = this.placement(etoiles[val][0], rayon);
 
@@ -633,7 +633,7 @@ export const Play = {
         }
 
         for (let val in pieges) {
-            const rayon = c / 6 + pieges[val][1] * plataille;
+            const rayon = BASE_SIZE / 6 + pieges[val][1] * plataille;
 
             const tmp = this.placement(pieges[val][0], rayon);
 
@@ -667,13 +667,13 @@ export const Play = {
         //game.debug.body(this.nuit);
         //game.debug.body(this.dude);
         /*
-    this.plateformes.forEachAlive(function(c){
-        game.debug.body(c);
+    this.plateformes.forEachAlive(function(BASE_SIZE){
+        game.debug.body(BASE_SIZE);
     });
     */
         /*
-    this.dudeTest.forEachAlive(function(c){
-        game.debug.body(c);
+    this.dudeTest.forEachAlive(function(BASE_SIZE){
+        game.debug.body(BASE_SIZE);
     });
     */
         //game.debug.spriteCoords(this.dudeTest.getAt(0), 32, 300);
