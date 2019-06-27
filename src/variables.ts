@@ -5,15 +5,9 @@ export const YELLOW = 0xfbf3b4;
 
 // -- \\
 
-export const hauteur = 10;
-
-export const alph = 0.5;
-export const inac = 0.05;
 export const type = 'plat';
-export const invert_redim = 1;
 
 export const pi180 = Math.PI / 180;
-export const pi180_invers = 1 / pi180;
 
 export const edited_lvl: any = {};
 

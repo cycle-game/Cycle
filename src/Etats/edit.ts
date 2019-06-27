@@ -1,19 +1,15 @@
-import {
-    BASE_SIZE,
-    hauteur,
-    inac,
-    invert_redim as invert_redimVar,
-    plataille,
-    edited_lvl,
-    alph,
-    pi180_invers,
-} from '../variables';
+import { BASE_SIZE, plataille, edited_lvl, pi180 } from '../variables';
 import { Play } from './play';
 import { fr as lang } from './levels';
 import Phaser from 'phaser';
 import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from './resoucesNames';
 
-let invert_redim = invert_redimVar;
+const alph = 0.5;
+const inac = 0.05;
+const pi180_invers = 1 / pi180;
+const PLATFORMS_HEIGHT_NUMBER = 10;
+
+let invert_redim = 1;
 
 export const Edit = {
     create: function() {
@@ -49,7 +45,7 @@ export const Edit = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------ Redimensionnement //
 
-        const maxPlat = (hauteur * plataille + BASE_SIZE / 6 + plataille + this.dude.height) * 2;
+        const maxPlat = (PLATFORMS_HEIGHT_NUMBER * plataille + BASE_SIZE / 6 + plataille + this.dude.height) * 2;
 
         if (maxPlat > BASE_SIZE)
             // Redimensionnement
@@ -285,7 +281,7 @@ export const Edit = {
         var cx, rayon, perimetre, nbr_plat, deg, tmp, elt;
 
         // Parcourt du niveau de haut en bas (rayon du cercle)
-        for (let i = 0; i < hauteur; i++) {
+        for (let i = 0; i < PLATFORMS_HEIGHT_NUMBER; i++) {
             // -------------------------------------------------------------- //
             // ---------------- Calcul du positionnement pour les plateformes //
 
@@ -425,8 +421,8 @@ export const Edit = {
 
         // Dépassement
         if (rayon < BASE_SIZE / 6) rayon = BASE_SIZE / 6 + plataille / 2;
-        else if (rayon > BASE_SIZE / 6 + hauteur * plataille)
-            rayon = BASE_SIZE / 6 + hauteur * plataille + plataille / 2;
+        else if (rayon > BASE_SIZE / 6 + PLATFORMS_HEIGHT_NUMBER * plataille)
+            rayon = BASE_SIZE / 6 + PLATFORMS_HEIGHT_NUMBER * plataille + plataille / 2;
         // Maintenant on arrondi tout
         else
             rayon =
