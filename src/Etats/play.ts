@@ -3,7 +3,7 @@ import { average, reset, save } from '../functions';
 import { levels, fr as lang } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
-import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from './resoucesNames';
+import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
 
 const cplan = BASE_SIZE / 1.8;
 let nb_tours = 0;

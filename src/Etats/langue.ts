@@ -1,7 +1,7 @@
 import { BASE_SIZE } from '../variables';
 import { en, fr } from './levels';
 import { game } from './game';
-import { LANG, LANG_SELECTOR } from './resoucesNames';
+import { LANG, LANG_SELECTOR } from '../resoucesNames';
 
 export let lang;
 

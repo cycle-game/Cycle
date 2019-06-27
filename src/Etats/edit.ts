@@ -2,7 +2,7 @@ import { BASE_SIZE, plataille, edited_lvl, pi180 } from '../variables';
 import { Play } from './play';
 import { fr as lang } from './levels';
 import Phaser from 'phaser';
-import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from './resoucesNames';
+import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
 
 const alph = 0.5;
 const inac = 0.05;
