@@ -48,9 +48,9 @@ export const Edit = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------ Redimensionnement //
 
-      const maxPlat = (hauteur * plataille + c / 6 + plataille + this.dude.height) * 2;
+        const maxPlat = (hauteur * plataille + c / 6 + plataille + this.dude.height) * 2;
 
-      if (maxPlat > c)
+        if (maxPlat > c)
             // Redimensionnement
             this.redimensionne(c / maxPlat);
 
@@ -164,19 +164,19 @@ export const Edit = {
         edited_lvl.edited = true;
 
         // Exportation du niveau
-      const export_lvl =
-        '{' +
-        'plateformes: [' +
-        this.objToString(edited_lvl.plateformes) +
-        '], ' +
-        'pieges: [' +
-        this.objToString(edited_lvl.pieges) +
-        '], ' +
-        'etoiles: [' +
-        this.objToString(edited_lvl.etoiles) +
-        ']' +
-        '}';
-      (window.document.getElementById('export_lvl') as any).value = export_lvl;
+        const export_lvl =
+            '{' +
+            'plateformes: [' +
+            this.objToString(edited_lvl.plateformes) +
+            '], ' +
+            'pieges: [' +
+            this.objToString(edited_lvl.pieges) +
+            '], ' +
+            'etoiles: [' +
+            this.objToString(edited_lvl.etoiles) +
+            ']' +
+            '}';
+        (window.document.getElementById('export_lvl') as any).value = export_lvl;
 
         // Affichage pour l'envoi
         window.document.getElementById('SendMeLvl').className = '';
@@ -190,10 +190,10 @@ export const Edit = {
         // Conversion d'un objet en chaîne de caractère symbolisant un tableau
         // javascript.
 
-      let str = '';
-      const tmp = [];
+        let str = '';
+        const tmp = [];
 
-      for (let val in obj) {
+        for (let val in obj) {
             tmp.push('[' + obj[val].join(', ') + ']');
         }
 
@@ -205,9 +205,9 @@ export const Edit = {
         // Pour les étoiles les positions ne sont pas prédéfinies
 
         if (this.etoile_pos.alpha > 0) {
-          let newetoile;
+            let newetoile;
 
-          // Vérification : l'étoile existe-t-elle déjà ou non ?
+            // Vérification : l'étoile existe-t-elle déjà ou non ?
             this.etoiles.forEachAlive(function(c) {
                 if (c.calculLvl == this.etoile_pos.calculLvl && c.calculDeg == this.etoile_pos.calculDeg) {
                     newetoile = c;
@@ -378,13 +378,13 @@ export const Edit = {
         // ---------------------- Calcul de la position de l'"étoile-curseur" //
 
         if (this.etoile_pos.alpha > 0) {
-          const x_pointer = this.game.input.x * invert_redim - this.general.x;
-          const y_pointer = this.game.input.y * invert_redim - this.general.y;
-          const tmp = this.unPeuDeTrigo(x_pointer, y_pointer);
+            const x_pointer = this.game.input.x * invert_redim - this.general.x;
+            const y_pointer = this.game.input.y * invert_redim - this.general.y;
+            const tmp = this.unPeuDeTrigo(x_pointer, y_pointer);
 
-          const placement = Play.placement(tmp[1], tmp[0]);
+            const placement = Play.placement(tmp[1], tmp[0]);
 
-          this.etoile_pos.x = placement[0];
+            this.etoile_pos.x = placement[0];
             this.etoile_pos.y = placement[1];
             this.etoile_pos.angle = placement[2];
             this.etoile_pos.calculLvl = (tmp[0] - c / 6) / plataille - 0.5;
@@ -410,14 +410,14 @@ export const Edit = {
         // Dans cette fonction on renvoie une position en valeur trigonométrique
         // en accord avec le nombre de niveau choisis et arrondi au degrée.
 
-      let rayon = Math.sqrt(x * x + y * y);
+        let rayon = Math.sqrt(x * x + y * y);
 
-      // tangente de l'angle = opposé / adjacent
-      const radian = Math.atan(y / x);
+        // tangente de l'angle = opposé / adjacent
+        const radian = Math.atan(y / x);
 
-      let degrees = radian * pi180_invers + 90;
+        let degrees = radian * pi180_invers + 90;
 
-      // On a les degrees sur de 0 à 180 pour chaque face du cercle
+        // On a les degrees sur de 0 à 180 pour chaque face du cercle
         // Donc si on est sur la face gauche, on ajoute 180°
 
         if (x < 0) degrees += 180;
@@ -435,9 +435,9 @@ export const Edit = {
     redimensionne: function(s) {
         // Redimensionnement de la fenêtre en fonction de la hauteur (rayon)
 
-      const s_invers = 1 / s;
+        const s_invers = 1 / s;
 
-      this.game.camera.scale.y = s;
+        this.game.camera.scale.y = s;
         this.game.camera.scale.x = s;
 
         this.general.x += (c * s_invers * (1 - s)) / 2;
