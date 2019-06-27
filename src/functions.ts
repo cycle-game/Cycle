@@ -34,9 +34,9 @@ FB.init({
               }
             );
         };
-    
+
 facebook_share();
-    
+
 };
 
 
@@ -49,7 +49,7 @@ facebook_share();
 }(document, 'script', 'facebook-jssdk'));
 */
 
-import { bleu, c, plataille } from './variables';
+import { bleu, BASE_SIZE, plataille } from './variables';
 import { lang } from './Etats/langue';
 
 //http://forum.webrankinfo.com/equivalent-urlencode-javascript-t51434.html
@@ -187,7 +187,7 @@ export function reset(Stats) {
 }
 
 export function ecart(nombre, marge) {
-    var plan = c - 2 * marge;
+    var plan = BASE_SIZE - 2 * marge;
 
     var ecart = Math.round(plan / (nombre - 1));
 
@@ -205,7 +205,7 @@ export function difficultes(contexte, Stats) {
     for (var i = 0; i < lang.Difficultes.length; i++) {
         contexte.choix_diff[i] = cliquable(
             marge + espace * i,
-            c - plataille,
+            BASE_SIZE - plataille,
             lang.Difficultes[i],
             25,
             0.5,

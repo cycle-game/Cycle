@@ -1,4 +1,4 @@
-import { c, plataille, Stats } from '../variables';
+import { BASE_SIZE, plataille, Stats } from '../variables';
 import { cliquable, difficultes, ecart, scores } from '../functions';
 import { fr as lang } from './levels';
 import Phaser from 'phaser';
@@ -7,7 +7,7 @@ export const Scores = {
     create: function() {
         const highscores = scores().split('|||');
 
-        const label = cliquable(c / 2, plataille, lang.UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
+        const label = cliquable(BASE_SIZE / 2, plataille, lang.UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
 
         // Retour au menu
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
@@ -55,7 +55,7 @@ export const Scores = {
                 }
             }
 
-            //this.scores[val] = cliquable(c/2, c/2, highscores[val], 25, 0.5, 0.5, 0, null, null, this);
+            //this.scores[val] = cliquable(BASE_SIZE/2, BASE_SIZE/2, highscores[val], 25, 0.5, 0.5, 0, null, null, this);
 
             if (val == this.diff) this.scores[val].alpha = 1;
             else this.scores[val].alpha = 0;

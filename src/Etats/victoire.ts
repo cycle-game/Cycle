@@ -1,5 +1,5 @@
 import { cliquable, reset, save, sociaux, toHigh } from '../functions';
-import { c, pseudo as pseudoVar, Stats } from '../variables';
+import { BASE_SIZE, pseudo as pseudoVar, Stats } from '../variables';
 import Phaser from 'phaser';
 import { fr as lang } from './levels';
 
@@ -8,8 +8,8 @@ let pseudo = pseudoVar;
 export const Victoire = {
     create: function() {
         var label = cliquable(
-            c / 2,
-            c / 4,
+            BASE_SIZE / 2,
+            BASE_SIZE / 4,
             lang.Victoire + '\n\n' + Math.round(Stats.score),
             25,
             0.5,
@@ -20,9 +20,9 @@ export const Victoire = {
             this,
         );
 
-        var enter_pseudo = cliquable(c / 2, c / 2, lang.Pseudo, 25, 0.5, 0.5, 300, 500, null, this);
+        var enter_pseudo = cliquable(BASE_SIZE / 2, BASE_SIZE / 2, lang.Pseudo, 25, 0.5, 0.5, 300, 500, null, this);
 
-        this.pseudo = cliquable(c / 2, (c / 4) * 3, pseudo + '_', 25, 0.5, 0.5, 0, 500, null, this);
+        this.pseudo = cliquable(BASE_SIZE / 2, (BASE_SIZE / 4) * 3, pseudo + '_', 25, 0.5, 0.5, 0, 500, null, this);
 
         // Retour au menu
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);

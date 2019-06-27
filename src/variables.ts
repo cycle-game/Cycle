@@ -1,4 +1,4 @@
-export const c = 600; // Sera la variable de base, mais on dézoomera dans certains niveau
+export const BASE_SIZE = 600;
 export const bleu = '040c4b';
 export const jaune = 0xfbf3b4;
 export const lang = {};
@@ -30,7 +30,7 @@ export const Stats = { level: 0, score: 0, diff: 1 };
 export let nb_tours = 0;
 export const nb_etoiles = 0;
 
-export const cplan = c / 1.8;
+export const cplan = BASE_SIZE / 1.8;
 
 // rotation speed
 export const rotat = 2;
