@@ -1,58 +1,75 @@
 {
-  "name": "cycle-game",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/cycle-game/Cycle.git",
-  "author": "Rémi Perrot",
-  "contributors": [
-    {
-      "name": "Rémi Perrot"
+    "name": "cycle-game",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/cycle-game/Cycle.git",
+    "author": "Rémi Perrot",
+    "contributors": [
+        {
+            "name": "Rémi Perrot"
+        },
+        {
+            "name": "Julien Giovaresco"
+        },
+        {
+            "name": "Gaëtan Maisse",
+            "email": "gaetanmaisse@gmail.com"
+        },
+        {
+            "name": "Marc Schaller"
+        }
+    ],
+    "license": "GPL-3.0-only",
+    "private": false,
+    "scripts": {
+        "build": "webpack --mode=production",
+        "build:dev": "webpack --mode=development",
+        "lint:prettier": "yarn prettier -l 'src/**/*.{ts,js,md,json}'",
+        "lint:prettier:fix": "yarn prettier --write 'src/**/*.{ts,js,md,json}'",
+        "deploy": "yarn build && gh-pages -d dist",
+        "start:dev": "webpack-dev-server"
     },
-    {
-      "name": "Julien Giovaresco"
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
     },
-    {
-      "name": "Gaëtan Maisse",
-      "email": "gaetanmaisse@gmail.com"
+    "lint-staged": {
+        "*.{ts,js}": [
+            "prettier --write",
+            "git add"
+        ],
+        "*.{json,md}": [
+            "prettier --write",
+            "git add"
+        ]
     },
-    {
-      "name": "Marc Schaller"
+    "prettier": {
+        "tabWidth": 4,
+        "semi": true,
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "arrowParens": "avoid"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.4.5",
+        "@babel/preset-env": "^7.4.5",
+        "babel-loader": "^8.0.6",
+        "copy-webpack-plugin": "^5.0.3",
+        "expose-loader": "^0.7.5",
+        "gh-pages": "^2.0.1",
+        "html-webpack-plugin": "^3.2.0",
+        "husky": "^2.4.1",
+        "lint-staged": "^8.2.1",
+        "prettier": "^1.18.2",
+        "ts-loader": "^6.0.4",
+        "typescript": "^3.5.2",
+        "webpack": "^4.33.0",
+        "webpack-cli": "^3.3.3",
+        "webpack-dev-server": "^3.7.1"
+    },
+    "dependencies": {
+        "phaser": "2.5.0"
     }
-  ],
-  "license": "GPL-3.0-only",
-  "private": false,
-  "scripts": {
-    "build": "webpack --mode=production",
-    "build:dev": "webpack --mode=development",
-    "lint:prettier": "yarn prettier -l 'src/**/*.{ts,js,md,json}'",
-    "lint:prettier:fix": "yarn prettier --write 'src/**/*.{ts,js,md,json}'",
-    "deploy": "yarn build && gh-pages -d dist",
-    "start:dev": "webpack-dev-server"
-  },
-  "prettier": {
-    "tabWidth": 4,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "bracketSpacing": true,
-    "arrowParens": "avoid"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "babel-loader": "^8.0.6",
-    "copy-webpack-plugin": "^5.0.3",
-    "expose-loader": "^0.7.5",
-    "gh-pages": "^2.0.1",
-    "html-webpack-plugin": "^3.2.0",
-    "prettier": "^1.18.2",
-    "ts-loader": "^6.0.4",
-    "typescript": "^3.5.2",
-    "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.3",
-    "webpack-dev-server": "^3.7.1"
-  },
-  "dependencies": {
-    "phaser": "2.5.0"
-  }
 }
