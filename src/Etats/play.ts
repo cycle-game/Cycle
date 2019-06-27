@@ -23,8 +23,7 @@ let s_invers = 1 / s;
 let fps_adapt = 1;
 const fps_array = [];
 
-// Animation de fin et de début
-let anim = true;
+let isLevelPlaying = false;
 
 // Attention,  ici on a une grosse partie du jeu
 // C'est l'état (state) où tout les niveaux seront
@@ -259,17 +258,17 @@ export const Play = {
         // -------------------------------------------------------- Animation //
 
         // Dans le cas où c'est le premier passage, petite animation posée
-        if (anim) {
+        if (!isLevelPlaying) {
             this.dude.scale = { x: 1, y: 0.01 };
             this.dude.body.gravity.y = 0;
-            //anim = false;
+
             const t = this.game.add
                 .tween(this.dude.scale)
                 .to({ x: 1, y: 1 }, 350)
                 .start();
             t.onComplete.add(function() {
                 this.dude.body.gravity.y = 1000;
-                anim = false;
+                isLevelPlaying = true;
             }, this);
         }
 
@@ -347,7 +346,7 @@ export const Play = {
     },
     update: function() {
         // ----------- Condition pour l'animation début-fin //
-        if (!anim) {
+        if (isLevelPlaying) {
             // ------------------------------------------------ //
 
             // ------------------------------------------------------------------ //
@@ -486,7 +485,7 @@ export const Play = {
 
             // ------------- Animation de fin de niveau //
             this.dude.body.gravity.y = 0;
-            anim = true;
+            isLevelPlaying = false;
             var t = this.game.add
                 .tween(this.dude.scale)
                 .to({ x: 1, y: 0.01 }, 200)
