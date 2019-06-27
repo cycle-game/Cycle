@@ -1,8 +1,8 @@
 export const DEBUG_POINT = 'debug-point';
 export const LANG = 'lang';
 export const LANG_SELECTOR = 'lang-selector';
-export const LOADER_EMPTY = 'load_vide';
-export const LOADER_FULL = 'load_plein';
+export const LOADER_EMPTY = 'loader-empty';
+export const LOADER_FULL = 'loader-full';
 export const LOGO_C = 'logo-c';
 export const LOGO_C_MASK = 'logo-c-mask';
 export const LOGO_WITHOUT_C = 'logo-without-c';
