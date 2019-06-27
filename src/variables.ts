@@ -1,6 +1,4 @@
 export const c = 600; // Sera la variable de base, mais on dézoomera dans certains niveau
-export const sound = true;
-export const dead = 0;
 export const bleu = '040c4b';
 export const jaune = 0xfbf3b4;
 export const lang = {};
@@ -21,37 +19,30 @@ export const edited_lvl: any = {};
 
 // -- \\
 
-// Level actuel
+// Current level
 export const Stats = { level: 0, score: 0, diff: 1 };
-// 4 types de difficultés :
-// _ 0 = facile
+// 4 difficulty levels :
+// _ 0 = easy
 // _ 1 = normal
-// _ 2 = difficile
-// _ 3 = inhumain
+// _ 2 = difficult
+// _ 3 = insane
 
 export let nb_tours = 0;
 export const nb_etoiles = 0;
 
 export const cplan = c / 1.8;
-/* Positions des plateformes
-// (taille de la planête = c/3)
-export const c_gen = ( (cplan - c/6) / 4 );
-export const c1 = c_gen * 3;
-export const c2 = c_gen * 2;
-export const c3 = c_gen * 1;
-*/
-// Vitesse de rotation
+
+// rotation speed
 export const rotat = 2;
 export let nuit_rotat = 1.3;
 export const nuit_rotat_diff = [0.9, 1.1, 1.3];
 export const nuit_depart = -10;
-//export const vrotate = 1.5;
-//export const pre_calcul_dplct = (vrotate * 360) / 2 * Math.PI;
+
 // Scale
 export const s = 1;
 export const s_invers = 1 / s;
 
-// Taille des plateformes
+// platform size
 export const plataille = 20;
 
 // FPS
@@ -60,8 +51,6 @@ export const fps_array = [];
 
 // Animation de fin et de début
 export const anim = true;
-
-//export const enregistrement = false;
 
 // -- \\
 
