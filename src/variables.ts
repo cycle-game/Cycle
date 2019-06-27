@@ -5,8 +5,6 @@ export const YELLOW = 0xfbf3b4;
 
 // -- \\
 
-export const type = 'plat';
-
 export const pi180 = Math.PI / 180;
 
 export const edited_lvl: any = {};
