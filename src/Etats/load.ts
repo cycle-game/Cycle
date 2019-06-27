@@ -15,7 +15,7 @@ import {
     SELECTOR,
     STAR,
     TRAP,
-} from './resoucesNames';
+} from '../resoucesNames';
 
 export let preloading2;
 export let preloading1;

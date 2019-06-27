@@ -1,6 +1,6 @@
 import { YELLOW } from '../variables';
 import { game } from './game';
-import { LOADER_EMPTY, LOADER_FULL } from './resoucesNames';
+import { LOADER_EMPTY, LOADER_FULL } from '../resoucesNames';
 
 export const Boot = {
     preload: () => {

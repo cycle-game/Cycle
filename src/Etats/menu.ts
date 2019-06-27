@@ -3,7 +3,7 @@ import { cliquable, difficultes, reset } from '../functions';
 import { BASE_SIZE, plataille, Stats } from '../variables';
 import { lang } from './langue';
 import Phaser from 'phaser';
-import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from './resoucesNames';
+import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from '../resoucesNames';
 
 export const Explain = {
     create: function() {
