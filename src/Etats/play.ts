@@ -1,6 +1,6 @@
 import {
     anim as animVar,
-    bleu,
+    BLUE,
     BASE_SIZE,
     cplan,
     edited_lvl,
@@ -153,7 +153,7 @@ export const Play = {
             Stats.level + 1,
             {
                 font: '30px Arial',
-                fill: '#' + bleu,
+                fill: '#' + BLUE,
                 align: 'center',
             },
             this.general,
@@ -165,7 +165,7 @@ export const Play = {
             Stats.score,
             {
                 font: '20px Arial',
-                fill: '#' + bleu,
+                fill: '#' + BLUE,
                 align: 'center',
             },
             this.general,

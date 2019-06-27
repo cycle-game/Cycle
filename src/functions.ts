@@ -49,7 +49,7 @@ facebook_share();
 }(document, 'script', 'facebook-jssdk'));
 */
 
-import { bleu, BASE_SIZE, plataille } from './variables';
+import { BLUE, BASE_SIZE, plataille } from './variables';
 import { lang } from './Etats/langue';
 
 //http://forum.webrankinfo.com/equivalent-urlencode-javascript-t51434.html
@@ -156,7 +156,7 @@ export function average(tableau) {
 // Création d'un texte cliquable (ou non)
 export function cliquable(x, y, text, taille, anchor_x, anchor_y, delay, speed, onDown, context) {
     // Label
-    var toReturn = context.game.add.text(x, y, text, { font: taille + 'px Arial', fill: '#' + bleu, align: 'center' });
+    var toReturn = context.game.add.text(x, y, text, { font: taille + 'px Arial', fill: '#' + BLUE, align: 'center' });
     toReturn.anchor.setTo(anchor_x, anchor_y);
     toReturn.alpha = 0;
 
