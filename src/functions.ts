@@ -1,5 +1,6 @@
 import { BLUE, BASE_SIZE, plataille } from './variables';
-import { lang } from './Etats/langue';
+import { lang } from './i18n';
+import { lang as selectedLang } from './Etats/langue';
 
 export function sociaux(Stats, pseudo, lng) {
     // Social network pre-share
@@ -99,15 +100,15 @@ export function ecart(nombre, marge) {
 export function difficultes(contexte, Stats) {
     // Mise en place des difficultés
     var marge = 100;
-    var espace = ecart(lang.Difficultes.length, marge);
+    var espace = ecart(lang[selectedLang].Difficultes.length, marge);
 
     contexte.Stats = Stats;
 
-    for (var i = 0; i < lang.Difficultes.length; i++) {
+    for (var i = 0; i < lang[selectedLang].Difficultes.length; i++) {
         contexte.choix_diff[i] = cliquable(
             marge + espace * i,
             BASE_SIZE - plataille,
-            lang.Difficultes[i],
+            lang[selectedLang].Difficultes[i],
             25,
             0.5,
             0.5,
@@ -122,7 +123,7 @@ export function difficultes(contexte, Stats) {
 
 export function choix(sprite) {
     if (!isNaN(sprite)) {
-        if (sprite >= 0 && sprite < lang.Difficultes.length) {
+        if (sprite >= 0 && sprite < lang[selectedLang].Difficultes.length) {
             this.souligne(this.choix_diff[sprite]);
         }
 

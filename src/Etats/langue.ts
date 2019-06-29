@@ -1,5 +1,4 @@
 import { BASE_SIZE } from '../variables';
-import { en, fr } from './levels';
 import { game } from './game';
 import { LANG, LANG_SELECTOR } from '../resoucesNames';
 
@@ -29,8 +28,8 @@ export const Langue = {
 
         // Au clique ...
         if (game.input.mousePointer.isDown) {
-            if (x_pointer <= BASE_SIZE / 2) lang = fr;
-            else lang = en;
+            if (x_pointer <= BASE_SIZE / 2) lang = 'fr';
+            else lang = 'en';
 
             game.state.start('Menu');
         }

@@ -1,8 +1,9 @@
 import { BASE_SIZE, plataille, edited_lvl, pi180 } from '../variables';
 import { Play } from './play';
-import { fr as lang } from './levels';
 import Phaser from 'phaser';
 import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
+import { lang } from '../i18n';
+import { lang as selectedLang } from './langue';
 
 const alph = 0.5;
 const inac = 0.05;
@@ -81,7 +82,7 @@ export const Edit = {
         this.etoile = this.menu.create(-plataille * 1, plataille * 2.5, STAR);
         this.etoile.anchor.set(0.5);
 
-        this.launch = this.game.add.text(plataille, plataille, lang.Tester);
+        this.launch = this.game.add.text(plataille, plataille, lang[selectedLang].Tester);
         this.launch.anchor.setTo(0, 0);
 
         // ------------------------------------------------------------------ //

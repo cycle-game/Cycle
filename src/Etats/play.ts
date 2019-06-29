@@ -1,9 +1,11 @@
 import { BLUE, BASE_SIZE, edited_lvl, pi180, plataille, Stats } from '../variables';
 import { average, reset, save } from '../functions';
-import { levels, fr as lang } from './levels';
+import { levels } from './levels';
 import Phaser from 'phaser';
 import { game } from './game';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
+import { lang } from '../i18n';
+import { lang as selectedLang } from './langue';
 
 const cplan = BASE_SIZE / 1.8;
 let nb_tours = 0;
@@ -302,7 +304,7 @@ export const Play = {
         // ----------------------------------------------- Back to the editor //
 
         if (edited_lvl.edited) {
-            this.goBack = game.add.text(plataille, plataille, lang.Retour);
+            this.goBack = game.add.text(plataille, plataille, lang[selectedLang].Retour);
             this.goBack.anchor.setTo(0, 0);
 
             this.goBack.inputEnabled = true;
