@@ -1,7 +1,8 @@
 import { cliquable, reset, save, sociaux, toHigh } from '../functions';
 import { BASE_SIZE, pseudo as pseudoVar, Stats } from '../variables';
 import Phaser from 'phaser';
-import { fr as lang } from './levels';
+import { lang } from '../i18n';
+import { lang as selectedLang } from './langue';
 
 let pseudo = pseudoVar;
 
@@ -10,7 +11,7 @@ export const Victoire = {
         var label = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 4,
-            lang.Victoire + '\n\n' + Math.round(Stats.score),
+            lang[selectedLang].Victoire + '\n\n' + Math.round(Stats.score),
             25,
             0.5,
             0.5,
@@ -20,7 +21,18 @@ export const Victoire = {
             this,
         );
 
-        var enter_pseudo = cliquable(BASE_SIZE / 2, BASE_SIZE / 2, lang.Pseudo, 25, 0.5, 0.5, 300, 500, null, this);
+        var enter_pseudo = cliquable(
+            BASE_SIZE / 2,
+            BASE_SIZE / 2,
+            lang[selectedLang].Pseudo,
+            25,
+            0.5,
+            0.5,
+            300,
+            500,
+            null,
+            this,
+        );
 
         this.pseudo = cliquable(BASE_SIZE / 2, (BASE_SIZE / 4) * 3, pseudo + '_', 25, 0.5, 0.5, 0, 500, null, this);
 

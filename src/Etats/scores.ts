@@ -1,14 +1,15 @@
 import { BASE_SIZE, plataille, Stats } from '../variables';
 import { cliquable, difficultes, ecart, scores } from '../functions';
-import { fr as lang } from './levels';
 import Phaser from 'phaser';
+import { lang } from '../i18n';
+import { lang as selectedLang } from './langue';
 
 export const Scores = {
     create: function() {
         const highscores = scores().split('|||');
 
         // Screen title
-        cliquable(BASE_SIZE / 2, plataille, lang.UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
+        cliquable(BASE_SIZE / 2, plataille, lang[selectedLang].UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
 
         // ESC to return to menu
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);

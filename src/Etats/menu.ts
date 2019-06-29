@@ -1,7 +1,8 @@
 // On crée l'état du menu
 import { cliquable, difficultes, reset } from '../functions';
 import { BASE_SIZE, plataille, Stats } from '../variables';
-import { lang } from './langue';
+import { lang } from '../i18n';
+import { lang as selectedLang } from './langue';
 import Phaser from 'phaser';
 import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from '../resoucesNames';
 
@@ -14,7 +15,7 @@ export const Explain = {
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Présentation du jeu
-        cliquable(BASE_SIZE / 2, BASE_SIZE / 2.5, lang.Presentation, 25, 0.5, 0.5, 0, 500, null, this);
+        cliquable(BASE_SIZE / 2, BASE_SIZE / 2.5, lang[selectedLang].Presentation, 25, 0.5, 0.5, 0, 500, null, this);
 
         // Difficulté
         this.choix_diff = [];
@@ -48,13 +49,35 @@ export const Menu = {
     create: function() {
         // Tout les labels sont créés aec la fonction cliquable prenant en para:
         // x, y, text, size, anchor x, anchor y, delay, speed, onDown, context
-        var play = cliquable(BASE_SIZE / 2, BASE_SIZE / 2.2, lang.Jeu, 50, 0.5, 0.5, 0, 500, this.play, this);
-        var or = cliquable(BASE_SIZE / 2, BASE_SIZE / 1.5, lang.Ou, 23, 0.5, 0.5, 300, 500, null, this);
-        var editor = cliquable(BASE_SIZE / 2, BASE_SIZE / 1.3, lang.Editeur, 30, 0.5, 0.5, 700, 500, this.editor, this);
+        var play = cliquable(
+            BASE_SIZE / 2,
+            BASE_SIZE / 2.2,
+            lang[selectedLang].Jeu,
+            50,
+            0.5,
+            0.5,
+            0,
+            500,
+            this.play,
+            this,
+        );
+        var or = cliquable(BASE_SIZE / 2, BASE_SIZE / 1.5, lang[selectedLang].Ou, 23, 0.5, 0.5, 300, 500, null, this);
+        var editor = cliquable(
+            BASE_SIZE / 2,
+            BASE_SIZE / 1.3,
+            lang[selectedLang].Editeur,
+            30,
+            0.5,
+            0.5,
+            700,
+            500,
+            this.editor,
+            this,
+        );
         var come_back = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE - plataille,
-            lang.HowToBack,
+            lang[selectedLang].HowToBack,
             18,
             0.5,
             1,
@@ -63,8 +86,30 @@ export const Menu = {
             null,
             this,
         );
-        var raz = cliquable(BASE_SIZE - plataille, plataille, lang.RaZ, 25, 1, 0, 200, 250, this.raz, this);
-        var scores = cliquable(BASE_SIZE / 2, BASE_SIZE / 1.7, lang.Scores, 27, 0.5, 0.5, 200, 250, this.scores, this);
+        var raz = cliquable(
+            BASE_SIZE - plataille,
+            plataille,
+            lang[selectedLang].RaZ,
+            25,
+            1,
+            0,
+            200,
+            250,
+            this.raz,
+            this,
+        );
+        var scores = cliquable(
+            BASE_SIZE / 2,
+            BASE_SIZE / 1.7,
+            lang[selectedLang].Scores,
+            27,
+            0.5,
+            0.5,
+            200,
+            250,
+            this.scores,
+            this,
+        );
 
         // Logo + animation
         this.logo_c = this.game.add.sprite(BASE_SIZE / 2 - 99, plataille + 80, LOGO_C);
