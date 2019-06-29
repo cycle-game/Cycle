@@ -7,12 +7,13 @@ export const Scores = {
     create: function() {
         const highscores = scores().split('|||');
 
-        const label = cliquable(BASE_SIZE / 2, plataille, lang.UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
+        // Screen title
+        cliquable(BASE_SIZE / 2, plataille, lang.UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
 
-        // Retour au menu
+        // ESC to return to menu
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
-        // Difficulté
+        // Difficulty
         this.choix_diff = [];
         difficultes(this, null);
 
@@ -20,7 +21,7 @@ export const Scores = {
 
         this.diff = Stats.diff;
 
-        // Affichage des scores
+        // Scores display
         this.scores = [];
         const margey = 70;
         const margex = 150;
@@ -55,8 +56,6 @@ export const Scores = {
                 }
             }
 
-            //this.scores[val] = cliquable(BASE_SIZE/2, BASE_SIZE/2, highscores[val], 25, 0.5, 0.5, 0, null, null, this);
-
             if (val == this.diff) this.scores[val].alpha = 1;
             else this.scores[val].alpha = 0;
         }
@@ -75,7 +74,6 @@ export const Scores = {
         this.scores[this.diff].alpha = 1;
     },
     update: function() {
-        // Retour au menu
         if (this.esc_key.isDown) this.game.state.start('Menu');
     },
 };
