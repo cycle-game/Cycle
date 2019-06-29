@@ -1,145 +1,46 @@
-/*facebook_share = function() {};
-
-window.fbAsyncInit = function() {
-FB.init({
-  appId      : '762573653764635',
-  xfbml      : true,
-  version    : 'v2.0'
-});
-
-    facebook_share = function() {
-         FB.ui(
-              {
-               method: 'share_open_graph',
-                action_type: 'og.likes',
-               name: 'And the amaaaziiiing name',
-               caption: 'This is the amazing caption',
-  action_properties: JSON.stringify({
-      object:'http://cycle.ppersonne.fr/ScoreTest.php',
-  }),
-               description: (
-                  'A small JavaScript library that allows you to harness ' +
-                  'the power of Facebook, bringing the user\'s identity, ' +
-                  'AMAZIIING.'
-               ),
-               link: 'http://cycle.ppersonne.fr',
-               picture: 'http://cycle.ppersonne.fr/Ressources/Facebook/Logo_only.png'
-              },
-              function(response) {
-                if (response && response.post_id) {
-                  //alert('Post was published.');
-                } else {
-                  //alert('Post was not published.');
-                }
-              }
-            );
-        };
-
-facebook_share();
-
-};
-
-
-(function(d, s, id){
- var js, fjs = d.getElementsByTagName(s)[0];
- if (d.getElementById(id)) {return;}
- js = d.createElement(s); js.id = id;
- js.src = "//connect.facebook.net/fr_FR/sdk.js";
- fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-*/
-
 import { BLUE, BASE_SIZE, plataille } from './variables';
 import { lang } from './Etats/langue';
 
-//http://forum.webrankinfo.com/equivalent-urlencode-javascript-t51434.html
-export function urlencode(str) {
-    return escape(str.replace(/%/g, '%25').replace(/\+/g, '%2B')).replace(/%25/g, '%');
-}
-
-// Pré-partage pour les réseaux sociaux
 export function sociaux(Stats, pseudo, lng) {
-    var url =
-        'http://cycle.ppersonne.fr/Score.php?pseudo=' +
-        pseudo +
-        '&lvl=' +
-        Stats.level +
-        '&score=' +
-        Math.round(Stats.score) +
-        '&diff=' +
-        Stats.diff +
-        '&langue=' +
-        lng.Lang;
-
-    document
-        .getElementById('OnWall')
-        .setAttribute(
-            'href',
-            'https://www.facebook.com/sharer/sharer.php?u=' +
-                urlencode(url) +
-                '&redirect_uri=http://cycle.ppersonne.fr',
-        );
-    document
-        .getElementById('ToFriends')
-        .setAttribute(
-            'href',
-            'http://www.facebook.com/dialog/send?app_id=762573653764635&link=' +
-                urlencode(url) +
-                '&redirect_uri=http://cycle.ppersonne.fr',
-        );
-
-    document.getElementById('ScoreSharing').className = '';
+    // Social network pre-share
 }
 
-// Sauvegarde des scores
 export function save(Stats) {
-    var data = 'lvl=' + Stats.level + '&score=' + Stats.score + '&diff=' + Stats.diff;
-
-    var request = new XMLHttpRequest();
-    request.open('POST', './BDD/Session.php', true);
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    request.onload = function() {
-        if (request.status >= 200 && request.status < 400) {
-            // Success!
-        } else {
-            // Error
-        }
-    };
-    request.send(data);
+    // Save score
 }
 
-// Sauvegarde du (high)score
 export function toHigh(Stats, pseudo) {
-    var data = 'lvl=' + Stats.level + '&score=' + Math.round(Stats.score) + '&pseudo=' + pseudo + '&diff=' + Stats.diff;
-
-    var request = new XMLHttpRequest();
-    request.open('POST', './BDD/HighScore.php', false);
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    request.onload = function() {
-        if (request.status >= 200 && request.status < 400) {
-            // Success!
-            console.log(request);
-        } else {
-            // Error
-        }
-    };
-    request.send(data);
+    // Save high score
 }
 
 export function scores() {
-    var request = new XMLHttpRequest();
-    request.open('POST', './BDD/HighScore.php', false);
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    request.onload = function() {
-        if (request.status >= 200 && request.status < 400) {
-            // Success!
-        } else {
-            return null;
-        }
-    };
-    request.send();
-    // On peut retourner ça grâce à la désactivation de l'asynchrone
-    return request.response;
+    // fetch scores
+    return (
+        'player1_easy::20::2' +
+        '><' +
+        'player2_easy::15::2' +
+        '><' +
+        'player3_easy::10::2' +
+        '|||' +
+        'player1_normal::30::3' +
+        '><' +
+        'player2_normal::20::3' +
+        '><' +
+        'player3_normal::10::3' +
+        '|||' +
+        'player1_hard::31::1' +
+        '><' +
+        'player2_hard::16::1' +
+        '><' +
+        'player3_hard::11::1' +
+        '|||' +
+        'player1_insane::30::1' +
+        '><' +
+        'player2_insane::15::1' +
+        '><' +
+        'player2_insane::10::1' +
+        '|||'
+    );
 }
 
 // Average d'un tableau
