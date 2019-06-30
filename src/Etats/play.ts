@@ -1,6 +1,6 @@
 import { BLUE, BASE_SIZE, edited_lvl, pi180, plataille, Stats } from '../variables';
 import { average, reset, save } from '../functions';
-import { stages } from '../stages/stages';
+import { stages } from '../stages';
 import Phaser from 'phaser';
 import { game } from './game';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
