@@ -4,6 +4,7 @@ import Phaser from 'phaser';
 import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
 import { lang as selectedLang } from './langue';
+import { placement } from '../utils/CoordonateSystem';
 
 const alph = 0.5;
 const inac = 0.05;
@@ -302,7 +303,7 @@ export const Edit = {
             // Parcourt du périmètre du cercle
             for (let j = 0; j < 360; j += deg) {
                 // Positions et rotation pour les sprites
-                tmp = Play.placement(j, rayon);
+                tmp = placement(j, rayon);
 
                 // ---------------------------------------------------------- //
                 // ---------------------------------------------- Plateformes //
@@ -355,7 +356,7 @@ export const Edit = {
             for (var val in edited_lvl.etoiles) {
                 rayon = (edited_lvl.etoiles[val][1] + 0.5) * plataille + BASE_SIZE / 6;
 
-                tmp = Play.placement(edited_lvl.etoiles[val][0], rayon);
+                tmp = placement(edited_lvl.etoiles[val][0], rayon);
 
                 var elt = this.stars.create(tmp[0], tmp[1], STAR);
 
@@ -380,11 +381,11 @@ export const Edit = {
             const y_pointer = this.game.input.y * invert_redim - this.general.y;
             const tmp = this.unPeuDeTrigo(x_pointer, y_pointer);
 
-            const placement = Play.placement(tmp[1], tmp[0]);
+            const position = placement(tmp[1], tmp[0]);
 
-            this.etoile_pos.x = placement[0];
-            this.etoile_pos.y = placement[1];
-            this.etoile_pos.angle = placement[2];
+            this.etoile_pos.x = position[0];
+            this.etoile_pos.y = position[1];
+            this.etoile_pos.angle = position[2];
             this.etoile_pos.calculLvl = (tmp[0] - BASE_SIZE / 6) / plataille - 0.5;
             this.etoile_pos.calculDeg = tmp[1];
         }
