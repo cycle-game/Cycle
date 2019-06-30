@@ -16,7 +16,7 @@ export const lang = {
         Pseudo: 'Enter your name and confirm with .. enter!',
         Scores: 'Highscores',
         Difficultes: ['Easy', 'Normal', 'Hard', 'Nightmare'],
-        UnSeul: 'Score / Pseudo / Number of levels',
+        UnSeul: 'Score / Pseudo / Number of stages',
     },
     fr: {
         Lang: 'fr',

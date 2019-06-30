@@ -1,4 +1,4 @@
-export const levels = [
+export const stages = [
     /* 1 */ {
         plateformes: [
             [46.45161290322581, 0],

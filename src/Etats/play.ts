@@ -1,6 +1,6 @@
 import { BLUE, BASE_SIZE, edited_lvl, pi180, plataille, Stats } from '../variables';
 import { average, reset, save } from '../functions';
-import { levels } from '../stage/levels';
+import { stages } from '../stage/stages';
 import Phaser from 'phaser';
 import { game } from './game';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
@@ -498,7 +498,7 @@ export const Play = {
                     // On vient de l'editeur
                     this.game.state.start('Edit');
                 else {
-                    if (Stats.level >= levels.length) {
+                    if (Stats.level >= stages.length) {
                         this.redimensionne(1);
                         this.game.state.start('Victoire');
                     } else this.game.state.start('Play');
@@ -545,12 +545,12 @@ export const Play = {
         let plateformes;
         // En fonction on est en édition ou on est en jeu ..
         if (edited_lvl.edited) plateformes = edited_lvl.plateformes;
-        else if (levels[Stats.level])
+        else if (stages[Stats.level])
             // Vérification de l'existence du level
-            plateformes = levels[Stats.level].plateformes;
+            plateformes = stages[Stats.level].plateformes;
         else {
             // S'il n'existe pas il y a une erreur; reboot du début
-            plateformes = levels[0].plateformes;
+            plateformes = stages[0].plateformes;
             reset(Stats);
         }
 
@@ -603,7 +603,7 @@ export const Play = {
         // Même principe que makePlateformes
         let etoiles;
         if (edited_lvl.edited) etoiles = edited_lvl.etoiles;
-        else etoiles = levels[Stats.level].etoiles;
+        else etoiles = stages[Stats.level].etoiles;
 
         for (let val in etoiles) {
             const rayon = BASE_SIZE / 6 + etoiles[val][1] * plataille + plataille / 2;
@@ -624,7 +624,7 @@ export const Play = {
         if (edited_lvl.edited) {
             pieges = edited_lvl.pieges;
         } else {
-            pieges = levels[Stats.level].pieges;
+            pieges = stages[Stats.level].pieges;
         }
 
         for (let val in pieges) {
