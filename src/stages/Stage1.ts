@@ -1,7 +1,7 @@
 import { StageDefinition } from './StageDefinition';
 
 export const stage1: StageDefinition = {
-    plateformes: [
+    platforms: [
         [46.45161290322581, 0],
         [81.29032258064515, 0],
         [116.1290322580645, 0],
@@ -12,6 +12,6 @@ export const stage1: StageDefinition = {
         [290.3225806451614, 0],
         [325.1612903225808, 0],
     ],
-    pieges: [],
-    etoiles: [[292, 2], [220, 2], [151, 2], [83, 2]],
+    traps: [],
+    stars: [[292, 2], [220, 2], [151, 2], [83, 2]],
 };

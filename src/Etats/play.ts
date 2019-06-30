@@ -182,17 +182,17 @@ export const Play = {
 
         // Hey, j'ai entendu dire que t'aimais les groupes, donc j'ai mis
         // un groupe dans un groupe
-        this.plateformes = this.game.add.group(this.planete);
+        this.platforms = this.game.add.group(this.planete);
 
         // On lance la fonction qui va créer les plateformes
         let maxPlat = this.makePlateformes();
 
         // Étoiles
-        this.etoiles = this.game.add.group(this.planete);
+        this.stars = this.game.add.group(this.planete);
         this.makeEtoiles();
 
         // Pièges
-        this.pieges = this.game.add.group(this.planete);
+        this.traps = this.game.add.group(this.planete);
         this.makePiegesMWAHAHAHAHA();
 
         // ------------------------------------------------------------------ //
@@ -243,14 +243,14 @@ export const Play = {
         //this.dude.body.collideWorldBounds = true;
         this.plnte.body.immovable = true;
 
-        // Maintenant il faut que toutes les plateformes soient immobiles
+        // Maintenant il faut que toutes les platforms soient immobiles
         // (on a pas besoin de les activer en physique, car elle font partie
         // de this.planete)
-        this.plateformes.forEachAlive(function(c) {
+        this.platforms.forEachAlive(function(c) {
             c.body.immovable = true;
         }, this);
 
-        this.etoiles.forEachAlive(function(c) {
+        this.stars.forEachAlive(function(c) {
             c.body.angularVelocity = Math.round(Math.random() * 400) + 100;
         }, this);
 
@@ -367,13 +367,13 @@ export const Play = {
             this.game.physics.arcade.collide(this.dude, this.plnte);
             // Sur la plateforme
             /*var onPlt = */
-            this.game.physics.arcade.collide(this.dude, this.plateformes);
+            this.game.physics.arcade.collide(this.dude, this.platforms);
 
-            // Overlap sur les plateformes avec les prédicteurs de position
-            const overlap_right = this.game.physics.arcade.overlap(this.dudeTest.getAt(0), this.plateformes);
-            const overlap_left = this.game.physics.arcade.overlap(this.dudeTest.getAt(1), this.plateformes);
+          // Overlap sur les plateformes avec les prédicteurs de position
+            const overlap_right = this.game.physics.arcade.overlap(this.dudeTest.getAt(0), this.platforms);
+            const overlap_left = this.game.physics.arcade.overlap(this.dudeTest.getAt(1), this.platforms);
 
-            this.game.physics.arcade.overlap(this.dude, this.etoiles, this.takeEtoiles, null, this);
+            this.game.physics.arcade.overlap(this.dude, this.stars, this.takeEtoiles, null, this);
 
             // ------------------------------------------------------------------ //
             // ------------------------------------------------------------------ //
@@ -430,7 +430,7 @@ export const Play = {
             // ------------------------------------------------------------------ //
             // ---------------------------------------- Collision avec les pièges //
 
-            if (this.game.physics.arcade.overlap(this.dude, this.pieges)) {
+            if (this.game.physics.arcade.overlap(this.dude, this.traps)) {
                 this.create();
                 Stats.score += this.tours(this.planete.angle) + 50;
             }
@@ -533,7 +533,7 @@ export const Play = {
         this.dude.body.setSize(this.dude.body.width * s, this.dude.body.height * s, 0, 0);
         this.plnte.body.setSize(this.plnte.body.width * s, this.plnte.body.height * s, 0, 0);
 
-        this.plateformes.forEachAlive(function(c) {
+        this.platforms.forEachAlive(function(c) {
             c.body.setSize(c.body.width * s, c.body.height * s, 0, 0);
         }, this);
         this.dudeTest.forEachAlive(function(c) {
@@ -547,10 +547,10 @@ export const Play = {
         if (edited_lvl.edited) plateformes = edited_lvl.plateformes;
         else if (stages[Stats.level])
             // Vérification de l'existence du level
-            plateformes = stages[Stats.level].plateformes;
+            plateformes = stages[Stats.level].platforms;
         else {
             // S'il n'existe pas il y a une erreur; reboot du début
-            plateformes = stages[0].plateformes;
+            plateformes = stages[0].platforms;
             reset(Stats);
         }
 
@@ -589,7 +589,7 @@ export const Play = {
             const tmp = this.placement(plateformes[val][0], rayon);
 
             // Création de la plateforme
-            const plt = this.plateformes.create(tmp[0], tmp[1], PLATFORM);
+            const plt = this.platforms.create(tmp[0], tmp[1], PLATFORM);
             plt.anchor.set(0.5, 1);
             plt.angle = tmp[2];
 
@@ -603,19 +603,19 @@ export const Play = {
         // Même principe que makePlateformes
         let etoiles;
         if (edited_lvl.edited) etoiles = edited_lvl.etoiles;
-        else etoiles = stages[Stats.level].etoiles;
+        else etoiles = stages[Stats.level].stars;
 
         for (let val in etoiles) {
             const rayon = BASE_SIZE / 6 + etoiles[val][1] * plataille + plataille / 2;
 
             const tmp = this.placement(etoiles[val][0], rayon);
 
-            const et = this.etoiles.create(tmp[0], tmp[1], STAR);
+            const et = this.stars.create(tmp[0], tmp[1], STAR);
             et.anchor.set(0.6);
             et.angle = tmp[2];
         }
 
-        nb_etoiles = this.etoiles.countLiving();
+        nb_etoiles = this.stars.countLiving();
     },
     makePiegesMWAHAHAHAHA: function() {
         let pieges;
@@ -624,7 +624,7 @@ export const Play = {
         if (edited_lvl.edited) {
             pieges = edited_lvl.pieges;
         } else {
-            pieges = stages[Stats.level].pieges;
+            pieges = stages[Stats.level].traps;
         }
 
         for (let val in pieges) {
@@ -632,7 +632,7 @@ export const Play = {
 
             const tmp = this.placement(pieges[val][0], rayon);
 
-            const plt = this.pieges.create(tmp[0], tmp[1], TRAP);
+            const plt = this.traps.create(tmp[0], tmp[1], TRAP);
             plt.anchor.set(0.5, 1);
             plt.angle = tmp[2];
         }

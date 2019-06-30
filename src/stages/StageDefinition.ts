@@ -1,5 +1,5 @@
 export type StageDefinition = {
-    plateformes: [number, number][];
-    pieges: [number, number][];
-    etoiles: [number, number][];
+    platforms: [number, number][];
+    traps: [number, number][];
+    stars: [number, number][];
 };
