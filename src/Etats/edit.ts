@@ -57,10 +57,10 @@ export const Edit = {
         // ------------------------------------------------------------------ //
         // ----------------------------------------------------------- Objets //
 
-        this.plateformes = this.game.add.group(this.general);
-        this.pieges = this.game.add.group(this.general);
+        this.platforms = this.game.add.group(this.general);
+        this.traps = this.game.add.group(this.general);
 
-        this.etoiles = this.game.add.group(this.general);
+        this.stars = this.game.add.group(this.general);
         // Décalage d'une demie-plateforme (raison inconnue)
 
         this.etoile_pos = this.general.create(0, 0, STAR);
@@ -92,7 +92,7 @@ export const Edit = {
 
         this.menu.forEachAlive(this.menuForeach, this);
 
-        this.plateformes.forEachAlive(function(c) {
+        this.platforms.forEachAlive(function(c) {
             c.inputEnabled = true;
             c.input.useHandCursor = true;
             c.events.onInputDown.add(alpha, this);
@@ -100,7 +100,7 @@ export const Edit = {
             c.events.onInputOut.add(out, this);
         });
 
-        this.pieges.forEachAlive(function(c) {
+        this.traps.forEachAlive(function(c) {
             c.inputEnabled = true;
             c.input.useHandCursor = true;
             c.events.onInputDown.add(alpha, this);
@@ -129,9 +129,9 @@ export const Edit = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
-        // ----------------------------------------- Écriture des plateformes //
+        // ----------------------------------------- Écriture des platforms //
 
-        this.plateformes.forEachAlive(function(c) {
+        this.platforms.forEachAlive(function(c) {
             if (c.alpha > alph) edited_lvl.plateformes.push([c.calculDeg, c.calculLvl]);
         }, this);
 
@@ -140,7 +140,7 @@ export const Edit = {
         // ------------------------------------------------------------------ //
         // ---------------------------------------------- Écriture des pièges //
 
-        this.pieges.forEachAlive(function(c) {
+        this.traps.forEachAlive(function(c) {
             if (c.alpha > alph) edited_lvl.pieges.push([c.calculDeg, c.calculLvl]);
         }, this);
 
@@ -149,8 +149,8 @@ export const Edit = {
         // ------------------------------------------------------------------ //
         // --------------------------------------------- Écriture des étoiles //
 
-        if (this.etoile_pos.alpha > 0) this.etoiles.getTop().kill(); // Detruit la dernière étoile (position du curseur)
-        this.etoiles.forEachAlive(function(c) {
+        if (this.etoile_pos.alpha > 0) this.stars.getTop().kill(); // Detruit la dernière étoile (position du curseur)
+        this.stars.forEachAlive(function(c) {
             if (c.alpha > alph) edited_lvl.etoiles.push([c.calculDeg, c.calculLvl]);
         }, this);
 
@@ -164,13 +164,13 @@ export const Edit = {
         // Exportation du niveau
         const export_lvl =
             '{' +
-            'plateformes: [' +
+            'platforms: [' +
             this.objToString(edited_lvl.plateformes) +
             '], ' +
-            'pieges: [' +
+            'traps: [' +
             this.objToString(edited_lvl.pieges) +
             '], ' +
-            'etoiles: [' +
+            'stars: [' +
             this.objToString(edited_lvl.etoiles) +
             ']' +
             '}';
@@ -206,7 +206,7 @@ export const Edit = {
             let newetoile;
 
             // Vérification : l'étoile existe-t-elle déjà ou non ?
-            this.etoiles.forEachAlive(function(c) {
+            this.stars.forEachAlive(function(c) {
                 if (c.calculLvl == this.etoile_pos.calculLvl && c.calculDeg == this.etoile_pos.calculDeg) {
                     newetoile = c;
                 }
@@ -217,7 +217,7 @@ export const Edit = {
                 newetoile.kill();
             } else {
                 // Sinon on en crée une nouvelle
-                newetoile = this.etoiles.create(this.etoile_pos.x, this.etoile_pos.y, STAR);
+                newetoile = this.stars.create(this.etoile_pos.x, this.etoile_pos.y, STAR);
                 newetoile.anchor.set(0.6);
                 newetoile.angle = this.etoile_pos.angle;
                 newetoile.calculLvl = this.etoile_pos.calculLvl;
@@ -229,29 +229,29 @@ export const Edit = {
         // Avant toute chose : suppression de la dernière étoile ajoutée, si
         // on était en mode "étoile"
 
-        if (this.etoile_pos.alpha > 0) this.etoiles.getTop().kill();
+        if (this.etoile_pos.alpha > 0) this.stars.getTop().kill();
 
         // Pour savoir où on clique, on regarde le sprite utilisé
 
         if (sprite.key == PLATFORM) {
             // Plateforme
 
-            this.changeInputEnabled(this.plateformes, true);
-            this.changeInputEnabled(this.pieges, false);
+            this.changeInputEnabled(this.platforms, true);
+            this.changeInputEnabled(this.traps, false);
             this.etoile_pos.alpha = 0;
         } else if (sprite.key == TRAP) {
             // Piege
 
-            this.changeInputEnabled(this.plateformes, false);
-            this.changeInputEnabled(this.pieges, true);
+            this.changeInputEnabled(this.platforms, false);
+            this.changeInputEnabled(this.traps, true);
             this.etoile_pos.alpha = 0;
         } else if (sprite.key == STAR) {
             // Etoile
 
             this.etoile_pos.alpha = alph;
 
-            this.changeInputEnabled(this.plateformes, false);
-            this.changeInputEnabled(this.pieges, false);
+            this.changeInputEnabled(this.platforms, false);
+            this.changeInputEnabled(this.traps, false);
         }
     },
     changeInputEnabled: function(group, inputEnabled) {
@@ -307,7 +307,7 @@ export const Edit = {
                 // ---------------------------------------------------------- //
                 // ---------------------------------------------- Plateformes //
 
-                elt = this.plateformes.create(tmp[0], tmp[1], PLATFORM);
+                elt = this.platforms.create(tmp[0], tmp[1], PLATFORM);
                 elt.anchor.set(0.5, 1);
                 elt.angle = tmp[2];
                 elt.alpha = inac;
@@ -329,7 +329,7 @@ export const Edit = {
                 // ---------------------------------------------------------- //
                 // --------------------------------------------------- Pièges //
 
-                elt = this.pieges.create(tmp[0], tmp[1], TRAP);
+                elt = this.traps.create(tmp[0], tmp[1], TRAP);
                 elt.anchor.set(0.5, 1);
                 elt.angle = tmp[2];
                 elt.alpha = 0;
@@ -357,7 +357,7 @@ export const Edit = {
 
                 tmp = Play.placement(edited_lvl.etoiles[val][0], rayon);
 
-                var elt = this.etoiles.create(tmp[0], tmp[1], STAR);
+                var elt = this.stars.create(tmp[0], tmp[1], STAR);
 
                 elt.angle = tmp[2];
                 elt.anchor.set(0.6);
