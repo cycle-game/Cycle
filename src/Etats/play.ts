@@ -1,4 +1,4 @@
-import { BLUE, BASE_SIZE, edited_lvl, pi180, plataille, Stats } from '../variables';
+import { BLUE, BASE_SIZE, edited_lvl, plataille, Stats } from '../variables';
 import { average, reset, save } from '../functions';
 import { stages } from '../stages';
 import Phaser from 'phaser';
@@ -6,6 +6,7 @@ import { game } from './game';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
 import { lang as selectedLang } from './langue';
+import { placement } from '../utils/CoordonateSystem';
 
 const cplan = BASE_SIZE / 1.8;
 let nb_tours = 0;
@@ -369,7 +370,7 @@ export const Play = {
             /*var onPlt = */
             this.game.physics.arcade.collide(this.dude, this.platforms);
 
-          // Overlap sur les plateformes avec les prédicteurs de position
+            // Overlap sur les plateformes avec les prédicteurs de position
             const overlap_right = this.game.physics.arcade.overlap(this.dudeTest.getAt(0), this.platforms);
             const overlap_left = this.game.physics.arcade.overlap(this.dudeTest.getAt(1), this.platforms);
 
@@ -577,7 +578,7 @@ export const Play = {
 
       // Parcourt de la distance début-fin pour une plateforme
       for (var i = plateformes[val][0]; i < plateformes[val][1]; i += deg) {
-          var tmp = this.placement(i, rayon);
+          var tmp = placement(i, rayon);
 
           var plt = this.plateformes.create(tmp[0], tmp[1], PLATFORM);
           plt.anchor.set(0.5, 1);
@@ -586,7 +587,7 @@ export const Play = {
             // -------------------------------------------------------------- //
 
             // Positionnement et rotation
-            const tmp = this.placement(plateformes[val][0], rayon);
+            const tmp = placement(plateformes[val][0], rayon);
 
             // Création de la plateforme
             const plt = this.platforms.create(tmp[0], tmp[1], PLATFORM);
@@ -608,7 +609,7 @@ export const Play = {
         for (let val in etoiles) {
             const rayon = BASE_SIZE / 6 + etoiles[val][1] * plataille + plataille / 2;
 
-            const tmp = this.placement(etoiles[val][0], rayon);
+            const tmp = placement(etoiles[val][0], rayon);
 
             const et = this.stars.create(tmp[0], tmp[1], STAR);
             et.anchor.set(0.6);
@@ -630,31 +631,14 @@ export const Play = {
         for (let val in pieges) {
             const rayon = BASE_SIZE / 6 + pieges[val][1] * plataille;
 
-            const tmp = this.placement(pieges[val][0], rayon);
+            const tmp = placement(pieges[val][0], rayon);
 
             const plt = this.traps.create(tmp[0], tmp[1], TRAP);
             plt.anchor.set(0.5, 1);
             plt.angle = tmp[2];
         }
     },
-    placement: function(degrees, rayon) {
-        // ------------------------------------------------------------------ \\
-        // On aurait pu utiliser les pivots, mais le rendu est beaucoup moins
-        // bien (pivots ==> sprite.pivot.x)
 
-        // On commence le level en haut au milieu.
-        // Et pusiqu'on donne la variable en degrée ...
-        const radian = (degrees - 90) * pi180;
-
-        // Ainsi on obtient miraculeusement les valeurs x/y
-        const pos_x = rayon * Math.cos(radian);
-        const pos_y = rayon * Math.sin(radian);
-
-        // ------------------------------------------------------------------ //
-
-        // Maintenant on place la plateforme (dans le groupe des plateformes)
-        return [pos_x, pos_y, degrees];
-    },
     render: function() {
         //game.debug.cameraInfo(game.camera, 32, 32);
         //game.debug.spriteInfo(this.plateformes.getFirstAlive(), 32, 32);
