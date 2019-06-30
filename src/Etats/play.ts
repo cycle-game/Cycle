@@ -6,7 +6,7 @@ import { game } from './game';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
 import { lang as selectedLang } from './langue';
-import { placement } from '../utils/CoordonateSystem';
+import { polarToCartesian } from '../utils/CoordonateSystem';
 
 const cplan = BASE_SIZE / 1.8;
 let nb_tours = 0;
@@ -578,7 +578,7 @@ export const Play = {
 
       // Parcourt de la distance début-fin pour une plateforme
       for (var i = plateformes[val][0]; i < plateformes[val][1]; i += deg) {
-          var tmp = placement(i, rayon);
+          var tmp = polarToCartesian(i, rayon);
 
           var plt = this.plateformes.create(tmp[0], tmp[1], PLATFORM);
           plt.anchor.set(0.5, 1);
@@ -587,12 +587,12 @@ export const Play = {
             // -------------------------------------------------------------- //
 
             // Positionnement et rotation
-            const tmp = placement(plateformes[val][0], rayon);
+            const tmp = polarToCartesian(plateformes[val][0], rayon);
 
             // Création de la plateforme
             const plt = this.platforms.create(tmp[0], tmp[1], PLATFORM);
             plt.anchor.set(0.5, 1);
-            plt.angle = tmp[2];
+            plt.angle = plateformes[val][0];
 
             // Plateforme la plus haute
             if (plateformes[val][1] > maxPlat) maxPlat = plateformes[val][1];
@@ -609,11 +609,11 @@ export const Play = {
         for (let val in etoiles) {
             const rayon = BASE_SIZE / 6 + etoiles[val][1] * plataille + plataille / 2;
 
-            const tmp = placement(etoiles[val][0], rayon);
+            const tmp = polarToCartesian(etoiles[val][0], rayon);
 
             const et = this.stars.create(tmp[0], tmp[1], STAR);
             et.anchor.set(0.6);
-            et.angle = tmp[2];
+            et.angle = etoiles[val][0];
         }
 
         nb_etoiles = this.stars.countLiving();
@@ -631,11 +631,11 @@ export const Play = {
         for (let val in pieges) {
             const rayon = BASE_SIZE / 6 + pieges[val][1] * plataille;
 
-            const tmp = placement(pieges[val][0], rayon);
+            const tmp = polarToCartesian(pieges[val][0], rayon);
 
             const plt = this.traps.create(tmp[0], tmp[1], TRAP);
             plt.anchor.set(0.5, 1);
-            plt.angle = tmp[2];
+            plt.angle = pieges[val][0];
         }
     },
 
