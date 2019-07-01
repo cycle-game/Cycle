@@ -2,6 +2,8 @@
 
 HTML5 game made with Phaser
 
+<img alt="game banner" src="externalResources/BandeauFacebook.png">
+
 ## Run locally
 
 1. Clone the repository: `git clone https://github.com/cycle-game/Cycle.git`
