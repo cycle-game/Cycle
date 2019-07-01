@@ -1,6 +1,6 @@
 import { BLUE, BASE_SIZE, plataille } from './variables';
 import { lang } from './i18n';
-import { lang as selectedLang } from './Etats/langue';
+import { lang as selectedLang } from './states/langue';
 
 export function sociaux(Stats, pseudo, lng) {
     // Social network pre-share
