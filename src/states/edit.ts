@@ -124,9 +124,9 @@ export const Edit = {
         // ------------------------------------------------------------------ //
         // ---------------------------------- Mise-en-place du niveau d'essai //
 
-        edited_lvl.plateformes = [];
-        edited_lvl.etoiles = [];
-        edited_lvl.pieges = [];
+        edited_lvl.platforms = [];
+        edited_lvl.stars = [];
+        edited_lvl.traps = [];
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
@@ -134,7 +134,7 @@ export const Edit = {
         // ----------------------------------------- Écriture des platforms //
 
         this.platforms.forEachAlive(function(c) {
-            if (c.alpha > alph) edited_lvl.plateformes.push([c.calculDeg, c.calculLvl]);
+            if (c.alpha > alph) edited_lvl.platforms.push([c.calculDeg, c.calculLvl]);
         }, this);
 
         // ------------------------------------------------------------------ //
@@ -143,7 +143,7 @@ export const Edit = {
         // ---------------------------------------------- Écriture des pièges //
 
         this.traps.forEachAlive(function(c) {
-            if (c.alpha > alph) edited_lvl.pieges.push([c.calculDeg, c.calculLvl]);
+            if (c.alpha > alph) edited_lvl.traps.push([c.calculDeg, c.calculLvl]);
         }, this);
 
         // ------------------------------------------------------------------ //
@@ -153,7 +153,7 @@ export const Edit = {
 
         if (this.etoile_pos.alpha > 0) this.stars.getTop().kill(); // Detruit la dernière étoile (position du curseur)
         this.stars.forEachAlive(function(c) {
-            if (c.alpha > alph) edited_lvl.etoiles.push([c.calculDeg, c.calculLvl]);
+            if (c.alpha > alph) edited_lvl.stars.push([c.calculDeg, c.calculLvl]);
         }, this);
 
         // ------------------------------------------------------------------ //
@@ -167,13 +167,13 @@ export const Edit = {
         const export_lvl =
             '{' +
             'platforms: [' +
-            this.objToString(edited_lvl.plateformes) +
+            this.objToString(edited_lvl.platforms) +
             '], ' +
             'traps: [' +
-            this.objToString(edited_lvl.pieges) +
+            this.objToString(edited_lvl.traps) +
             '], ' +
             'stars: [' +
-            this.objToString(edited_lvl.etoiles) +
+            this.objToString(edited_lvl.stars) +
             ']' +
             '}';
         (window.document.getElementById('export_lvl') as any).value = export_lvl;
@@ -318,10 +318,10 @@ export const Edit = {
 
                 // Si on revient d'un test, il faut réafficher les éléments choisis
                 if (edited_lvl.edited) {
-                    for (var val in edited_lvl.plateformes) {
+                    for (var val in edited_lvl.platforms) {
                         if (
-                            edited_lvl.plateformes[val][0] == elt.calculDeg &&
-                            edited_lvl.plateformes[val][1] == elt.calculLvl
+                            edited_lvl.platforms[val][0] == elt.calculDeg &&
+                            edited_lvl.platforms[val][1] == elt.calculLvl
                         )
                             elt.alpha = 1;
                     }
@@ -339,8 +339,8 @@ export const Edit = {
                 elt.calculDeg = j;
 
                 if (edited_lvl.edited) {
-                    for (var val in edited_lvl.pieges) {
-                        if (edited_lvl.pieges[val][0] == elt.calculDeg && edited_lvl.pieges[val][1] == elt.calculLvl)
+                    for (var val in edited_lvl.traps) {
+                        if (edited_lvl.traps[val][0] == elt.calculDeg && edited_lvl.traps[val][1] == elt.calculLvl)
                             elt.alpha = 1;
                     }
                 }
@@ -354,17 +354,17 @@ export const Edit = {
         // ---------------------------- Remise en place des étoiles au besoin //
 
         if (edited_lvl.edited) {
-            for (var val in edited_lvl.etoiles) {
-                rayon = (edited_lvl.etoiles[val][1] + 0.5) * platformSizeInPx + BASE_SIZE / 6;
+            for (var val in edited_lvl.stars) {
+                rayon = (edited_lvl.stars[val][1] + 0.5) * platformSizeInPx + BASE_SIZE / 6;
 
-                tmp = polarToCartesian(edited_lvl.etoiles[val][0], rayon);
+                tmp = polarToCartesian(edited_lvl.stars[val][0], rayon);
 
                 var elt = this.stars.create(tmp[0], tmp[1], STAR);
 
                 elt.angle = tmp[2];
                 elt.anchor.set(0.6);
-                elt.calculLvl = edited_lvl.etoiles[val][1];
-                elt.calculDeg = edited_lvl.etoiles[val][0];
+                elt.calculLvl = edited_lvl.stars[val][1];
+                elt.calculDeg = edited_lvl.stars[val][0];
             }
         }
 
