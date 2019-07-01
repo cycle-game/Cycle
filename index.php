@@ -69,14 +69,6 @@ if (isset($_POST['pseudo']) && isset($_POST['lvl'])) {
                     <li>(WIP)</li>
                 </ul>
             </li>
-            <li> Niveaux
-                <ul>
-                    <li>Alexis Busin</li>
-                    <li>Arnaud Thevenard</li>
-                    <li><a href="http://www.humbertdany.com/">Dany Humbert</a></li>
-                    <li><a href="http://raphaelrothmann.fr/">Raphaël Rothmann</a></li>
-                </ul>
-            </li>
             <li> Remerciements
                 <ul>
                     <li><a href="http://fr.viadeo.com/fr/profile/loic.brunot">Loïc Brunot</a></li>
