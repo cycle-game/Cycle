@@ -1,6 +1,6 @@
 import { StageDefinition } from './StageDefinition';
 
-export const stage4: StageDefinition = {
+export const stage04: StageDefinition = {
     platforms: [
         [23.225806451612904, 0],
         [34.83870967741936, 0],

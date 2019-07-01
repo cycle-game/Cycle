@@ -1,12 +1,12 @@
-import { stage1 } from './Stage1';
-import { stage2 } from './Stage2';
-import { stage3 } from './Stage3';
-import { stage7 } from './Stage7';
-import { stage6 } from './Stage6';
-import { stage5 } from './Stage5';
-import { stage4 } from './Stage4';
-import { stage9 } from './Stage9';
-import { stage8 } from './Stage8';
+import { stage01 } from './Stage01';
+import { stage02 } from './Stage02';
+import { stage03 } from './Stage03';
+import { stage07 } from './Stage07';
+import { stage06 } from './Stage06';
+import { stage05 } from './Stage05';
+import { stage04 } from './Stage04';
+import { stage09 } from './Stage09';
+import { stage08 } from './Stage08';
 import { stage10 } from './Stage10';
 import { stage11 } from './Stage11';
 import { stage12 } from './Stage12';
@@ -16,15 +16,15 @@ import { stage16 } from './Stage16';
 import { stage14 } from './Stage14';
 
 export const stages = [
-    stage1,
-    stage2,
-    stage3,
-    stage4,
-    stage5,
-    stage6,
-    stage7,
-    stage8,
-    stage9,
+    stage01,
+    stage02,
+    stage03,
+    stage04,
+    stage05,
+    stage06,
+    stage07,
+    stage08,
+    stage09,
     stage10,
     stage11,
     stage12,
