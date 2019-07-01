@@ -7,6 +7,7 @@ import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../r
 import { lang } from '../i18n';
 import { lang as selectedLang } from './langue';
 import { polarToCartesian } from '../utils/CoordonateSystem';
+import { StageDefinition } from '../stages/StageDefinition';
 
 const cplan = BASE_SIZE / 1.8;
 let nb_tours = 0;
@@ -28,11 +29,21 @@ const fps_array = [];
 
 let isLevelPlaying = false;
 
+let currentStage: StageDefinition;
+
+let trapsGroup: any;
 // Attention,  ici on a une grosse partie du jeu
 // C'est l'état (state) où tout les niveaux seront
 // mis en place.
 export const Play = {
     create: function() {
+        if (edited_lvl.edited) {
+            currentStage = edited_lvl;
+        } else {
+            currentStage = stages[Stats.stage];
+        }
+
+        currentStage = stages[Stats.stage];
         this.game.paused = true;
         // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
         // Il faut modifier phaser.js pour ajouter  \\
@@ -193,8 +204,8 @@ export const Play = {
         this.makeEtoiles();
 
         // Pièges
-        this.traps = this.game.add.group(this.planete);
-        this.makePiegesMWAHAHAHAHA();
+        trapsGroup = this.game.add.group(this.planete);
+        this.createAndDisplayTraps();
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
@@ -431,7 +442,7 @@ export const Play = {
             // ------------------------------------------------------------------ //
             // ---------------------------------------- Collision avec les pièges //
 
-            if (this.game.physics.arcade.overlap(this.dude, this.traps)) {
+            if (this.game.physics.arcade.overlap(this.dude, trapsGroup)) {
                 this.create();
                 Stats.score += this.tours(this.planete.angle) + 50;
             }
@@ -545,7 +556,7 @@ export const Play = {
         // Création des sprites par rapport aux données des niveaux
         let plateformes;
         // En fonction on est en édition ou on est en jeu ..
-        if (edited_lvl.edited) plateformes = edited_lvl.plateformes;
+        if (edited_lvl.edited) plateformes = edited_lvl.platforms;
         else if (stages[Stats.stage])
             // Vérification de l'existence du level
             plateformes = stages[Stats.stage].platforms;
@@ -603,7 +614,7 @@ export const Play = {
     makeEtoiles: function() {
         // Même principe que makePlateformes
         let etoiles;
-        if (edited_lvl.edited) etoiles = edited_lvl.etoiles;
+        if (edited_lvl.edited) etoiles = edited_lvl.stars;
         else etoiles = stages[Stats.stage].stars;
 
         for (let val in etoiles) {
@@ -618,25 +629,17 @@ export const Play = {
 
         nb_etoiles = this.stars.countLiving();
     },
-    makePiegesMWAHAHAHAHA: function() {
-        let pieges;
-        // Même principe que makePlateformes
+    createAndDisplayTraps: () => {
+        currentStage.traps.forEach(trap => {
+            const angle = trap[0];
+            const radius = BASE_SIZE / 6 + trap[1] * platformSizeInPx;
 
-        if (edited_lvl.edited) {
-            pieges = edited_lvl.pieges;
-        } else {
-            pieges = stages[Stats.stage].traps;
-        }
+            const cartesianPosition = polarToCartesian(angle, radius);
 
-        for (let val in pieges) {
-            const rayon = BASE_SIZE / 6 + pieges[val][1] * platformSizeInPx;
-
-            const tmp = polarToCartesian(pieges[val][0], rayon);
-
-            const plt = this.traps.create(tmp[0], tmp[1], TRAP);
-            plt.anchor.set(0.5, 1);
-            plt.angle = pieges[val][0];
-        }
+            const trapVM = trapsGroup.create(cartesianPosition[0], cartesianPosition[1], TRAP);
+            trapVM.anchor.set(0.5, 1);
+            trapVM.angle = trap[0];
+        });
     },
 
     render: function() {
