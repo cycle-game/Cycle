@@ -32,6 +32,7 @@ let isLevelPlaying = false;
 let currentStage: StageDefinition;
 
 let trapsGroup: any;
+let starsGroup: any;
 // Attention,  ici on a une grosse partie du jeu
 // C'est l'état (state) où tout les niveaux seront
 // mis en place.
@@ -200,8 +201,8 @@ export const Play = {
         let maxPlat = this.makePlateformes();
 
         // Étoiles
-        this.stars = this.game.add.group(this.planete);
-        this.makeEtoiles();
+        starsGroup = this.game.add.group(this.planete);
+        this.createAndDisplayStars();
 
         // Pièges
         trapsGroup = this.game.add.group(this.planete);
@@ -262,7 +263,7 @@ export const Play = {
             c.body.immovable = true;
         }, this);
 
-        this.stars.forEachAlive(function(c) {
+        starsGroup.forEachAlive(function(c) {
             c.body.angularVelocity = Math.round(Math.random() * 400) + 100;
         }, this);
 
@@ -385,7 +386,7 @@ export const Play = {
             const overlap_right = this.game.physics.arcade.overlap(this.dudeTest.getAt(0), this.platforms);
             const overlap_left = this.game.physics.arcade.overlap(this.dudeTest.getAt(1), this.platforms);
 
-            this.game.physics.arcade.overlap(this.dude, this.stars, this.takeEtoiles, null, this);
+            this.game.physics.arcade.overlap(this.dude, starsGroup, this.takeEtoiles, null, this);
 
             // ------------------------------------------------------------------ //
             // ------------------------------------------------------------------ //
@@ -611,23 +612,19 @@ export const Play = {
 
         return maxPlat * platformSizeInPx + BASE_SIZE / 6;
     },
-    makeEtoiles: function() {
-        // Même principe que makePlateformes
-        let etoiles;
-        if (edited_lvl.edited) etoiles = edited_lvl.stars;
-        else etoiles = stages[Stats.stage].stars;
+    createAndDisplayStars: () => {
+        currentStage.stars.forEach(star => {
+            const angle = star[0];
+            const radius = BASE_SIZE / 6 + star[1] * platformSizeInPx + platformSizeInPx / 2;
 
-        for (let val in etoiles) {
-            const rayon = BASE_SIZE / 6 + etoiles[val][1] * platformSizeInPx + platformSizeInPx / 2;
+            const cartesianPosition = polarToCartesian(angle, radius);
 
-            const tmp = polarToCartesian(etoiles[val][0], rayon);
+            const starVM = starsGroup.create(cartesianPosition[0], cartesianPosition[1], STAR);
+            starVM.anchor.set(0.6);
+            starVM.angle = star[0];
+        });
 
-            const et = this.stars.create(tmp[0], tmp[1], STAR);
-            et.anchor.set(0.6);
-            et.angle = etoiles[val][0];
-        }
-
-        nb_etoiles = this.stars.countLiving();
+        nb_etoiles = starsGroup.countLiving();
     },
     createAndDisplayTraps: () => {
         currentStage.traps.forEach(trap => {
