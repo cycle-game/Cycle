@@ -28,6 +28,7 @@ module.exports = {
     compress: true,
     port: 9000
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
