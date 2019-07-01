@@ -1,4 +1,4 @@
-import { BLUE, BASE_SIZE, plataille } from './variables';
+import { BLUE, BASE_SIZE, platformSizeInPx } from './variables';
 import { lang } from './i18n';
 import { lang as selectedLang } from './states/langue';
 
@@ -107,7 +107,7 @@ export function difficultes(contexte, Stats) {
     for (var i = 0; i < lang[selectedLang].Difficultes.length; i++) {
         contexte.choix_diff[i] = cliquable(
             marge + espace * i,
-            BASE_SIZE - plataille,
+            BASE_SIZE - platformSizeInPx,
             lang[selectedLang].Difficultes[i],
             25,
             0.5,
@@ -117,7 +117,7 @@ export function difficultes(contexte, Stats) {
             choix,
             contexte,
         );
-        contexte.choix_diff[i].diff = i;
+        contexte.choix_diff[i].difficulty = i;
     }
 }
 

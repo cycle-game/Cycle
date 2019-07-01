@@ -12,7 +12,7 @@ export const edited_lvl: any = {};
 // -- \\
 
 // Current level
-export const Stats = { level: 0, score: 0, diff: 1 };
+export const Stats = { stage: 0, score: 0, difficulty: 1 };
 // 4 difficulty levels :
 // _ 0 = easy
 // _ 1 = normal
@@ -20,7 +20,7 @@ export const Stats = { level: 0, score: 0, diff: 1 };
 // _ 3 = insane
 
 // platform size
-export const plataille = 20;
+export const platformSizeInPx = 20;
 
 // -- \\
 

@@ -1,6 +1,6 @@
 // On crée l'état du menu
 import { cliquable, difficultes, reset } from '../functions';
-import { BASE_SIZE, plataille, Stats } from '../variables';
+import { BASE_SIZE, platformSizeInPx, Stats } from '../variables';
 import { lang } from '../i18n';
 import { lang as selectedLang } from './langue';
 import Phaser from 'phaser';
@@ -21,9 +21,9 @@ export const Explain = {
         this.choix_diff = [];
         difficultes(this, null);
 
-        if (isNaN(Stats.diff)) Stats.diff = 1;
+        if (isNaN(Stats.difficulty)) Stats.difficulty = 1;
 
-        this.choix_diff[Stats.diff].setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
+        this.choix_diff[Stats.difficulty].setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
     },
     souligne: function(sprite) {
         for (var val in this.choix_diff) {
@@ -33,7 +33,7 @@ export const Explain = {
         sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
 
         reset(Stats);
-        Stats.diff = sprite.diff;
+        Stats.difficulty = sprite.difficulty;
     },
     update: function() {
         // Retour au menu
@@ -76,7 +76,7 @@ export const Menu = {
         );
         var come_back = cliquable(
             BASE_SIZE / 2,
-            BASE_SIZE - plataille,
+            BASE_SIZE - platformSizeInPx,
             lang[selectedLang].HowToBack,
             18,
             0.5,
@@ -87,8 +87,8 @@ export const Menu = {
             this,
         );
         var raz = cliquable(
-            BASE_SIZE - plataille,
-            plataille,
+            BASE_SIZE - platformSizeInPx,
+            platformSizeInPx,
             lang[selectedLang].RaZ,
             25,
             1,
@@ -112,11 +112,11 @@ export const Menu = {
         );
 
         // Logo + animation
-        this.logo_c = this.game.add.sprite(BASE_SIZE / 2 - 99, plataille + 80, LOGO_C);
+        this.logo_c = this.game.add.sprite(BASE_SIZE / 2 - 99, platformSizeInPx + 80, LOGO_C);
         this.logo_c.anchor.setTo(0.5, 0.5);
-        var logo_c_cache = this.game.add.sprite(BASE_SIZE / 2 - 99, plataille + 5, LOGO_C_MASK);
+        var logo_c_cache = this.game.add.sprite(BASE_SIZE / 2 - 99, platformSizeInPx + 5, LOGO_C_MASK);
         logo_c_cache.anchor.setTo(0.5, 0);
-        var logo = this.game.add.sprite(BASE_SIZE / 2, plataille, LOGO_WITHOUT_C);
+        var logo = this.game.add.sprite(BASE_SIZE / 2, platformSizeInPx, LOGO_WITHOUT_C);
         logo.anchor.setTo(0.5, 0);
     },
     raz: function() {

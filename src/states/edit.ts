@@ -1,4 +1,4 @@
-import { BASE_SIZE, plataille, edited_lvl, pi180 } from '../variables';
+import { BASE_SIZE, platformSizeInPx, edited_lvl, pi180 } from '../variables';
 import { Play } from './play';
 import Phaser from 'phaser';
 import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
@@ -47,7 +47,8 @@ export const Edit = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------ Redimensionnement //
 
-        const maxPlat = (PLATFORMS_HEIGHT_NUMBER * plataille + BASE_SIZE / 6 + plataille + this.dude.height) * 2;
+        const maxPlat =
+            (PLATFORMS_HEIGHT_NUMBER * platformSizeInPx + BASE_SIZE / 6 + platformSizeInPx + this.dude.height) * 2;
 
         if (maxPlat > BASE_SIZE)
             // Redimensionnement
@@ -78,12 +79,12 @@ export const Edit = {
         this.menu.y = -maxPlat / 2;
 
         // Choix du type d'objets
-        this.plateforme = this.menu.create(-plataille * 1.5, plataille * 0.5, PLATFORM);
-        this.piege = this.menu.create(-plataille * 3, plataille * 0.5, TRAP);
-        this.etoile = this.menu.create(-plataille * 1, plataille * 2.5, STAR);
+        this.plateforme = this.menu.create(-platformSizeInPx * 1.5, platformSizeInPx * 0.5, PLATFORM);
+        this.piege = this.menu.create(-platformSizeInPx * 3, platformSizeInPx * 0.5, TRAP);
+        this.etoile = this.menu.create(-platformSizeInPx * 1, platformSizeInPx * 2.5, STAR);
         this.etoile.anchor.set(0.5);
 
-        this.launch = this.game.add.text(plataille, plataille, lang[selectedLang].Tester);
+        this.launch = this.game.add.text(platformSizeInPx, platformSizeInPx, lang[selectedLang].Tester);
         this.launch.anchor.setTo(0, 0);
 
         // ------------------------------------------------------------------ //
@@ -287,13 +288,13 @@ export const Edit = {
             // -------------------------------------------------------------- //
             // ---------------- Calcul du positionnement pour les plateformes //
 
-            cx = i * plataille;
+            cx = i * platformSizeInPx;
 
             rayon = BASE_SIZE / 6 + cx;
 
             perimetre = rayon * Math.PI * 2;
 
-            nbr_plat = Math.round(perimetre / plataille);
+            nbr_plat = Math.round(perimetre / platformSizeInPx);
 
             deg = 360 / nbr_plat;
 
@@ -354,7 +355,7 @@ export const Edit = {
 
         if (edited_lvl.edited) {
             for (var val in edited_lvl.etoiles) {
-                rayon = (edited_lvl.etoiles[val][1] + 0.5) * plataille + BASE_SIZE / 6;
+                rayon = (edited_lvl.etoiles[val][1] + 0.5) * platformSizeInPx + BASE_SIZE / 6;
 
                 tmp = polarToCartesian(edited_lvl.etoiles[val][0], rayon);
 
@@ -386,7 +387,7 @@ export const Edit = {
             this.etoile_pos.x = position[0];
             this.etoile_pos.y = position[1];
             this.etoile_pos.angle = tmp[1];
-            this.etoile_pos.calculLvl = (tmp[0] - BASE_SIZE / 6) / plataille - 0.5;
+            this.etoile_pos.calculLvl = (tmp[0] - BASE_SIZE / 6) / platformSizeInPx - 0.5;
             this.etoile_pos.calculDeg = tmp[1];
         }
 
@@ -422,15 +423,15 @@ export const Edit = {
         if (x < 0) degrees += 180;
 
         // Dépassement
-        if (rayon < BASE_SIZE / 6) rayon = BASE_SIZE / 6 + plataille / 2;
-        else if (rayon > BASE_SIZE / 6 + PLATFORMS_HEIGHT_NUMBER * plataille)
-            rayon = BASE_SIZE / 6 + PLATFORMS_HEIGHT_NUMBER * plataille + plataille / 2;
+        if (rayon < BASE_SIZE / 6) rayon = BASE_SIZE / 6 + platformSizeInPx / 2;
+        else if (rayon > BASE_SIZE / 6 + PLATFORMS_HEIGHT_NUMBER * platformSizeInPx)
+            rayon = BASE_SIZE / 6 + PLATFORMS_HEIGHT_NUMBER * platformSizeInPx + platformSizeInPx / 2;
         // Maintenant on arrondi tout
         else
             rayon =
-                Math.round((rayon - BASE_SIZE / 6 - plataille / 2) / plataille) * plataille +
+                Math.round((rayon - BASE_SIZE / 6 - platformSizeInPx / 2) / platformSizeInPx) * platformSizeInPx +
                 BASE_SIZE / 6 +
-                plataille / 2;
+                platformSizeInPx / 2;
 
         degrees = Math.round(degrees);
 

@@ -1,4 +1,4 @@
-import { BASE_SIZE, plataille, Stats } from '../variables';
+import { BASE_SIZE, platformSizeInPx, Stats } from '../variables';
 import { cliquable, difficultes, ecart, scores } from '../functions';
 import Phaser from 'phaser';
 import { lang } from '../i18n';
@@ -9,7 +9,7 @@ export const Scores = {
         const highscores = scores().split('|||');
 
         // Screen title
-        cliquable(BASE_SIZE / 2, plataille, lang[selectedLang].UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
+        cliquable(BASE_SIZE / 2, platformSizeInPx, lang[selectedLang].UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
 
         // ESC to return to menu
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
@@ -18,9 +18,9 @@ export const Scores = {
         this.choix_diff = [];
         difficultes(this, null);
 
-        if (isNaN(Stats.diff)) Stats.diff = 1;
+        if (isNaN(Stats.difficulty)) Stats.difficulty = 1;
 
-        this.diff = Stats.diff;
+        this.difficulty = Stats.difficulty;
 
         // Scores display
         this.scores = [];
@@ -57,11 +57,11 @@ export const Scores = {
                 }
             }
 
-            if (val == this.diff) this.scores[val].alpha = 1;
+            if (val == this.difficulty) this.scores[val].alpha = 1;
             else this.scores[val].alpha = 0;
         }
 
-        this.choix_diff[Stats.diff].setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
+        this.choix_diff[Stats.difficulty].setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
     },
     souligne: function(sprite) {
         // Selection
@@ -71,8 +71,8 @@ export const Scores = {
         }
 
         sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
-        this.diff = sprite.diff;
-        this.scores[this.diff].alpha = 1;
+        this.difficulty = sprite.difficulty;
+        this.scores[this.difficulty].alpha = 1;
     },
     update: function() {
         if (this.esc_key.isDown) this.game.state.start('Menu');

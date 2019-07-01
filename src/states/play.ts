@@ -1,4 +1,4 @@
-import { BLUE, BASE_SIZE, edited_lvl, plataille, Stats } from '../variables';
+import { BLUE, BASE_SIZE, edited_lvl, platformSizeInPx, Stats } from '../variables';
 import { average, reset, save } from '../functions';
 import { stages } from '../stages';
 import Phaser from 'phaser';
@@ -44,8 +44,8 @@ export const Play = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------- Difficulté //
 
-        if (Stats.diff < 3) {
-            nuit_rotat = nuit_rotat_diff[Stats.diff];
+        if (Stats.difficulty < 3) {
+            nuit_rotat = nuit_rotat_diff[Stats.difficulty];
         } else {
             nuit_rotat = nuit_rotat_diff[nuit_rotat_diff.length - 1];
         }
@@ -77,7 +77,7 @@ export const Play = {
 
         this.game.time.events.loop(Phaser.Timer.SECOND, this.fpsAdapt, this);
 
-        if (Stats.diff >= 3) this.fps_moy = 2;
+        if (Stats.difficulty >= 3) this.fps_moy = 2;
         else this.fps_moy = 10;
 
         // ------------------------------------------------------------------ //
@@ -145,8 +145,8 @@ export const Play = {
 
         this.label_lvl = this.game.add.text(
             0,
-            -plataille,
-            Stats.level + 1,
+            -platformSizeInPx,
+            Stats.stage + 1,
             {
                 font: '30px Arial',
                 fill: '#' + BLUE,
@@ -157,7 +157,7 @@ export const Play = {
         this.label_lvl.anchor.setTo(0.5, 0.5);
         this.label_score = this.game.add.text(
             0,
-            +plataille,
+            +platformSizeInPx,
             Stats.score,
             {
                 font: '20px Arial',
@@ -294,7 +294,7 @@ export const Play = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------ Redimensionnement //
 
-        maxPlat = (maxPlat + plataille + this.dude.body.height) * 2;
+        maxPlat = (maxPlat + platformSizeInPx + this.dude.body.height) * 2;
 
         if (maxPlat >= BASE_SIZE) this.redimensionne(BASE_SIZE / maxPlat);
         else this.redimensionne(1);
@@ -305,7 +305,7 @@ export const Play = {
         // ----------------------------------------------- Back to the editor //
 
         if (edited_lvl.edited) {
-            this.goBack = game.add.text(plataille, plataille, lang[selectedLang].Retour);
+            this.goBack = game.add.text(platformSizeInPx, platformSizeInPx, lang[selectedLang].Retour);
             this.goBack.anchor.setTo(0, 0);
 
             this.goBack.inputEnabled = true;
@@ -336,7 +336,7 @@ export const Play = {
         let fps = this.game.time.fps;
 
         // Rajout d'une difficulté : en mode hardcore (3), on change la vitesse
-        if (Stats.diff >= 3) fps += Math.round((Math.random() - 0.5) * 55);
+        if (Stats.difficulty >= 3) fps += Math.round((Math.random() - 0.5) * 55);
 
         if (fps > 0) fps_array.push(fps);
 
@@ -484,7 +484,7 @@ export const Play = {
             // Lorsqu'on a atteint 0, on revient à l'éditeur ou on passe
             // au niveau suivant/écran de victoire
 
-            Stats.level += 1;
+            Stats.stage += 1;
 
             // ------------- Animation de fin de niveau //
             this.dude.body.gravity.y = 0;
@@ -499,7 +499,7 @@ export const Play = {
                     // On vient de l'editeur
                     this.game.state.start('Edit');
                 else {
-                    if (Stats.level >= stages.length) {
+                    if (Stats.stage >= stages.length) {
                         this.redimensionne(1);
                         this.game.state.start('Victoire');
                     } else this.game.state.start('Play');
@@ -546,9 +546,9 @@ export const Play = {
         let plateformes;
         // En fonction on est en édition ou on est en jeu ..
         if (edited_lvl.edited) plateformes = edited_lvl.plateformes;
-        else if (stages[Stats.level])
+        else if (stages[Stats.stage])
             // Vérification de l'existence du level
-            plateformes = stages[Stats.level].platforms;
+            plateformes = stages[Stats.stage].platforms;
         else {
             // S'il n'existe pas il y a une erreur; reboot du début
             plateformes = stages[0].platforms;
@@ -561,7 +561,7 @@ export const Play = {
         // Parcourt des plateformes
         for (let val in plateformes) {
             // On déplace une partie de la trigo ici (gain de temps)
-            const cx = plateformes[val][1] * plataille;
+            const cx = plateformes[val][1] * platformSizeInPx;
 
             const rayon = BASE_SIZE / 6 + cx;
 
@@ -571,7 +571,7 @@ export const Play = {
       var perimetre = rayon * Math.PI * 2;
 
       // On regarde combien on a de plateformes par tour de cercle
-      var nbr_plat = Math.round(perimetre / plataille);
+      var nbr_plat = Math.round(perimetre / platformSizeInPx);
 
       // Ce qui donne un espacement en degrée de ...
       var deg = 360 / nbr_plat;
@@ -598,16 +598,16 @@ export const Play = {
             if (plateformes[val][1] > maxPlat) maxPlat = plateformes[val][1];
         }
 
-        return maxPlat * plataille + BASE_SIZE / 6;
+        return maxPlat * platformSizeInPx + BASE_SIZE / 6;
     },
     makeEtoiles: function() {
         // Même principe que makePlateformes
         let etoiles;
         if (edited_lvl.edited) etoiles = edited_lvl.etoiles;
-        else etoiles = stages[Stats.level].stars;
+        else etoiles = stages[Stats.stage].stars;
 
         for (let val in etoiles) {
-            const rayon = BASE_SIZE / 6 + etoiles[val][1] * plataille + plataille / 2;
+            const rayon = BASE_SIZE / 6 + etoiles[val][1] * platformSizeInPx + platformSizeInPx / 2;
 
             const tmp = polarToCartesian(etoiles[val][0], rayon);
 
@@ -625,11 +625,11 @@ export const Play = {
         if (edited_lvl.edited) {
             pieges = edited_lvl.pieges;
         } else {
-            pieges = stages[Stats.level].traps;
+            pieges = stages[Stats.stage].traps;
         }
 
         for (let val in pieges) {
-            const rayon = BASE_SIZE / 6 + pieges[val][1] * plataille;
+            const rayon = BASE_SIZE / 6 + pieges[val][1] * platformSizeInPx;
 
             const tmp = polarToCartesian(pieges[val][0], rayon);
 
