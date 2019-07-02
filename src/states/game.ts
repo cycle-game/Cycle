@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser-ce';
 
 import { BASE_SIZE } from '../variables';
 import { Victoire } from './victoire';

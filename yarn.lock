@@ -4257,10 +4257,10 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-phaser@2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/phaser/-/phaser-2.5.0.tgz#5773e615f4b0447822d6fcc1f731ba068d4ac196"
-  integrity sha1-V3PmFfSwRHgi1vzB9zG6Bo1KwZY=
+phaser-ce@2.13.2:
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/phaser-ce/-/phaser-ce-2.13.2.tgz#46a146b683948486b0ed700fbbd681f641200ff8"
+  integrity sha512-CzFLDxpXxV3EShL0xHYCu+y0fgg5WIFME+ShpNpub9bn7DgGDIJwdrjkDyM8hINKEP4FRGP96HaBWyiPxTAFSA==
 
 picomatch@^2.0.5:
   version "2.0.7"
