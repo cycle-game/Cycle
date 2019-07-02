@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser-ce';
 import { cliquable, difficultes, reset } from '../functions';
 import { BASE_SIZE, Stats } from '../variables';
 import { lang } from '../i18n';

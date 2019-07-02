@@ -1,6 +1,6 @@
 import { BASE_SIZE, platformSizeInPx, edited_lvl, pi180 } from '../variables';
 import { Play } from './play';
-import Phaser from 'phaser';
+import Phaser from 'phaser-ce';
 import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
 import { lang as selectedLang } from './langue';

@@ -1,6 +1,6 @@
 import { BASE_SIZE, platformSizeInPx, Stats } from '../variables';
 import { cliquable, difficultes, ecart, scores } from '../functions';
-import Phaser from 'phaser';
+import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
 import { lang as selectedLang } from './langue';
 

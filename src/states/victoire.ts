@@ -1,6 +1,6 @@
 import { cliquable, reset, save, sociaux, toHigh } from '../functions';
 import { BASE_SIZE, pseudo as pseudoVar, Stats } from '../variables';
-import Phaser from 'phaser';
+import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
 import { lang as selectedLang } from './langue';
 
