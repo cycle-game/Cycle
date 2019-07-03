@@ -1,6 +1,7 @@
 import { BLUE, BASE_SIZE, platformSizeInPx } from './variables';
 import { lang } from './i18n';
 import { lang as selectedLang } from './states/langue';
+import Phaser from 'phaser-ce';
 
 export function sociaux(Stats, pseudo, lng) {
     // Social network pre-share
@@ -56,9 +57,24 @@ export function average(tableau) {
 }
 
 // Création d'un texte cliquable (ou non)
-export function cliquable(x, y, text, taille, anchor_x, anchor_y, delay, speed, onDown, context) {
+export function cliquable(
+    x: number,
+    y: number,
+    text: string,
+    taille: number,
+    anchor_x: number,
+    anchor_y: number,
+    delay: number,
+    speed: number,
+    onDown: any,
+    context: any,
+): Phaser.Text {
     // Label
-    var toReturn = context.game.add.text(x, y, text, { font: taille + 'px Arial', fill: '#' + BLUE, align: 'center' });
+    const toReturn = (context.game as Phaser.Game).add.text(x, y, text, {
+        font: taille + 'px Arial',
+        fill: '#' + BLUE,
+        align: 'center',
+    });
     toReturn.anchor.setTo(anchor_x, anchor_y);
     toReturn.alpha = 0;
 
@@ -69,8 +85,6 @@ export function cliquable(x, y, text, taille, anchor_x, anchor_y, delay, speed, 
             .delay(delay)
             .to({ alpha: 1 }, speed)
             .start();
-
-    var test = 2;
 
     // Inputs
     if (onDown != null) {
