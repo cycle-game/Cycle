@@ -32,23 +32,23 @@ export const Load = {
 
         // Et pendant se temps on charge toutes les ressources !
 
-        this.game.load.image(PLAYER, 'Ressources/Phaser/player.png');
-        this.game.load.image(SELECTOR, 'Ressources/Phaser/selector.png');
-        this.game.load.image(NIGHT_MASK, 'Ressources/Phaser/night-mask.png');
-        this.game.load.image(PLANET, 'Ressources/Phaser/planet.svg');
+        this.game.load.image(PLAYER, 'resources/Phaser/player.png');
+        this.game.load.image(SELECTOR, 'resources/Phaser/selector.png');
+        this.game.load.image(NIGHT_MASK, 'resources/Phaser/night-mask.png');
+        this.game.load.image(PLANET, 'resources/Phaser/planet.svg');
 
-        this.game.load.image(PLATFORM, 'Ressources/Phaser/platform.png');
-        this.game.load.image(STAR, 'Ressources/Phaser/star.png');
-        this.game.load.image(TRAP, 'Ressources/Phaser/trap.png');
+        this.game.load.image(PLATFORM, 'resources/Phaser/platform.png');
+        this.game.load.image(STAR, 'resources/Phaser/star.png');
+        this.game.load.image(TRAP, 'resources/Phaser/trap.png');
 
-        this.game.load.image(LANG, 'Ressources/Phaser/lang.png');
-        this.game.load.image(LANG_SELECTOR, 'Ressources/Phaser/lang-selector.png');
+        this.game.load.image(LANG, 'resources/Phaser/lang.png');
+        this.game.load.image(LANG_SELECTOR, 'resources/Phaser/lang-selector.png');
 
-        this.game.load.image(LOGO_WITHOUT_C, 'Ressources/Phaser/logo-without-c.png');
-        this.game.load.image(LOGO_C, 'Ressources/Phaser/logo-c.png');
-        this.game.load.image(LOGO_C_MASK, 'Ressources/Phaser/logo-c-mask.png');
+        this.game.load.image(LOGO_WITHOUT_C, 'resources/Phaser/logo-without-c.png');
+        this.game.load.image(LOGO_C, 'resources/Phaser/logo-c.png');
+        this.game.load.image(LOGO_C_MASK, 'resources/Phaser/logo-c-mask.png');
 
-        this.game.load.image(DEBUG_POINT, 'Ressources/Phaser/debug-point.png');
+        this.game.load.image(DEBUG_POINT, 'resources/Phaser/debug-point.png');
     },
     create: function() {
         // Et on passe à la sélection de langue
