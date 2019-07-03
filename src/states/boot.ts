@@ -8,8 +8,8 @@ export const Boot = {
         game.stage.setBackgroundColor(YELLOW);
 
         // Images pour le loader
-        game.load.image(LOADER_FULL, 'Ressources/Phaser/loader-full.png');
-        game.load.image(LOADER_EMPTY, 'Ressources/Phaser/loader-empty.png');
+        game.load.image(LOADER_FULL, 'resources/Phaser/loader-full.png');
+        game.load.image(LOADER_EMPTY, 'resources/Phaser/loader-empty.png');
     },
     create: () => {
         // On passe à l'état de chargement

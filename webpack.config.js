@@ -20,7 +20,7 @@ module.exports = {
       template: './src/index.html'
     }),
     new CopyPlugin([
-      { from: 'src/Ressources', to: 'Ressources' },
+      { from: 'src/resources', to: 'resources' },
     ]),
   ],
   devServer: {
