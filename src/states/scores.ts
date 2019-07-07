@@ -16,7 +16,8 @@ export const Scores = {
 
         // Difficulty
         this.choix_diff = [];
-        difficultes(this, null);
+        this.Stats = null;
+        difficultes(this);
 
         if (isNaN(Stats.difficulty)) Stats.difficulty = 1;
 

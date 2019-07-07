@@ -100,12 +100,10 @@ export function ecart(nombre, marge) {
 }
 
 // Choix de la difficulté
-export function difficultes(contexte, Stats) {
+export function difficultes(contexte) {
     // Mise en place des difficultés
     var marge = 100;
     var espace = ecart(lang[selectedLang].Difficultes.length, marge);
-
-    contexte.Stats = Stats;
 
     for (var i = 0; i < lang[selectedLang].Difficultes.length; i++) {
         contexte.choix_diff[i] = cliquable(
