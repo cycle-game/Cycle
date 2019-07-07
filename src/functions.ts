@@ -45,17 +45,6 @@ export function scores() {
     );
 }
 
-// Average d'un tableau
-export function average(tableau) {
-    var sum = 0;
-
-    for (var x = 0; x < tableau.length; x++) {
-        sum += tableau[x];
-    }
-
-    return sum / tableau.length;
-}
-
 // Création d'un texte cliquable (ou non)
 export function cliquable(
     x: number,
