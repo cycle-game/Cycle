@@ -8,6 +8,7 @@ export class ExplainState extends Phaser.State {
     choix_diff: (Phaser.Text & { difficulty: number })[];
     private space_key: Phaser.Key;
     private esc_key: Phaser.Key;
+    Stats: typeof Stats = null;
 
     create(): void {
         // Un équivalent d'écouteur d'évènement (si on veut)
@@ -21,7 +22,7 @@ export class ExplainState extends Phaser.State {
 
         // Difficulté
         this.choix_diff = [];
-        difficultes(this, null);
+        difficultes(this);
 
         if (isNaN(Stats.difficulty)) Stats.difficulty = 1;
 
