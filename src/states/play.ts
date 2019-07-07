@@ -1,5 +1,5 @@
 import { BLUE, BASE_SIZE, edited_lvl, platformSizeInPx, Stats } from '../variables';
-import { average, reset, save } from '../functions';
+import { reset, save } from '../functions';
 import { stages } from '../stages';
 import Phaser from 'phaser-ce';
 import { game } from './game';
@@ -8,6 +8,8 @@ import { lang } from '../i18n';
 import { lang as selectedLang } from './langue';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { StageDefinition } from '../stages/StageDefinition';
+
+import { mean } from 'lodash';
 
 const cplan = BASE_SIZE / 1.8;
 let nb_tours = 0;
@@ -354,7 +356,7 @@ export const Play = {
 
         if (fps_array.length > this.fps_moy) fps_array.shift();
 
-        if (fps_array.length > 1) fps_adapt = 60 / average(fps_array);
+        if (fps_array.length > 1) fps_adapt = 60 / mean(fps_array);
 
         //console.log(fps_array);
         console.log(fps_adapt);
