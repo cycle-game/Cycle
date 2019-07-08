@@ -642,22 +642,19 @@ export const Play = {
     },
 
     render: function() {
-        //game.debug.cameraInfo(game.camera, 32, 32);
-        //game.debug.spriteInfo(this.plateformes.getFirstAlive(), 32, 32);
-        //game.debug.body(this.plnte);
-        //game.debug.body(this.nuit);
-        //game.debug.body(this.dude);
-        /*
-    this.plateformes.forEachAlive(function(BASE_SIZE){
-        game.debug.body(BASE_SIZE);
-    });
-    */
-        /*
-    this.dudeTest.forEachAlive(function(BASE_SIZE){
-        game.debug.body(BASE_SIZE);
-    });
-    */
-        //game.debug.spriteCoords(this.dudeTest.getAt(0), 32, 300);
-        //game.debug.spriteCoords(this.dude, 32, 200);
+        // this.game.debug.spriteBounds(this.dude);
+        // game.debug.body(this.plnte);
+        // game.debug.body(this.nuit);
+        // game.debug.body(this.dude);
+        // this.platforms.forEachAlive((platform) =>
+        //     game.debug.body(platform)
+        // );
+        // this.dudeTest.forEachAlive((dudeT) =>
+        //     game.debug.body(dudeT)
+        // );
+        // game.debug.cameraInfo(game.camera, 32, 32);
+        // game.debug.spriteInfo(this.platforms.getFirstAlive(), 32, 32);
+        // game.debug.spriteCoords(this.dudeTest.getAt(0), 32, 300);
+        // game.debug.spriteCoords(this.dude, 32, 200);
     },
 };
