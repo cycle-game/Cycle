@@ -1,4 +1,4 @@
-import { BLUE, BASE_SIZE, platformSizeInPx } from './variables';
+import { BASE_SIZE, BLUE, platformSizeInPx } from './variables';
 import { lang } from './i18n';
 import { lang as selectedLang } from './states/langue';
 import Phaser from 'phaser-ce';
@@ -91,25 +91,26 @@ export function reset(Stats) {
     Stats.diff = 1;
 }
 
-export function ecart(nombre, marge) {
-    var plan = BASE_SIZE - 2 * marge;
-
-    var ecart = Math.round(plan / (nombre - 1));
-
-    return ecart;
+export function ecart(nombre: number, margingInPx: number) {
+    const gameWidthInPx = BASE_SIZE - 2 * margingInPx;
+    return Math.round(gameWidthInPx / (nombre - 1));
 }
 
-// Choix de la difficulté
-export function difficultes(contexte) {
-    // Mise en place des difficultés
-    var marge = 100;
-    var espace = ecart(lang[selectedLang].Difficultes.length, marge);
+export type DifficultySelectorVM = ({ text: Phaser.Text; difficulty: number })[];
 
-    for (var i = 0; i < lang[selectedLang].Difficultes.length; i++) {
-        contexte.choix_diff[i] = cliquable(
-            marge + espace * i,
+// Choix de la difficulté
+export function difficultes(contexte): DifficultySelectorVM {
+    const difficulties: string[] = lang[selectedLang].Difficultes;
+
+    // Mise en place des difficultés
+    const margingInPx = 100;
+    const elementWidthInPx = ecart(difficulties.length, margingInPx);
+
+    return difficulties.map((difficulty, index) => ({
+        text: cliquable(
+            margingInPx + elementWidthInPx * index,
             BASE_SIZE - platformSizeInPx,
-            lang[selectedLang].Difficultes[i],
+            difficulty,
             25,
             0.5,
             0.5,
@@ -117,9 +118,9 @@ export function difficultes(contexte) {
             500,
             choix,
             contexte,
-        );
-        contexte.choix_diff[i].difficulty = i;
-    }
+        ),
+        difficulty: index,
+    }));
 }
 
 export function choix(sprite) {

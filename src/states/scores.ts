@@ -15,9 +15,8 @@ export const Scores = {
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Difficulty
-        this.choix_diff = [];
+        this.choix_diff = difficultes(this);
         this.Stats = null;
-        difficultes(this);
 
         if (isNaN(Stats.difficulty)) Stats.difficulty = 1;
 
@@ -62,12 +61,12 @@ export const Scores = {
             else this.scores[val].alpha = 0;
         }
 
-        this.choix_diff[Stats.difficulty].setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
+        this.choix_diff[Stats.difficulty].text.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
     },
     souligne: function(sprite) {
         // Selection
         for (let val in this.choix_diff) {
-            this.choix_diff[val].setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
+            this.choix_diff[val].text.setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
             this.scores[val].alpha = 0;
         }
 
