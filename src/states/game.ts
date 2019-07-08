@@ -15,7 +15,7 @@ import { ExplainState } from './explain';
 export const game = new Phaser.Game(BASE_SIZE, BASE_SIZE, Phaser.CANVAS, 'cycleCanvas');
 
 // Les états du jeu
-game.state.add('Boot', Boot);
+game.state.add(Boot.NAME, new Boot());
 game.state.add('Load', Load);
 game.state.add('Menu', Menu);
 game.state.add('Explain', new ExplainState());
@@ -26,4 +26,4 @@ game.state.add('Scores', Scores);
 game.state.add('Langue', Langue);
 
 // Lancement
-game.state.start('Boot');
+game.state.start(Boot.NAME);
