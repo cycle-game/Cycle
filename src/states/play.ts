@@ -22,8 +22,7 @@ const nuit_rotat_diff = [0.9, 1.1, 1.3];
 const nuit_depart = -10;
 
 // Scale
-let s = 1;
-let s_invers = 1 / s;
+let zoom = 1;
 
 // FPS
 let fps_adapt = 1;
@@ -310,8 +309,8 @@ export const Play = {
 
         maxPlat = (maxPlat + platformSizeInPx + this.dude.body.height) * 2;
 
-        if (maxPlat >= BASE_SIZE) this.redimensionne(BASE_SIZE / maxPlat);
-        else this.redimensionne(1);
+        if (maxPlat >= BASE_SIZE) this.zoom(BASE_SIZE / maxPlat);
+        else this.zoom(1);
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
@@ -460,7 +459,7 @@ export const Play = {
         Stats.score += this.tours(this.planete.angle) + 50;
         save(Stats);*/
 
-                this.redimensionne(1);
+                this.zoom(1);
                 this.game.state.start('Menu');
             }
 
@@ -514,7 +513,7 @@ export const Play = {
                     this.game.state.start('Edit');
                 else {
                     if (Stats.stage >= stages.length) {
-                        this.redimensionne(1);
+                        this.zoom(1);
                         this.game.state.start('Victoire');
                     } else this.game.state.start('Play');
                 }
@@ -523,37 +522,38 @@ export const Play = {
             // ---------------------------------------- //
         }
     },
-    redimensionne: function(news) {
-        // Redimensionnement en fonction de la hauteur du jeu (rayon)
+    zoom: function(zoomFactor) {
+        // Scale the game canvas according to game height (radius)
+        // /!\ this function must be called only one time, as it computes
+        //     size according to object width and height, and changes them
 
-        s = news;
-        s_invers = 1 / s;
+        zoom = zoomFactor;
+        const multiplier = 1 / zoom;
 
-        // Malheureusement une grosse partie de la physique du jeu ne se
-        // redimensionne pas toute seule :/
+        // Graphical zoom
+        this.game.camera.scale.y = zoom;
+        this.game.camera.scale.x = zoom;
 
-        this.game.camera.scale.y = s;
-        this.game.camera.scale.x = s;
+        // Centering
+        this.general.x += (BASE_SIZE * multiplier * (1 - zoom)) / 2;
+        this.general.y += (BASE_SIZE * multiplier * (1 - zoom)) / 2;
 
-        // Pour des raisons inconnus, le dplct de la caméra ne fctne pas
-        //this.game.camera.setPosition(100, 100);
-        //this.game.camera.x = 300;
-        //this.game.camera.y = 300;
-        //this.game.camera.focusOnXY(300,300);
-        // Du coup on met en place le supergroup this.general
-        this.general.x += (BASE_SIZE * s_invers * (1 - s)) / 2;
-        this.general.y += (BASE_SIZE * s_invers * (1 - s)) / 2;
+        // Physical zoom
+        // Bodies keep their size as if camera.scale had no effect. It has
+        // to be computed manually
+        this.setBodySize(this.dude, zoom);
+        this.setBodySize(this.plnte, zoom);
+        this.platforms.forEachAlive(platform => this.setBodySize(platform, zoom), this);
+        this.dudeTest.forEachAlive(dudeT => this.setBodySize(dudeT, zoom, null, 0), this);
+    },
+    setBodySize: function(sprite, zoomFactor: number, xOff: number = null, yOff: number = null) {
+        const bodyWidth = sprite.body.width * zoomFactor;
+        const bodyHeight = sprite.body.height * zoomFactor;
 
-        // Les corps ne sont pas à jour :(
-        this.dude.body.setSize(this.dude.body.width * s, this.dude.body.height * s, 0, 0);
-        this.plnte.body.setSize(this.plnte.body.width * s, this.plnte.body.height * s, 0, 0);
+        const xOffset = xOff === null ? (sprite.body.width - bodyWidth) / 2 : xOff;
+        const yOffset = yOff === null ? (sprite.body.height - bodyHeight) / 2 : yOff;
 
-        this.platforms.forEachAlive(function(c) {
-            c.body.setSize(c.body.width * s, c.body.height * s, 0, 0);
-        }, this);
-        this.dudeTest.forEachAlive(function(c) {
-            c.body.setSize(c.body.width * s, c.body.height * s, 0, 0);
-        }, this);
+        sprite.body.setSize(bodyWidth, bodyHeight, xOffset, yOffset);
     },
     makePlateformes: function() {
         // Création des sprites par rapport aux données des niveaux
