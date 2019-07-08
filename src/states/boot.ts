@@ -1,18 +1,17 @@
 import { YELLOW } from '../variables';
-import { game } from './game';
 import { LOADER_EMPTY, LOADER_FULL } from '../resoucesNames';
 
-export const Boot = {
-    preload: () => {
-        // Couleur de fond
-        game.stage.setBackgroundColor(YELLOW);
+export class Boot extends Phaser.State {
+    static NAME = Boot.prototype.constructor.name;
 
-        // Images pour le loader
-        game.load.image(LOADER_FULL, 'resources/tiles/loader-full.png');
-        game.load.image(LOADER_EMPTY, 'resources/tiles/loader-empty.png');
-    },
-    create: () => {
-        // On passe à l'état de chargement
-        game.state.start('Load');
-    },
-};
+    preload() {
+        this.game.stage.setBackgroundColor(YELLOW);
+
+        this.game.load.image(LOADER_FULL, 'resources/tiles/loader-full.png');
+        this.game.load.image(LOADER_EMPTY, 'resources/tiles/loader-empty.png');
+    }
+
+    create() {
+        this.game.state.start('Load');
+    }
+}
