@@ -8,6 +8,7 @@ import { lang } from '../i18n';
 import { selectedLang } from './langue';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { StageDefinition } from '../stages/StageDefinition';
+import { Menu } from './menu';
 
 import { mean } from 'lodash';
 
@@ -459,7 +460,7 @@ export const Play = {
         save(Stats);*/
 
                 this.zoom(1);
-                this.game.state.start('Menu');
+                this.game.state.start(Menu.NAME);
             }
 
             // ------------------------------------------------------------------ //

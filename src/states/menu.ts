@@ -6,11 +6,13 @@ import { selectedLang } from './langue';
 import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from '../resoucesNames';
 
 // Précédant les explications : choix entre editor et game
-export const Menu = {
-    create: function() {
-        // Tout les labels sont créés aec la fonction cliquable prenant en para:
-        // x, y, text, size, anchor x, anchor y, delay, speed, onDown, context
-        var play = cliquable(
+export class Menu extends Phaser.State {
+    static NAME = Menu.prototype.constructor.name;
+
+    private logo_c: Phaser.Sprite;
+
+    create() {
+        const play = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 2.2,
             lang[selectedLang].Jeu,
@@ -22,8 +24,8 @@ export const Menu = {
             this.play,
             this,
         );
-        var or = cliquable(BASE_SIZE / 2, BASE_SIZE / 1.5, lang[selectedLang].Ou, 23, 0.5, 0.5, 300, 500, null, this);
-        var editor = cliquable(
+        const or = cliquable(BASE_SIZE / 2, BASE_SIZE / 1.5, lang[selectedLang].Ou, 23, 0.5, 0.5, 300, 500, null, this);
+        const editor = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 1.3,
             lang[selectedLang].Editeur,
@@ -35,7 +37,7 @@ export const Menu = {
             this.editor,
             this,
         );
-        var come_back = cliquable(
+        const come_back = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE - platformSizeInPx,
             lang[selectedLang].HowToBack,
@@ -47,7 +49,7 @@ export const Menu = {
             null,
             this,
         );
-        var raz = cliquable(
+        const raz = cliquable(
             BASE_SIZE - platformSizeInPx,
             platformSizeInPx,
             lang[selectedLang].RaZ,
@@ -59,7 +61,7 @@ export const Menu = {
             this.raz,
             this,
         );
-        var scores = cliquable(
+        const scores = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 1.7,
             lang[selectedLang].Scores,
@@ -72,30 +74,28 @@ export const Menu = {
             this,
         );
 
-        // Logo + animation
         this.logo_c = this.game.add.sprite(BASE_SIZE / 2 - 99, platformSizeInPx + 80, LOGO_C);
         this.logo_c.anchor.setTo(0.5, 0.5);
-        var logo_c_cache = this.game.add.sprite(BASE_SIZE / 2 - 99, platformSizeInPx + 5, LOGO_C_MASK);
+        const logo_c_cache = this.game.add.sprite(BASE_SIZE / 2 - 99, platformSizeInPx + 5, LOGO_C_MASK);
         logo_c_cache.anchor.setTo(0.5, 0);
-        var logo = this.game.add.sprite(BASE_SIZE / 2, platformSizeInPx, LOGO_WITHOUT_C);
+        const logo = this.game.add.sprite(BASE_SIZE / 2, platformSizeInPx, LOGO_WITHOUT_C);
         logo.anchor.setTo(0.5, 0);
-    },
-    raz: function() {
-        // Remise à zero des scores
+    }
+    raz() {
         reset(Stats);
-        this.game.state.start('Menu');
-    },
-    scores: function() {
+        this.game.state.start(Menu.NAME);
+    }
+    scores() {
         this.game.state.start('Scores');
-    },
-    play: function() {
+    }
+    play() {
         this.game.state.start('Explain');
-    },
-    editor: function() {
+    }
+    editor() {
         this.game.state.start('Edit');
-    },
-    update: function() {
-        // Logo animé
+    }
+    update() {
+        // Animate logo
         this.logo_c.angle += 0.7;
-    },
-};
+    }
+}

@@ -3,6 +3,7 @@ import { BASE_SIZE, pseudo as pseudoVar, Stats } from '../variables';
 import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
 import { selectedLang } from './langue';
+import { Menu } from './menu';
 
 let pseudo = pseudoVar;
 
@@ -92,7 +93,7 @@ export const Victoire = {
         // Retour au menu
         if (this.esc_key.isDown) {
             reset(Stats);
-            this.game.state.start('Menu');
+            this.game.state.start(Menu.NAME);
         }
     },
 };

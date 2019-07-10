@@ -5,6 +5,7 @@ import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
 import { selectedLang } from './langue';
 import { polarToCartesian } from '../utils/CoordonateSystem';
+import { Menu } from './menu';
 
 const alph = 0.5;
 const inac = 0.05;
@@ -398,7 +399,7 @@ export const Edit = {
         if (this.esc_key.isDown) {
             this.redimensionne(1);
             edited_lvl.edited = false;
-            this.game.state.start('Menu');
+            this.game.state.start(Menu.NAME);
         }
 
         // ------------------------------------------------------------------ //

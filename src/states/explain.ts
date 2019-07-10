@@ -3,6 +3,7 @@ import { cliquable, difficultes, DifficultySelectorVM, reset } from '../function
 import { BASE_SIZE, Stats } from '../variables';
 import { lang } from '../i18n';
 import { selectedLang } from './langue';
+import { Menu } from './menu';
 
 export class ExplainState extends Phaser.State {
     choix_diff: DifficultySelectorVM;
@@ -30,7 +31,7 @@ export class ExplainState extends Phaser.State {
 
     update(): void {
         // Retour au menu
-        if (this.esc_key.isDown) this.game.state.start('Menu');
+        if (this.esc_key.isDown) this.game.state.start(Menu.NAME);
 
         // Démarrage du jeu
         if (this.space_key.isDown) this.game.state.start('Play');

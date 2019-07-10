@@ -2,6 +2,7 @@ import { BASE_SIZE } from '../variables';
 import { game } from './game';
 import { LANG, LANG_SELECTOR } from '../resoucesNames';
 import { EN, FR } from '../i18n';
+import { Menu } from './menu';
 
 export let selectedLang;
 
@@ -29,7 +30,7 @@ export class Langue extends Phaser.State {
             if (x_pointer <= BASE_SIZE / 2) selectedLang = FR;
             else selectedLang = EN;
 
-            game.state.start('Menu');
+            game.state.start(Menu.NAME);
         }
     }
 }
