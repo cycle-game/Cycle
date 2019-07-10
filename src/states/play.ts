@@ -5,7 +5,7 @@ import Phaser from 'phaser-ce';
 import { game } from './game';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
-import { lang as selectedLang } from './langue';
+import { selectedLang } from './langue';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { StageDefinition } from '../stages/StageDefinition';
 

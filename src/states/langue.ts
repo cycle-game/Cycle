@@ -2,7 +2,7 @@ import { BASE_SIZE } from '../variables';
 import { game } from './game';
 import { LANG, LANG_SELECTOR } from '../resoucesNames';
 
-export let lang;
+export let selectedLang;
 
 export class Langue extends Phaser.State {
     static NAME = Langue.prototype.constructor.name;
@@ -25,8 +25,8 @@ export class Langue extends Phaser.State {
         else this.langSelector.x = BASE_SIZE / 2;
 
         if (game.input.mousePointer.isDown) {
-            if (x_pointer <= BASE_SIZE / 2) lang = 'fr';
-            else lang = 'en';
+            if (x_pointer <= BASE_SIZE / 2) selectedLang = 'fr';
+            else selectedLang = 'en';
 
             game.state.start('Menu');
         }
