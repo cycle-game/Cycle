@@ -1,5 +1,6 @@
 import { YELLOW } from '../variables';
 import { LOADER_EMPTY, LOADER_FULL } from '../resoucesNames';
+import { Load } from './load';
 
 export class Boot extends Phaser.State {
     static NAME = Boot.prototype.constructor.name;
@@ -12,6 +13,6 @@ export class Boot extends Phaser.State {
     }
 
     create() {
-        this.game.state.start('Load');
+        this.game.state.start(Load.NAME);
     }
 }
