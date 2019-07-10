@@ -23,7 +23,7 @@ game.state.add('Edit', Edit);
 game.state.add('Play', Play);
 game.state.add('Victoire', Victoire);
 game.state.add('Scores', Scores);
-game.state.add('Langue', Langue);
+game.state.add(Langue.NAME, new Langue());
 
 // Lancement
 game.state.start(Boot.NAME);
