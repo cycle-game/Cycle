@@ -21,7 +21,7 @@ game.state.add(Menu.NAME, new Menu());
 game.state.add(ExplainState.NAME, new ExplainState());
 game.state.add('Edit', Edit);
 game.state.add('Play', Play);
-game.state.add('Victoire', Victoire);
+game.state.add(Victoire.NAME, new Victoire());
 game.state.add('Scores', Scores);
 game.state.add(Langue.NAME, new Langue());
 

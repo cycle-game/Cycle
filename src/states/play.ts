@@ -9,6 +9,7 @@ import { selectedLang } from './langue';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { StageDefinition } from '../stages/StageDefinition';
 import { Menu } from './menu';
+import { Victoire } from './victoire';
 
 import { mean } from 'lodash';
 
@@ -514,7 +515,7 @@ export const Play = {
                 else {
                     if (Stats.stage >= stages.length) {
                         this.zoom(1);
-                        this.game.state.start('Victoire');
+                        this.game.state.start(Victoire.NAME);
                     } else this.game.state.start('Play');
                 }
                 // ------------ ----------------------- //
