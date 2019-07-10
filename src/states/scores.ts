@@ -3,6 +3,7 @@ import { cliquable, difficultes, ecart, scores } from '../functions';
 import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
 import { selectedLang } from './langue';
+import { Menu } from './menu';
 
 export const Scores = {
     create: function() {
@@ -75,6 +76,6 @@ export const Scores = {
         this.scores[this.difficulty].alpha = 1;
     },
     update: function() {
-        if (this.esc_key.isDown) this.game.state.start('Menu');
+        if (this.esc_key.isDown) this.game.state.start(Menu.NAME);
     },
 };
