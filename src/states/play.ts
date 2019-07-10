@@ -45,7 +45,6 @@ export const Play = {
             currentStage = stages[Stats.stage];
         }
 
-        currentStage = stages[Stats.stage];
         this.game.paused = true;
         // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
         // Il faut modifier phaser.js pour ajouter  \\

@@ -163,23 +163,23 @@ export const Edit = {
         // Le level est prêt à être testé
         edited_lvl.edited = true;
 
-        // Exportation du niveau
-        const export_lvl =
-            '{' +
-            'platforms: [' +
-            this.objToString(edited_lvl.platforms) +
-            '], ' +
-            'traps: [' +
-            this.objToString(edited_lvl.traps) +
-            '], ' +
-            'stars: [' +
-            this.objToString(edited_lvl.stars) +
-            ']' +
-            '}';
-        (window.document.getElementById('export_lvl') as any).value = export_lvl;
-
-        // Affichage pour l'envoi
-        window.document.getElementById('SendMeLvl').className = '';
+        // TODO Fix Exportation du niveau
+        // const export_lvl =
+        //     '{' +
+        //     'platforms: [' +
+        //     this.objToString(edited_lvl.platforms) +
+        //     '], ' +
+        //     'traps: [' +
+        //     this.objToString(edited_lvl.traps) +
+        //     '], ' +
+        //     'stars: [' +
+        //     this.objToString(edited_lvl.stars) +
+        //     ']' +
+        //     '}';
+        // (window.document.getElementById('export_lvl') as any).value = export_lvl;
+        //
+        // //  Affichage pour l'envoi
+        // window.document.getElementById('SendMeLvl').className = '';
 
         this.game.state.start('Play');
 
