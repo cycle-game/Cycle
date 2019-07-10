@@ -6,6 +6,8 @@ import { selectedLang } from './langue';
 import { Menu } from './menu';
 
 export class ExplainState extends Phaser.State {
+    static NAME = ExplainState.prototype.constructor.name;
+
     choix_diff: DifficultySelectorVM;
     private space_key: Phaser.Key;
     private esc_key: Phaser.Key;
