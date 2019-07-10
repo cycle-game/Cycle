@@ -16,7 +16,7 @@ export const game = new Phaser.Game(BASE_SIZE, BASE_SIZE, Phaser.CANVAS, 'cycleC
 
 // Les états du jeu
 game.state.add(Boot.NAME, new Boot());
-game.state.add('Load', Load);
+game.state.add(Load.NAME, new Load());
 game.state.add('Menu', Menu);
 game.state.add('Explain', new ExplainState());
 game.state.add('Edit', Edit);

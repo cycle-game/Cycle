@@ -17,15 +17,13 @@ import {
     TRAP,
 } from '../resoucesNames';
 
-export let preloading2;
-export let preloading1;
+export class Load extends Phaser.State {
+    static NAME = Load.prototype.constructor.name;
 
-// L'état où le loader se lohad.
-export const Load = {
-    preload: function() {
+    preload() {
         // Ici on crée deux sprites, un en fond et un au dessus
-        preloading2 = this.game.add.sprite(0, 0, LOADER_FULL);
-        preloading1 = this.game.add.sprite(0, 0, LOADER_EMPTY);
+        this.game.add.sprite(0, 0, LOADER_FULL);
+        const preloading1 = this.game.add.sprite(0, 0, LOADER_EMPTY);
 
         // Celui du dessus sera révélé petit à petit
         this.game.load.setPreloadSprite(preloading1);
@@ -47,9 +45,10 @@ export const Load = {
         this.game.load.image(STAR, 'resources/sprites/star.png');
 
         this.game.load.image(DEBUG_POINT, 'resources/sprites/debug-point.png');
-    },
-    create: function() {
+    }
+
+    create() {
         // Et on passe à la sélection de langue
         this.game.state.start('Langue');
-    },
-};
+    }
+}
