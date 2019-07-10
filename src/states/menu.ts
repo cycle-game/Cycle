@@ -2,7 +2,7 @@
 import { cliquable, reset } from '../functions';
 import { BASE_SIZE, platformSizeInPx, Stats } from '../variables';
 import { lang } from '../i18n';
-import { lang as selectedLang } from './langue';
+import { selectedLang } from './langue';
 import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from '../resoucesNames';
 
 // Précédant les explications : choix entre editor et game
