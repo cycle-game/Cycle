@@ -4,34 +4,31 @@ import { LANG, LANG_SELECTOR } from '../resoucesNames';
 
 export let lang;
 
-export const Langue = {
-    create: () => {
-        lang = game.add.sprite(0, 0, LANG);
+export class Langue extends Phaser.State {
+    static NAME = Langue.prototype.constructor.name;
 
-        // Handcursor
-        lang.inputEnabled = true;
-        lang.input.useHandCursor = true;
+    private langSelector: Phaser.Sprite;
 
-        this.cache = game.add.sprite(0, 0, LANG_SELECTOR);
-        // @ts-ignore
-        this.cache.blendMode = PIXI.blendModes.DIFFERENCE;
-    },
+    create() {
+        const langSprite = game.add.sprite(0, 0, LANG);
+        langSprite.inputEnabled = true;
+        langSprite.input.useHandCursor = true;
 
-    update: () => {
-        // Position de la souris
-        var x_pointer = game.input.x;
-        var y_pointer = game.input.y;
+        this.langSelector = game.add.sprite(0, 0, LANG_SELECTOR);
+        this.langSelector.blendMode = PIXI.blendModes.DIFFERENCE;
+    }
 
-        // Changement de position du cache (inversant les couleurs)
-        if (x_pointer <= BASE_SIZE / 2) this.cache.x = 0;
-        else this.cache.x = BASE_SIZE / 2;
+    update() {
+        const x_pointer = game.input.x;
 
-        // Au clique ...
+        if (x_pointer <= BASE_SIZE / 2) this.langSelector.x = 0;
+        else this.langSelector.x = BASE_SIZE / 2;
+
         if (game.input.mousePointer.isDown) {
             if (x_pointer <= BASE_SIZE / 2) lang = 'fr';
             else lang = 'en';
 
             game.state.start('Menu');
         }
-    },
-};
+    }
+}
