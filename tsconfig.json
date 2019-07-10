@@ -7,5 +7,6 @@
         "sourceMap": true,
         "strict": false,
         "esModuleInterop": true
-    }
+    },
+    "exclude": ["webpack.config.js"]
 }
