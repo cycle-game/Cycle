@@ -1,6 +1,9 @@
+export const EN = 'en';
+export const FR = 'fr';
+
 export const lang = {
-    en: {
-        Lang: 'en',
+    [EN]: {
+        Lang: EN,
         Tester: 'Try',
         Presentation:
             "Looking for adventures ?\nMove yourself with the arrow keys.\nUse space to jump.\nP to pause.\n\nReach the last level for\nsaving & sharing your score !\n\n\nPush space to start\n\nDon't get hit by the night !",
@@ -18,8 +21,8 @@ export const lang = {
         Difficultes: ['Easy', 'Normal', 'Hard', 'Nightmare'],
         UnSeul: 'Score / Pseudo / Number of stages',
     },
-    fr: {
-        Lang: 'fr',
+    [FR]: {
+        Lang: FR,
         Tester: 'Tester',
         Presentation:
             'Bienvenue !\n\nDéplacez vous avec les flèches du clavier.\nUtilisez espace pour sauter.\nP pour mettre en pause.\n\nAtteignez le dernier niveau afin de\nsauvegarder et partager votre score !\n\n\nAppuyez sur espace pour commencer\n\nFuyez la nuit !',
