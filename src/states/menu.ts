@@ -93,7 +93,7 @@ export class Menu extends Phaser.State {
         this.game.state.start(ExplainState.NAME);
     }
     editor() {
-        this.game.state.start('Edit');
+        this.game.state.start('Editor');
     }
     update() {
         // Animate logo
