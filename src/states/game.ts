@@ -1,7 +1,7 @@
 import Phaser from 'phaser-ce';
 
 import { BASE_SIZE } from '../variables';
-import { Victoire } from './victoire';
+import { Victory } from './victory';
 import { Load } from './load';
 import { Menu } from './menu';
 import { Editor } from './editor';
@@ -21,7 +21,7 @@ game.state.add(Menu.NAME, new Menu());
 game.state.add(RulesState.NAME, new RulesState());
 game.state.add('Editor', Editor);
 game.state.add('Play', Play);
-game.state.add(Victoire.NAME, new Victoire());
+game.state.add(Victory.NAME, new Victory());
 game.state.add('Scores', Scores);
 game.state.add(Languages.NAME, new Languages());
 
