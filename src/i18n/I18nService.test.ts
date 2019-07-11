@@ -22,7 +22,7 @@ describe(i18nService.constructor.name, () => {
         });
 
         it('should return translation when key is a path', () => {
-            const translation = i18nService.translate('nested.deepTranslation');
+            const translation = i18nService.translate('testKeyNested.deepTranslation');
             expect(translation).toEqual('deepTranslationFR');
         });
     });
