@@ -7,8 +7,8 @@ import { Menu } from './menu';
 
 let pseudo = pseudoVar;
 
-export class Victoire extends Phaser.State {
-    static NAME = Victoire.prototype.constructor.name;
+export class Victory extends Phaser.State {
+    static NAME = Victory.prototype.constructor.name;
 
     private esc_key: Phaser.Key;
     private pseudo: Phaser.Text;
