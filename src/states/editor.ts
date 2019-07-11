@@ -14,7 +14,7 @@ const PLATFORMS_HEIGHT_NUMBER = 10;
 
 let invert_redim = 1;
 
-export const Edit = {
+export const Editor = {
     create: function() {
         // ------------------------------------------------------------------ //
         // --------------------------------------------------- Retour au menu //

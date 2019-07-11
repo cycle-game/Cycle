@@ -325,7 +325,7 @@ export const Play = {
             this.goBack.inputEnabled = true;
             this.goBack.input.useHandCursor = true;
             this.goBack.events.onInputDown.add(function() {
-                this.game.state.start('Edit');
+                this.game.state.start('Editor');
             }, this);
         }
 
@@ -511,7 +511,7 @@ export const Play = {
                 // ------------ ----- Changement d'état //
                 if (edited_lvl.edited)
                     // On vient de l'editeur
-                    this.game.state.start('Edit');
+                    this.game.state.start('Editor');
                 else {
                     if (Stats.stage >= stages.length) {
                         this.zoom(1);
