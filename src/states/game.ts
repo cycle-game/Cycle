@@ -9,7 +9,7 @@ import { Scores } from './scores';
 import { Play } from './play';
 import { Boot } from './boot';
 import { Langue } from './langue';
-import { ExplainState } from './explain';
+import { RulesState } from './rules';
 
 // Variable de jeu
 export const game = new Phaser.Game(BASE_SIZE, BASE_SIZE, Phaser.CANVAS, 'cycleCanvas');
@@ -18,7 +18,7 @@ export const game = new Phaser.Game(BASE_SIZE, BASE_SIZE, Phaser.CANVAS, 'cycleC
 game.state.add(Boot.NAME, new Boot());
 game.state.add(Load.NAME, new Load());
 game.state.add(Menu.NAME, new Menu());
-game.state.add(ExplainState.NAME, new ExplainState());
+game.state.add(RulesState.NAME, new RulesState());
 game.state.add('Editor', Editor);
 game.state.add('Play', Play);
 game.state.add(Victoire.NAME, new Victoire());

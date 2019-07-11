@@ -4,7 +4,7 @@ import { BASE_SIZE, platformSizeInPx, Stats } from '../variables';
 import { lang } from '../i18n';
 import { selectedLang } from './langue';
 import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from '../resoucesNames';
-import { ExplainState } from './explain';
+import { RulesState } from './rules';
 
 // Précédant les explications : choix entre editor et game
 export class Menu extends Phaser.State {
@@ -90,7 +90,7 @@ export class Menu extends Phaser.State {
         this.game.state.start('Scores');
     }
     play() {
-        this.game.state.start(ExplainState.NAME);
+        this.game.state.start(RulesState.NAME);
     }
     editor() {
         this.game.state.start('Editor');
