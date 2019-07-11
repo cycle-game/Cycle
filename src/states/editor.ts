@@ -3,7 +3,7 @@ import { Play } from './play';
 import Phaser from 'phaser-ce';
 import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
-import { selectedLang } from './langue';
+import { selectedLang } from './languages';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { Menu } from './menu';
 

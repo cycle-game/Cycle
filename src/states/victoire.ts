@@ -2,7 +2,7 @@ import { cliquable, reset, save, sociaux, toHigh } from '../functions';
 import { BASE_SIZE, pseudo as pseudoVar, Stats } from '../variables';
 import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
-import { selectedLang } from './langue';
+import { selectedLang } from './languages';
 import { Menu } from './menu';
 
 let pseudo = pseudoVar;

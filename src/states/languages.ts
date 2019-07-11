@@ -6,8 +6,8 @@ import { Menu } from './menu';
 
 export let selectedLang;
 
-export class Langue extends Phaser.State {
-    static NAME = Langue.prototype.constructor.name;
+export class Languages extends Phaser.State {
+    static NAME = Languages.prototype.constructor.name;
 
     private langSelector: Phaser.Sprite;
 
