@@ -86,9 +86,9 @@ export function cliquable(
 }
 
 export function reset(Stats) {
-    Stats.level = 0;
+    Stats.stage = 0;
     Stats.score = 0;
-    Stats.diff = 1;
+    Stats.difficulty = 1;
 }
 
 export function ecart(nombre: number, margingInPx: number) {
