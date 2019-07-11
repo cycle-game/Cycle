@@ -2,7 +2,7 @@ import { BASE_SIZE, platformSizeInPx, Stats } from '../variables';
 import { cliquable, difficultes, ecart, scores } from '../functions';
 import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
-import { selectedLang } from './langue';
+import { selectedLang } from './languages';
 import { Menu } from './menu';
 
 export const Scores = {

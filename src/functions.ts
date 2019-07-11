@@ -1,6 +1,6 @@
 import { BASE_SIZE, BLUE, platformSizeInPx } from './variables';
 import { lang } from './i18n';
-import { selectedLang } from './states/langue';
+import { selectedLang } from './states/languages';
 import Phaser from 'phaser-ce';
 
 export function sociaux(Stats, pseudo, lng) {

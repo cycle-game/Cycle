@@ -2,7 +2,7 @@ import Phaser from 'phaser-ce';
 import { cliquable, difficultes, DifficultySelectorVM, reset } from '../functions';
 import { BASE_SIZE, Stats } from '../variables';
 import { lang } from '../i18n';
-import { selectedLang } from './langue';
+import { selectedLang } from './languages';
 import { Menu } from './menu';
 
 export class RulesState extends Phaser.State {

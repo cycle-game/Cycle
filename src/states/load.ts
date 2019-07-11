@@ -16,7 +16,7 @@ import {
     STAR,
     TRAP,
 } from '../resoucesNames';
-import { Langue } from './langue';
+import { Languages } from './languages';
 
 export class Load extends Phaser.State {
     static NAME = Load.prototype.constructor.name;
@@ -50,6 +50,6 @@ export class Load extends Phaser.State {
 
     create() {
         // Et on passe à la sélection de langue
-        this.game.state.start(Langue.NAME);
+        this.game.state.start(Languages.NAME);
     }
 }

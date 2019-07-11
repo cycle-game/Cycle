@@ -2,7 +2,7 @@
 import { cliquable, reset } from '../functions';
 import { BASE_SIZE, platformSizeInPx, Stats } from '../variables';
 import { lang } from '../i18n';
-import { selectedLang } from './langue';
+import { selectedLang } from './languages';
 import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from '../resoucesNames';
 import { RulesState } from './rules';
 

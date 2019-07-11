@@ -8,7 +8,7 @@ import { Editor } from './editor';
 import { Scores } from './scores';
 import { Play } from './play';
 import { Boot } from './boot';
-import { Langue } from './langue';
+import { Languages } from './languages';
 import { RulesState } from './rules';
 
 // Variable de jeu
@@ -23,7 +23,7 @@ game.state.add('Editor', Editor);
 game.state.add('Play', Play);
 game.state.add(Victoire.NAME, new Victoire());
 game.state.add('Scores', Scores);
-game.state.add(Langue.NAME, new Langue());
+game.state.add(Languages.NAME, new Languages());
 
 // Lancement
 game.state.start(Boot.NAME);
