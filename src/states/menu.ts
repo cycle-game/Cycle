@@ -1,6 +1,6 @@
 // On crée l'état du menu
 import { cliquable, reset } from '../functions';
-import { BASE_SIZE, platformSizeInPx, Stats } from '../variables';
+import { BASE_SIZE, platformSizeInPx, PlayerProgression } from '../variables';
 import { lang } from '../i18n';
 import { selectedLang } from './languages';
 import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from '../resoucesNames';
@@ -83,7 +83,7 @@ export class Menu extends Phaser.State {
         logo.anchor.setTo(0.5, 0);
     }
     raz() {
-        reset(Stats);
+        reset(PlayerProgression);
         this.game.state.start(Menu.NAME);
     }
     scores() {

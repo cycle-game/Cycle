@@ -1,4 +1,4 @@
-import { BASE_SIZE, platformSizeInPx, Stats } from '../variables';
+import { BASE_SIZE, platformSizeInPx, PlayerProgression } from '../variables';
 import { cliquable, difficultes, ecart, scores } from '../functions';
 import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
@@ -19,9 +19,9 @@ export const Scores = {
         this.choix_diff = difficultes(this);
         this.Stats = null;
 
-        if (isNaN(Stats.difficulty)) Stats.difficulty = 1;
+        if (isNaN(PlayerProgression.difficulty)) PlayerProgression.difficulty = 1;
 
-        this.difficulty = Stats.difficulty;
+        this.difficulty = PlayerProgression.difficulty;
 
         // Scores display
         this.scores = [];
@@ -62,7 +62,7 @@ export const Scores = {
             else this.scores[val].alpha = 0;
         }
 
-        this.choix_diff[Stats.difficulty].text.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
+        this.choix_diff[PlayerProgression.difficulty].text.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
     },
     souligne: function(sprite) {
         // Selection

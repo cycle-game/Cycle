@@ -1,5 +1,5 @@
 import { cliquable, reset, save, sociaux, toHigh } from '../functions';
-import { BASE_SIZE, pseudo as pseudoVar, Stats } from '../variables';
+import { BASE_SIZE, pseudo as pseudoVar, PlayerProgression } from '../variables';
 import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
 import { selectedLang } from './languages';
@@ -17,7 +17,7 @@ export class Victory extends Phaser.State {
         const label = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 4,
-            lang[selectedLang].Victoire + '\n\n' + Math.round(Stats.score),
+            lang[selectedLang].Victoire + '\n\n' + Math.round(PlayerProgression.score),
             25,
             0.5,
             0.5,
@@ -51,7 +51,7 @@ export class Victory extends Phaser.State {
         // Retourw
         const back = this.game.input.keyboard.addKey(Phaser.Keyboard.BACKSPACE);
 
-        save({ stage: 0, score: 0, difficulty: Stats.difficulty });
+        save({ stage: 0, score: 0, difficulty: PlayerProgression.difficulty });
     }
     addToPseudo(letter) {
         // Écriture du pseudo
@@ -74,9 +74,9 @@ export class Victory extends Phaser.State {
 
         if (evt.which == Phaser.Keyboard.ENTER) {
             if (pseudo.length > 0) {
-                toHigh(Stats, pseudo);
-                sociaux(Stats, pseudo, lang);
-                reset(Stats);
+                toHigh(PlayerProgression, pseudo);
+                sociaux(PlayerProgression, pseudo, lang);
+                reset(PlayerProgression);
                 this.game.state.start('Scores');
             }
 
@@ -97,7 +97,7 @@ export class Victory extends Phaser.State {
     update() {
         // Retour au menu
         if (this.esc_key.isDown) {
-            reset(Stats);
+            reset(PlayerProgression);
             this.game.state.start(Menu.NAME);
         }
     }

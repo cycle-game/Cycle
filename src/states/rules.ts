@@ -1,6 +1,6 @@
 import Phaser from 'phaser-ce';
 import { cliquable, difficultes, DifficultySelectorVM, reset } from '../functions';
-import { BASE_SIZE, Stats } from '../variables';
+import { BASE_SIZE, PlayerProgression } from '../variables';
 import { lang } from '../i18n';
 import { selectedLang } from './languages';
 import { Menu } from './menu';
@@ -11,7 +11,7 @@ export class RulesState extends Phaser.State {
     choix_diff: DifficultySelectorVM;
     private space_key: Phaser.Key;
     private esc_key: Phaser.Key;
-    Stats: typeof Stats = null;
+    Stats: typeof PlayerProgression = null;
 
     create(): void {
         // Un équivalent d'écouteur d'évènement (si on veut)
@@ -26,9 +26,9 @@ export class RulesState extends Phaser.State {
         // Difficulté
         this.choix_diff = difficultes(this);
 
-        if (isNaN(Stats.difficulty)) Stats.difficulty = 1;
+        if (isNaN(PlayerProgression.difficulty)) PlayerProgression.difficulty = 1;
 
-        this.choix_diff[Stats.difficulty].text.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
+        this.choix_diff[PlayerProgression.difficulty].text.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
     }
 
     update(): void {
@@ -46,7 +46,7 @@ export class RulesState extends Phaser.State {
 
         sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
 
-        reset(Stats);
-        Stats.difficulty = sprite.data.difficulty;
+        reset(PlayerProgression);
+        PlayerProgression.difficulty = sprite.data.difficulty;
     }
 }
