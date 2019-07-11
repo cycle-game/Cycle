@@ -106,8 +106,8 @@ export function difficultes(contexte): DifficultySelectorVM {
     const margingInPx = 100;
     const elementWidthInPx = ecart(difficulties.length, margingInPx);
 
-    return difficulties.map((difficulty, index) => ({
-        text: cliquable(
+    return difficulties.map((difficulty, index) => {
+        const difficultyTextSprite = cliquable(
             margingInPx + elementWidthInPx * index,
             BASE_SIZE - platformSizeInPx,
             difficulty,
@@ -118,9 +118,14 @@ export function difficultes(contexte): DifficultySelectorVM {
             500,
             choix,
             contexte,
-        ),
-        difficulty: index,
-    }));
+        );
+        difficultyTextSprite.data.difficulty = index;
+
+        return {
+            text: difficultyTextSprite,
+            difficulty: index,
+        };
+    });
 }
 
 export function choix(sprite) {

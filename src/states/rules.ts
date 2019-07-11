@@ -47,6 +47,6 @@ export class RulesState extends Phaser.State {
         sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
 
         reset(Stats);
-        Stats.difficulty = sprite.difficulty;
+        Stats.difficulty = sprite.data.difficulty;
     }
 }
