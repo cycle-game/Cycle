@@ -1,4 +1,5 @@
 import { StageDefinition } from './stages/StageDefinition';
+import { difficultes } from './functions';
 
 export const BASE_SIZE = 600;
 
@@ -15,7 +16,7 @@ export let edited_lvl: EditableStageDefinition = { edited: false, platforms: [],
 // -- \\
 
 // Current level
-export const Stats = { stage: 0, score: 0, difficulty: 1 };
+export const PlayerProgression = { stage: 0, score: 0, difficulty: 1 };
 // 4 difficulty levels :
 // _ 0 = easy
 // _ 1 = normal

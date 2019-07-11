@@ -1,4 +1,4 @@
-import { BLUE, BASE_SIZE, edited_lvl, platformSizeInPx, Stats } from '../variables';
+import { BLUE, BASE_SIZE, edited_lvl, platformSizeInPx, PlayerProgression } from '../variables';
 import { reset, save } from '../functions';
 import { stages } from '../stages';
 import Phaser from 'phaser-ce';
@@ -44,7 +44,7 @@ export const Play = {
         if (edited_lvl.edited) {
             currentStage = edited_lvl;
         } else {
-            currentStage = stages[Stats.stage];
+            currentStage = stages[PlayerProgression.stage];
         }
 
         this.game.paused = true;
@@ -58,8 +58,8 @@ export const Play = {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------- Difficulté //
 
-        if (Stats.difficulty < 3) {
-            nuit_rotat = nuit_rotat_diff[Stats.difficulty];
+        if (PlayerProgression.difficulty < 3) {
+            nuit_rotat = nuit_rotat_diff[PlayerProgression.difficulty];
         } else {
             nuit_rotat = nuit_rotat_diff[nuit_rotat_diff.length - 1];
         }
@@ -69,7 +69,7 @@ export const Play = {
         // ------------------------------------------------------------------ //
         // --------------------------------------------------- Sauvegarde PHP //
 
-        save(Stats);
+        save(PlayerProgression);
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
@@ -91,7 +91,7 @@ export const Play = {
 
         this.game.time.events.loop(Phaser.Timer.SECOND, this.fpsAdapt, this);
 
-        if (Stats.difficulty >= 3) this.fps_moy = 2;
+        if (PlayerProgression.difficulty >= 3) this.fps_moy = 2;
         else this.fps_moy = 10;
 
         // ------------------------------------------------------------------ //
@@ -160,7 +160,7 @@ export const Play = {
         this.label_lvl = this.game.add.text(
             0,
             -platformSizeInPx,
-            Stats.stage + 1,
+            PlayerProgression.stage + 1,
             {
                 font: '30px Arial',
                 fill: '#' + BLUE,
@@ -172,7 +172,7 @@ export const Play = {
         this.label_score = this.game.add.text(
             0,
             +platformSizeInPx,
-            Stats.score,
+            PlayerProgression.score,
             {
                 font: '20px Arial',
                 fill: '#' + BLUE,
@@ -350,7 +350,7 @@ export const Play = {
         let fps = this.game.time.fps;
 
         // Rajout d'une difficulté : en mode hardcore (3), on change la vitesse
-        if (Stats.difficulty >= 3) fps += Math.round((Math.random() - 0.5) * 55);
+        if (PlayerProgression.difficulty >= 3) fps += Math.round((Math.random() - 0.5) * 55);
 
         if (fps > 0) fps_array.push(fps);
 
@@ -369,8 +369,8 @@ export const Play = {
             // ------------------------------------------------------------------ //
             // ------------------------------------------------------------ Score //
 
-            this.label_score.text = Math.round(Stats.score + this.tours(this.planete.angle));
-            Stats.score += 0.05;
+            this.label_score.text = Math.round(PlayerProgression.score + this.tours(this.planete.angle));
+            PlayerProgression.score += 0.05;
 
             // ------------------------------------------------------------------ //
             // ------------------------------------------------------------------ //
@@ -437,7 +437,7 @@ export const Play = {
             if (this.nuit.angle >= 87 || this.nuit.angle <= -87) {
                 // Rajouter le côté droit
                 this.create();
-                Stats.score += this.tours(this.planete.angle) + 50;
+                PlayerProgression.score += this.tours(this.planete.angle) + 50;
             }
 
             // ------------------------------------------------------------------ //
@@ -447,7 +447,7 @@ export const Play = {
 
             if (this.game.physics.arcade.overlap(this.dude, trapsGroup)) {
                 this.create();
-                Stats.score += this.tours(this.planete.angle) + 50;
+                PlayerProgression.score += this.tours(this.planete.angle) + 50;
             }
 
             // ------------------------------------------------------------------ //
@@ -498,7 +498,7 @@ export const Play = {
             // Lorsqu'on a atteint 0, on revient à l'éditeur ou on passe
             // au niveau suivant/écran de victoire
 
-            Stats.stage += 1;
+            PlayerProgression.stage += 1;
 
             // ------------- Animation de fin de niveau //
             this.dude.body.gravity.y = 0;
@@ -513,7 +513,7 @@ export const Play = {
                     // On vient de l'editeur
                     this.game.state.start('Editor');
                 else {
-                    if (Stats.stage >= stages.length) {
+                    if (PlayerProgression.stage >= stages.length) {
                         this.zoom(1);
                         this.game.state.start(Victory.NAME);
                     } else this.game.state.start('Play');
@@ -561,13 +561,13 @@ export const Play = {
         let plateformes;
         // En fonction on est en édition ou on est en jeu ..
         if (edited_lvl.edited) plateformes = edited_lvl.platforms;
-        else if (stages[Stats.stage])
+        else if (stages[PlayerProgression.stage])
             // Vérification de l'existence du level
-            plateformes = stages[Stats.stage].platforms;
+            plateformes = stages[PlayerProgression.stage].platforms;
         else {
             // S'il n'existe pas il y a une erreur; reboot du début
             plateformes = stages[0].platforms;
-            reset(Stats);
+            reset(PlayerProgression);
         }
 
         // Hauteur maximale des plateformes
