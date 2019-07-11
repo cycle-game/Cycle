@@ -5,8 +5,8 @@ import { lang } from '../i18n';
 import { selectedLang } from './langue';
 import { Menu } from './menu';
 
-export class ExplainState extends Phaser.State {
-    static NAME = ExplainState.prototype.constructor.name;
+export class RulesState extends Phaser.State {
+    static NAME = RulesState.prototype.constructor.name;
 
     choix_diff: DifficultySelectorVM;
     private space_key: Phaser.Key;
