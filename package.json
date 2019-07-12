@@ -72,7 +72,7 @@
         "webpack-dev-server": "^3.7.1"
     },
     "dependencies": {
-        "lodash": "^4.17.11",
+        "lodash": "^4.17.14",
         "phaser-ce": "2.13.2"
     }
 }
