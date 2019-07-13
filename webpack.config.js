@@ -10,10 +10,25 @@ const pixi = path.join(phaserModule, 'build/custom/pixi.js');
 const p2 = path.join(phaserModule, 'build/custom/p2.js');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: {
+    main: './src/index.ts',
+  },
   output: {
     path: __dirname + '/dist',
-    filename: 'main.js'
+    filename: '[name].[chunkhash].js'
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          enforce: true,
+          chunks: 'all'
+        }
+      }
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
