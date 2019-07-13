@@ -1,3 +1,4 @@
+const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -21,8 +22,18 @@ module.exports = {
     }),
     new CopyPlugin([
       { from: 'src/resources', to: 'resources' },
-    ]),
+    ])
   ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true
+        }
+      })
+    ]
+  },
   devServer: {
     contentBase: __dirname + '/dist',
     compress: true,
