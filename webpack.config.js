@@ -11,7 +11,7 @@ const p2 = path.join(phaserModule, 'build/custom/p2.js');
 
 module.exports = {
   entry: {
-    main: './src/index.ts',
+    main: './src/index.tsx',
   },
   output: {
     path: __dirname + '/dist',
@@ -70,7 +70,11 @@ module.exports = {
           }
         }
       },
-      { test: /\.tsx?$/, loader: "ts-loader" }
+      { test: /\.tsx?$/, loader: "ts-loader" },
+      {
+        test: /\.css$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
     ]
   },
   resolve: {
