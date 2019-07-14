@@ -23,3 +23,8 @@ jobs:
     - stage: build
       script: yarn build
 
+# only build commits/PRs targeted to the master branch
+# this avoids duplicate builds for push + PR
+branches:
+  only:
+    - master
