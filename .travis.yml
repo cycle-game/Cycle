@@ -1,0 +1,25 @@
+language: node_js
+
+git:
+  depth: false
+  quiet: true
+
+node_js:
+  - "stable"
+
+cache: yarn
+
+stages:
+  - lint
+  - test
+  - build
+
+jobs:
+  include:
+    - stage: lint
+      script: yarn lint:prettier
+    - stage: test
+      script: echo "No tests for now"
+    - stage: build
+      script: yarn build
+
