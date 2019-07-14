@@ -1,3 +1,3 @@
-require('pixi');
-require('p2');
-require('./states/game');
+import 'pixi';
+import 'p2';
+import './states/game';
