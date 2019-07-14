@@ -1,5 +1,7 @@
 # Cycle
 
+[![Build Status](https://travis-ci.com/cycle-game/Cycle.svg?branch=master)](https://travis-ci.com/cycle-game/Cycle)
+
 HTML5 game made with Phaser
 
 <img alt="game banner" src="externalResources/BandeauFacebook.png">
