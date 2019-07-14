@@ -2,7 +2,6 @@ import { BLUE, BASE_SIZE, edited_lvl, platformSizeInPx, PlayerProgression } from
 import { reset, save } from '../functions';
 import { stages } from '../stages';
 import Phaser from 'phaser-ce';
-import { game } from './game';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
 import { selectedLang } from './languages';
@@ -319,7 +318,7 @@ export const Play = {
         // ----------------------------------------------- Back to the editor //
 
         if (edited_lvl.edited) {
-            this.goBack = game.add.text(platformSizeInPx, platformSizeInPx, lang[selectedLang].Retour);
+            this.goBack = this.game.add.text(platformSizeInPx, platformSizeInPx, lang[selectedLang].Retour);
             this.goBack.anchor.setTo(0, 0);
 
             this.goBack.inputEnabled = true;
