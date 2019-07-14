@@ -72,7 +72,7 @@ export const Scores = {
         }
 
         sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
-        this.difficulty = sprite.difficulty;
+        this.difficulty = sprite.data.difficulty;
         this.scores[this.difficulty].alpha = 1;
     },
     update: function() {
