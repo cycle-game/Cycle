@@ -1,3 +1,6 @@
 import 'pixi';
 import 'p2';
-import './states/game';
+
+import { CycleGame } from './CycleGame';
+
+new CycleGame().start();
