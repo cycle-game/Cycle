@@ -1,5 +1,4 @@
 import { StageDefinition } from './stages/StageDefinition';
-import { difficultes } from './functions';
 
 export const BASE_SIZE = 600;
 
