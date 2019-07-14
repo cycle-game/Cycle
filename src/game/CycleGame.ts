@@ -13,8 +13,8 @@ import { Languages } from './states/languages';
 export class CycleGame {
     private game: Phaser.Game;
 
-    constructor() {
-        this.game = new Phaser.Game(BASE_SIZE, BASE_SIZE, Phaser.CANVAS, 'cycleCanvas');
+    constructor(private readonly htmlElement: string, public readonly baseSize = BASE_SIZE) {
+        this.game = new Phaser.Game(this.baseSize, this.baseSize, Phaser.CANVAS, this.htmlElement);
 
         // Les états du jeu
         this.game.state.add(Boot.NAME, new Boot());

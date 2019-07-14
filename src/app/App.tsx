@@ -1,17 +1,28 @@
 import React from 'react';
-import './App.css';
 
-export const App: React.FC = () => {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Learn React
-                </a>
-            </header>
-        </div>
-    );
-};
+import { CycleGame } from '../game';
+
+export class App extends React.Component {
+    private static GAME_HTML_ELEMENT = 'cycleCanvas';
+
+    private game: CycleGame;
+
+    constructor(props) {
+        super(props);
+        this.game = new CycleGame(App.GAME_HTML_ELEMENT);
+    }
+
+    componentDidMount(): void {
+        this.game.start();
+    }
+
+    render() {
+        const style = {
+            width: `${this.game.baseSize}px`,
+            height: `${this.game.baseSize}px`,
+            margin: 'auto',
+        };
+
+        return <div id={App.GAME_HTML_ELEMENT} style={style}></div>;
+    }
+}
