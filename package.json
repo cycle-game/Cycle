@@ -29,7 +29,9 @@
         "lint:prettier:fix": "yarn prettier --write 'src/**/*.{ts,js,md,json}'",
         "deploy": "yarn build && gh-pages -d dist",
         "release": "semantic-release",
-        "start:dev": "webpack-dev-server --mode=development --open"
+        "start:dev": "webpack-dev-server --mode=development --open",
+        "storybook:start": "start-storybook -p 6006",
+        "storybook:build": "build-storybook"
     },
     "husky": {
         "hooks": {
@@ -58,6 +60,11 @@
         "@babel/core": "^7.5.4",
         "@babel/preset-env": "^7.5.4",
         "@semantic-release/github": "^5.4.2",
+        "@storybook/addon-actions": "^5.1.9",
+        "@storybook/addon-info": "^5.1.9",
+        "@storybook/addon-links": "^5.1.9",
+        "@storybook/addons": "^5.1.9",
+        "@storybook/react": "^5.1.9",
         "@types/lodash": "^4.14.136",
         "@types/react": "16.8.23",
         "@types/react-dom": "16.8.4",
@@ -70,6 +77,7 @@
         "husky": "^3.0.0",
         "lint-staged": "^9.2.0",
         "prettier": "^1.18.2",
+        "react-docgen-typescript-loader": "^3.1.0",
         "semantic-release": "^15.13.18",
         "style-loader": "0.23.1",
         "ts-loader": "^6.0.4",
