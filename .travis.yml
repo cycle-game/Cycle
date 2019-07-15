@@ -9,26 +9,25 @@ node_js:
 
 cache: yarn
 
-stages:
-  - lint
-  - test
-  - build
-  - name: deploy
-    if: branch = "master" AND type = push AND fork = false
-
-jobs:
-  include:
-    - stage: lint
-      script: yarn lint:prettier
-    - stage: test
-      script: echo "No tests for now"
-    - stage: build
-      script: yarn build
-    - stage: deploy
-      script: yarn release
+script:
+  - yarn lint:prettier
+  - echo "No tests for now"
+  - yarn build
 
 # only build commits/PRs targeted to the master branch
 # this avoids duplicate builds for push + PR
 branches:
   only:
     - master
+
+before_deploy:
+  - yarn release
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  local_dir: ./dist
+  on:
+    branch: master
