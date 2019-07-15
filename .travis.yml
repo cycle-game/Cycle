@@ -25,7 +25,7 @@ jobs:
     - stage: build
       script: yarn build
     - stage: deploy
-      script: yarn deploy
+      script: yarn release
 
 # only build commits/PRs targeted to the master branch
 # this avoids duplicate builds for push + PR
