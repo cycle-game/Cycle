@@ -28,7 +28,7 @@
         "lint:prettier": "yarn prettier -l 'src/**/*.{ts,js,md,json}'",
         "lint:prettier:fix": "yarn prettier --write 'src/**/*.{ts,js,md,json}'",
         "deploy": "yarn build && gh-pages -d dist",
-        "release": "semantic-release && yarn deploy",
+        "release": "semantic-release",
         "start:dev": "webpack-dev-server --mode=development --open"
     },
     "husky": {
