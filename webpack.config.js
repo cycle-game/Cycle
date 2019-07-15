@@ -18,6 +18,14 @@ module.exports = {
     filename: '[name].[chunkhash].js'
   },
   optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true
+        }
+      })
+    ],
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
@@ -39,16 +47,6 @@ module.exports = {
       { from: 'src/resources', to: 'resources' },
     ])
   ],
-  optimization: {
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          keep_classnames: true,
-          keep_fnames: true
-        }
-      })
-    ]
-  },
   devServer: {
     contentBase: __dirname + '/dist',
     compress: true,
