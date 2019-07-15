@@ -28,6 +28,7 @@
         "lint:prettier": "yarn prettier -l 'src/**/*.{ts,js,md,json}'",
         "lint:prettier:fix": "yarn prettier --write 'src/**/*.{ts,js,md,json}'",
         "deploy": "yarn build && gh-pages -d dist",
+        "release": "semantic-release && yarn deploy",
         "start:dev": "webpack-dev-server --mode=development --open"
     },
     "husky": {
@@ -56,6 +57,7 @@
     "devDependencies": {
         "@babel/core": "^7.5.4",
         "@babel/preset-env": "^7.5.4",
+        "@semantic-release/github": "^5.4.2",
         "@types/lodash": "^4.14.136",
         "@types/react": "16.8.23",
         "@types/react-dom": "16.8.4",
@@ -68,6 +70,7 @@
         "husky": "^3.0.0",
         "lint-staged": "^9.2.0",
         "prettier": "^1.18.2",
+        "semantic-release": "^15.13.18",
         "style-loader": "0.23.1",
         "ts-loader": "^6.0.4",
         "typescript": "^3.5.3",
