@@ -13,6 +13,8 @@ stages:
   - lint
   - test
   - build
+  - name: deploy
+    if: branch = "master" AND type = push AND fork = false
 
 jobs:
   include:
@@ -22,6 +24,8 @@ jobs:
       script: echo "No tests for now"
     - stage: build
       script: yarn build
+    - stage: deploy
+      script: yarn deploy
 
 # only build commits/PRs targeted to the master branch
 # this avoids duplicate builds for push + PR
