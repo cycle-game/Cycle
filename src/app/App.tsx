@@ -1,28 +1,23 @@
 import React from 'react';
 
-import { CycleGame } from '../game';
+import { TheGame } from './the-game';
 
-export class App extends React.Component {
-    private static GAME_HTML_ELEMENT = 'cycleCanvas';
+type AppProps = {};
 
-    private game: CycleGame;
+type AppState = {};
 
-    constructor(props) {
+export class App extends React.Component<AppProps, AppState> {
+    constructor(props: AppProps) {
         super(props);
-        this.game = new CycleGame('fr', App.GAME_HTML_ELEMENT);
-    }
 
-    componentDidMount(): void {
-        this.game.start();
+        this.state = {};
     }
 
     render() {
-        const style = {
-            width: `${this.game.baseSize}px`,
-            height: `${this.game.baseSize}px`,
-            margin: 'auto',
-        };
-
-        return <div id={App.GAME_HTML_ELEMENT} style={style}></div>;
+        return (
+            <div>
+                <TheGame />
+            </div>
+        );
     }
 }
