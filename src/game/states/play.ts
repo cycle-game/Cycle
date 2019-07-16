@@ -38,8 +38,31 @@ let starsGroup: any;
 // Attention,  ici on a une grosse partie du jeu
 // C'est l'état (state) où tout les niveaux seront
 // mis en place.
-export const Play = {
-    create: function() {
+export class Play extends Phaser.State {
+    static NAME = Play.prototype.constructor.name;
+
+    private esc_key: Phaser.Key;
+    private space_key: Phaser.Key;
+    private gauche: Phaser.Key;
+    private droite: Phaser.Key;
+
+    private fps_moy: number;
+
+    private tweenTab: Phaser.Tween[];
+    private label_lvl: Phaser.Text;
+    private label_score: Phaser.Text;
+    private goBack: Phaser.Text;
+
+    private general: Phaser.Group;
+    private planete: Phaser.Group;
+    private platforms: Phaser.Group;
+    private dudeTest: Phaser.Group;
+
+    private dude: Phaser.Sprite;
+    private nuit: Phaser.Sprite;
+    private plnte: Phaser.Sprite;
+
+    create() {
         if (edited_lvl.edited) {
             currentStage = edited_lvl;
         } else {
@@ -159,7 +182,7 @@ export const Play = {
         this.label_lvl = this.game.add.text(
             0,
             -platformSizeInPx,
-            PlayerProgression.stage + 1,
+            `${PlayerProgression.stage + 1}`,
             {
                 font: '30px Arial',
                 fill: '#' + BLUE,
@@ -171,7 +194,7 @@ export const Play = {
         this.label_score = this.game.add.text(
             0,
             +platformSizeInPx,
-            PlayerProgression.score,
+            `${PlayerProgression.score}`,
             {
                 font: '20px Arial',
                 fill: '#' + BLUE,
@@ -275,7 +298,7 @@ export const Play = {
 
         // Dans le cas où c'est le premier passage, petite animation posée
         if (!isLevelPlaying) {
-            this.dude.scale = { x: 1, y: 0.01 };
+            this.dude.scale = new Phaser.Point(1, 0.01);
             this.dude.body.gravity.y = 0;
 
             const t = this.game.add
@@ -333,16 +356,16 @@ export const Play = {
         // ------------------------------------------------------------------ //
 
         this.game.paused = false;
-    },
-    tours: function(angle) {
+    }
+    tours(angle) {
         // Comptabilisation du nombre de tour. Si on fait + %360°, le tour est
         // ajouté, et on ne peut plus redescendre.
 
         if (Math.round(-(angle - 180) / 360) > nb_tours) nb_tours = Math.round(-(angle - 180) / 360);
 
         return 20 * (nb_tours - 1);
-    },
-    fpsAdapt: function() {
+    }
+    fpsAdapt() {
         // Permet de ne pas ralentir le jeu (du moins, au minimum), lorsqu'il
         // y a une perte d'images par seconde
 
@@ -359,8 +382,8 @@ export const Play = {
 
         //console.log(fps_array);
         console.log(fps_adapt);
-    },
-    update: function() {
+    }
+    update() {
         // ----------- Condition pour l'animation début-fin //
         if (isLevelPlaying) {
             // ------------------------------------------------ //
@@ -368,7 +391,7 @@ export const Play = {
             // ------------------------------------------------------------------ //
             // ------------------------------------------------------------ Score //
 
-            this.label_score.text = Math.round(PlayerProgression.score + this.tours(this.planete.angle));
+            this.label_score.text = `${Math.round(PlayerProgression.score + this.tours(this.planete.angle))}`;
             PlayerProgression.score += 0.05;
 
             // ------------------------------------------------------------------ //
@@ -469,8 +492,8 @@ export const Play = {
             // ----------- Condition pour l'animation début-fin //
         }
         // ------------------------------------------------ //
-    },
-    takeEtoiles: function(dude, etoile) {
+    }
+    takeEtoiles(dude, etoile) {
         /* *  http://www.lessmilk.com/games/10/ */
         /* */
         if (!etoile.alive) return;
@@ -521,8 +544,8 @@ export const Play = {
             }, this);
             // ---------------------------------------- //
         }
-    },
-    zoom: function(zoomFactor) {
+    }
+    zoom(zoomFactor) {
         // Scale the game canvas according to game height (radius)
         // /!\ this function must be called only one time, as it computes
         //     size according to object width and height, and changes them
@@ -545,8 +568,8 @@ export const Play = {
         this.setBodySize(this.plnte, zoom);
         this.platforms.forEachAlive(platform => this.setBodySize(platform, zoom), this);
         this.dudeTest.forEachAlive(dudeT => this.setBodySize(dudeT, zoom, null, 0), this);
-    },
-    setBodySize: function(sprite, zoomFactor: number, xOff: number = null, yOff: number = null) {
+    }
+    setBodySize(sprite, zoomFactor: number, xOff: number = null, yOff: number = null) {
         const bodyWidth = sprite.body.width * zoomFactor;
         const bodyHeight = sprite.body.height * zoomFactor;
 
@@ -554,8 +577,8 @@ export const Play = {
         const yOffset = yOff === null ? (sprite.body.height - bodyHeight) / 2 : yOff;
 
         sprite.body.setSize(bodyWidth, bodyHeight, xOffset, yOffset);
-    },
-    makePlateformes: function() {
+    }
+    makePlateformes() {
         // Création des sprites par rapport aux données des niveaux
         let plateformes;
         // En fonction on est en édition ou on est en jeu ..
@@ -613,8 +636,8 @@ export const Play = {
         }
 
         return maxPlat * platformSizeInPx + BASE_SIZE / 6;
-    },
-    createAndDisplayStars: () => {
+    }
+    createAndDisplayStars() {
         currentStage.stars.forEach(star => {
             const angle = star[0];
             const radius = BASE_SIZE / 6 + star[1] * platformSizeInPx + platformSizeInPx / 2;
@@ -627,8 +650,8 @@ export const Play = {
         });
 
         nb_etoiles = starsGroup.countLiving();
-    },
-    createAndDisplayTraps: () => {
+    }
+    createAndDisplayTraps() {
         currentStage.traps.forEach(trap => {
             const angle = trap[0];
             const radius = BASE_SIZE / 6 + trap[1] * platformSizeInPx;
@@ -639,9 +662,9 @@ export const Play = {
             trapVM.anchor.set(0.5, 1);
             trapVM.angle = trap[0];
         });
-    },
+    }
 
-    render: function() {
+    render() {
         // this.game.debug.spriteBounds(this.dude);
         // game.debug.body(this.plnte);
         // game.debug.body(this.nuit);
@@ -656,5 +679,5 @@ export const Play = {
         // game.debug.spriteInfo(this.platforms.getFirstAlive(), 32, 32);
         // game.debug.spriteCoords(this.dudeTest.getAt(0), 32, 300);
         // game.debug.spriteCoords(this.dude, 32, 200);
-    },
-};
+    }
+}
