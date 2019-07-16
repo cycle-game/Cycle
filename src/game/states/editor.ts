@@ -14,8 +14,32 @@ const PLATFORMS_HEIGHT_NUMBER = 10;
 
 let invert_redim = 1;
 
-export const Editor = {
-    create: function() {
+type CycleSprite = {
+    calculDeg: number;
+    calculLvl: number;
+};
+
+export class Editor extends Phaser.State {
+    static NAME = Editor.prototype.constructor.name;
+
+    private esc_key: Phaser.Key;
+
+    private general: Phaser.Group;
+    private menu: Phaser.Group;
+    private platforms: Phaser.Group;
+    private traps: Phaser.Group;
+    private stars: Phaser.Group;
+
+    private dude: Phaser.Sprite;
+    private plnte: Phaser.Sprite;
+    private etoile_pos: Phaser.Sprite & CycleSprite;
+    private plateforme: Phaser.Sprite;
+    private piege: Phaser.Sprite;
+    private etoile: Phaser.Sprite;
+
+    private launch: Phaser.Text;
+
+    create() {
         // ------------------------------------------------------------------ //
         // --------------------------------------------------- Retour au menu //
 
@@ -120,8 +144,8 @@ export const Editor = {
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
-    },
-    letsTry: function() {
+    }
+    letsTry() {
         // ------------------------------------------------------------------ //
         // ---------------------------------- Mise-en-place du niveau d'essai //
 
@@ -186,8 +210,8 @@ export const Editor = {
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
-    },
-    objToString: function(obj) {
+    }
+    objToString(obj) {
         // Conversion d'un objet en chaîne de caractère symbolisant un tableau
         // javascript.
 
@@ -201,8 +225,8 @@ export const Editor = {
         str = tmp.join(', ');
 
         return str;
-    },
-    clickGeneral: function() {
+    }
+    clickGeneral() {
         // Pour les étoiles les positions ne sont pas prédéfinies
 
         if (this.etoile_pos.alpha > 0) {
@@ -227,8 +251,8 @@ export const Editor = {
                 newetoile.calculDeg = this.etoile_pos.calculDeg;
             }
         }
-    },
-    choix: function(sprite) {
+    }
+    choix(sprite) {
         // Avant toute chose : suppression de la dernière étoile ajoutée, si
         // on était en mode "étoile"
 
@@ -256,8 +280,8 @@ export const Editor = {
             this.changeInputEnabled(this.platforms, false);
             this.changeInputEnabled(this.traps, false);
         }
-    },
-    changeInputEnabled: function(group, inputEnabled) {
+    }
+    changeInputEnabled(group, inputEnabled) {
         // En fonction du choix d'édition, on active ou désactive, et affiche
         // on cache les sprites correspondant
 
@@ -272,15 +296,15 @@ export const Editor = {
                 c.alpha = c.alpha > alph ? c.alpha : 0;
             });
         }
-    },
-    menuForeach: function(c) {
+    }
+    menuForeach(c) {
         // Simplification pour mettre en place les inputs
 
         c.inputEnabled = true;
         c.input.useHandCursor = true;
         c.events.onInputDown.add(this.choix, this);
-    },
-    makeSprite: function() {
+    }
+    makeSprite() {
         // Toutes les variables qui seront utilisés dans cette fonction
         var cx, rayon, perimetre, nbr_plat, deg, tmp, elt;
 
@@ -371,8 +395,8 @@ export const Editor = {
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
-    },
-    update: function() {
+    }
+    update() {
         this.etoile.angle += 4;
 
         // ------------------------------------------------------------------ //
@@ -404,8 +428,8 @@ export const Editor = {
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
-    },
-    unPeuDeTrigo: function(x, y) {
+    }
+    unPeuDeTrigo(x, y) {
         // Pour l'étoile
 
         // Dans cette fonction on renvoie une position en valeur trigonométrique
@@ -437,8 +461,8 @@ export const Editor = {
         degrees = Math.round(degrees);
 
         return [rayon, degrees];
-    },
-    redimensionne: function(s) {
+    }
+    redimensionne(s) {
         // Redimensionnement de la fenêtre en fonction de la hauteur (rayon)
 
         const s_invers = 1 / s;
@@ -450,9 +474,9 @@ export const Editor = {
         this.general.y += (BASE_SIZE * s_invers * (1 - s)) / 2;
 
         invert_redim = s_invers;
-    },
-    render: function() {},
-};
+    }
+    render() {}
+}
 
 // On déclare les fonctions à l'extérieur, puisque lors de l'appel on est
 // déjà dans une fonction ...
