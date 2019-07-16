@@ -21,7 +21,7 @@ export class CycleGame {
         this.game.state.add(Load.NAME, new Load());
         this.game.state.add(Menu.NAME, new Menu());
         this.game.state.add(RulesState.NAME, new RulesState());
-        this.game.state.add('Editor', Editor);
+        this.game.state.add(Editor.NAME, new Editor());
         this.game.state.add('Play', Play);
         this.game.state.add(Victory.NAME, new Victory());
         this.game.state.add('Scores', Scores);
