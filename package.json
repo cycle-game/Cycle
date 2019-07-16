@@ -59,6 +59,7 @@
     "devDependencies": {
         "@babel/core": "^7.5.4",
         "@babel/preset-env": "^7.5.4",
+        "@semantic-release/changelog": "^3.0.4",
         "@semantic-release/github": "^5.4.2",
         "@storybook/addon-actions": "^5.1.9",
         "@storybook/addon-info": "^5.1.9",
