@@ -1,12 +1,21 @@
 import { BASE_SIZE, platformSizeInPx, PlayerProgression } from '../variables';
-import { cliquable, difficultes, ecart, scores } from '../functions';
+import { cliquable, difficultes, DifficultySelectorVM, ecart, scores } from '../functions';
 import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
 import { selectedLang } from './languages';
 import { Menu } from './menu';
 
-export const Scores = {
-    create: function() {
+export class Scores extends Phaser.State {
+    static NAME = Scores.prototype.constructor.name;
+
+    private esc_key: Phaser.Key;
+
+    private choix_diff: DifficultySelectorVM;
+    private difficulty: number;
+
+    private scores: Phaser.Group[];
+
+    create() {
         const highscores = scores().split('|||');
 
         // Screen title
@@ -17,7 +26,6 @@ export const Scores = {
 
         // Difficulty
         this.choix_diff = difficultes(this);
-        this.Stats = null;
 
         if (isNaN(PlayerProgression.difficulty)) PlayerProgression.difficulty = 1;
 
@@ -58,13 +66,13 @@ export const Scores = {
                 }
             }
 
-            if (val == this.difficulty) this.scores[val].alpha = 1;
+            if (this.choix_diff[val].difficulty === this.difficulty) this.scores[val].alpha = 1;
             else this.scores[val].alpha = 0;
         }
 
         this.choix_diff[PlayerProgression.difficulty].text.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
-    },
-    souligne: function(sprite) {
+    }
+    souligne(sprite) {
         // Selection
         for (let val in this.choix_diff) {
             this.choix_diff[val].text.setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
@@ -74,8 +82,8 @@ export const Scores = {
         sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
         this.difficulty = sprite.data.difficulty;
         this.scores[this.difficulty].alpha = 1;
-    },
-    update: function() {
+    }
+    update() {
         if (this.esc_key.isDown) this.game.state.start(Menu.NAME);
-    },
-};
+    }
+}
