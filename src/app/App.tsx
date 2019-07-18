@@ -9,7 +9,7 @@ export class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.game = new CycleGame(App.GAME_HTML_ELEMENT);
+        this.game = new CycleGame('fr', App.GAME_HTML_ELEMENT);
     }
 
     componentDidMount(): void {

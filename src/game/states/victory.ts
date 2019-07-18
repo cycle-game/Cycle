@@ -2,7 +2,6 @@ import { cliquable, reset, save, sociaux, toHigh } from '../functions';
 import { BASE_SIZE, pseudo as pseudoVar, PlayerProgression } from '../variables';
 import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
-import { selectedLang } from './languages';
 import { Menu } from './menu';
 
 let pseudo = pseudoVar;
@@ -13,11 +12,15 @@ export class Victory extends Phaser.State {
     private esc_key: Phaser.Key;
     private pseudo: Phaser.Text;
 
+    constructor(private readonly selectedLang: string) {
+        super();
+    }
+
     create() {
         const label = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 4,
-            lang[selectedLang].Victoire + '\n\n' + Math.round(PlayerProgression.score),
+            lang[this.selectedLang].Victoire + '\n\n' + Math.round(PlayerProgression.score),
             25,
             0.5,
             0.5,
@@ -30,7 +33,7 @@ export class Victory extends Phaser.State {
         const enter_pseudo = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 2,
-            lang[selectedLang].Pseudo,
+            lang[this.selectedLang].Pseudo,
             25,
             0.5,
             0.5,

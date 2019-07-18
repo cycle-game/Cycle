@@ -2,7 +2,6 @@ import Phaser from 'phaser-ce';
 import { cliquable, difficultes, DifficultySelectorVM, reset } from '../functions';
 import { BASE_SIZE, PlayerProgression } from '../variables';
 import { lang } from '../i18n';
-import { selectedLang } from './languages';
 import { Menu } from './menu';
 
 export class RulesState extends Phaser.State {
@@ -13,6 +12,10 @@ export class RulesState extends Phaser.State {
     private esc_key: Phaser.Key;
     Stats: typeof PlayerProgression = null;
 
+    constructor(private readonly selectedLang: string) {
+        super();
+    }
+
     create(): void {
         // Un équivalent d'écouteur d'évènement (si on veut)
         this.space_key = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -21,10 +24,21 @@ export class RulesState extends Phaser.State {
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Présentation du jeu
-        cliquable(BASE_SIZE / 2, BASE_SIZE / 2.5, lang[selectedLang].Presentation, 25, 0.5, 0.5, 0, 500, null, this);
+        cliquable(
+            BASE_SIZE / 2,
+            BASE_SIZE / 2.5,
+            lang[this.selectedLang].Presentation,
+            25,
+            0.5,
+            0.5,
+            0,
+            500,
+            null,
+            this,
+        );
 
         // Difficulté
-        this.choix_diff = difficultes(this, lang[selectedLang].Difficultes);
+        this.choix_diff = difficultes(this, lang[this.selectedLang].Difficultes);
 
         if (isNaN(PlayerProgression.difficulty)) PlayerProgression.difficulty = 1;
 
@@ -41,7 +55,7 @@ export class RulesState extends Phaser.State {
 
     choix(sprite) {
         if (!isNaN(sprite)) {
-            if (sprite >= 0 && sprite < lang[selectedLang].Difficultes.length) {
+            if (sprite >= 0 && sprite < lang[this.selectedLang].Difficultes.length) {
                 this.souligne(this.choix_diff[sprite]);
             }
 

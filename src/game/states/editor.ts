@@ -3,7 +3,6 @@ import { Play } from './play';
 import Phaser from 'phaser-ce';
 import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
-import { selectedLang } from './languages';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { Menu } from './menu';
 
@@ -39,6 +38,9 @@ export class Editor extends Phaser.State {
 
     private launch: Phaser.Text;
 
+    constructor(private readonly selectedLang: string) {
+        super();
+    }
     create() {
         // ------------------------------------------------------------------ //
         // --------------------------------------------------- Retour au menu //
@@ -109,7 +111,7 @@ export class Editor extends Phaser.State {
         this.etoile = this.menu.create(-platformSizeInPx * 1, platformSizeInPx * 2.5, STAR);
         this.etoile.anchor.set(0.5);
 
-        this.launch = this.game.add.text(platformSizeInPx, platformSizeInPx, lang[selectedLang].Tester);
+        this.launch = this.game.add.text(platformSizeInPx, platformSizeInPx, lang[this.selectedLang].Tester);
         this.launch.anchor.setTo(0, 0);
 
         // ------------------------------------------------------------------ //

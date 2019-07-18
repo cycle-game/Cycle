@@ -4,7 +4,6 @@ import { stages } from '../stages';
 import Phaser from 'phaser-ce';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
 import { lang } from '../i18n';
-import { selectedLang } from './languages';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { StageDefinition } from '../stages/StageDefinition';
 import { Menu } from './menu';
@@ -61,6 +60,10 @@ export class Play extends Phaser.State {
     private dude: Phaser.Sprite;
     private nuit: Phaser.Sprite;
     private plnte: Phaser.Sprite;
+
+    constructor(private readonly selectedLang: string) {
+        super();
+    }
 
     create() {
         if (edited_lvl.edited) {
@@ -341,7 +344,7 @@ export class Play extends Phaser.State {
         // ----------------------------------------------- Back to the editor //
 
         if (edited_lvl.edited) {
-            this.goBack = this.game.add.text(platformSizeInPx, platformSizeInPx, lang[selectedLang].Retour);
+            this.goBack = this.game.add.text(platformSizeInPx, platformSizeInPx, lang[this.selectedLang].Retour);
             this.goBack.anchor.setTo(0, 0);
 
             this.goBack.inputEnabled = true;
