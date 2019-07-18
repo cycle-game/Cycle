@@ -2,7 +2,6 @@ import { BASE_SIZE, platformSizeInPx, PlayerProgression } from '../variables';
 import { cliquable, difficultes, DifficultySelectorVM, ecart, scores } from '../functions';
 import Phaser from 'phaser-ce';
 import { lang } from '../i18n';
-import { selectedLang } from './languages';
 import { Menu } from './menu';
 
 export class Scores extends Phaser.State {
@@ -15,17 +14,21 @@ export class Scores extends Phaser.State {
 
     private scores: Phaser.Group[];
 
+    constructor(private readonly selectedLang: string) {
+        super();
+    }
+
     create() {
         const highscores = scores().split('|||');
 
         // Screen title
-        cliquable(BASE_SIZE / 2, platformSizeInPx, lang[selectedLang].UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
+        cliquable(BASE_SIZE / 2, platformSizeInPx, lang[this.selectedLang].UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
 
         // ESC to return to menu
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Difficulty
-        this.choix_diff = difficultes(this, lang[selectedLang].Difficultes);
+        this.choix_diff = difficultes(this, lang[this.selectedLang].Difficultes);
 
         if (isNaN(PlayerProgression.difficulty)) PlayerProgression.difficulty = 1;
 
@@ -79,7 +82,7 @@ export class Scores extends Phaser.State {
 
     choix(sprite) {
         if (!isNaN(sprite)) {
-            if (sprite >= 0 && sprite < lang[selectedLang].Difficultes.length) {
+            if (sprite >= 0 && sprite < lang[this.selectedLang].Difficultes.length) {
                 this.souligne(this.choix_diff[sprite]);
             }
 
