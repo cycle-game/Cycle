@@ -1,6 +1,4 @@
 import { BASE_SIZE, BLUE, platformSizeInPx } from './variables';
-import { lang } from './i18n';
-import { selectedLang } from './states/languages';
 import Phaser from 'phaser-ce';
 
 export function sociaux(Stats, pseudo, lng) {
@@ -99,14 +97,12 @@ export function ecart(nombre: number, margingInPx: number) {
 export type DifficultySelectorVM = ({ text: Phaser.Text; difficulty: number })[];
 
 // Choix de la difficulté
-export function difficultes(contexte): DifficultySelectorVM {
-    const difficulties: string[] = lang[selectedLang].Difficultes;
-
+export function difficultes(contexte, labels: string[]): DifficultySelectorVM {
     // Mise en place des difficultés
     const margingInPx = 100;
-    const elementWidthInPx = ecart(difficulties.length, margingInPx);
+    const elementWidthInPx = ecart(labels.length, margingInPx);
 
-    return difficulties.map((difficulty, index) => {
+    return labels.map((difficulty, index) => {
         const difficultyTextSprite = cliquable(
             margingInPx + elementWidthInPx * index,
             BASE_SIZE - platformSizeInPx,
@@ -116,7 +112,7 @@ export function difficultes(contexte): DifficultySelectorVM {
             0.5,
             0,
             500,
-            choix,
+            contexte.choix,
             contexte,
         );
         difficultyTextSprite.data.difficulty = index;
@@ -126,16 +122,4 @@ export function difficultes(contexte): DifficultySelectorVM {
             difficulty: index,
         };
     });
-}
-
-export function choix(sprite) {
-    if (!isNaN(sprite)) {
-        if (sprite >= 0 && sprite < lang[selectedLang].Difficultes.length) {
-            this.souligne(this.choix_diff[sprite]);
-        }
-
-        return;
-    }
-
-    this.souligne(sprite);
 }
