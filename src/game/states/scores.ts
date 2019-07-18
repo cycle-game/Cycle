@@ -25,7 +25,7 @@ export class Scores extends Phaser.State {
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Difficulty
-        this.choix_diff = difficultes(this);
+        this.choix_diff = difficultes(this, lang[selectedLang].Difficultes);
 
         if (isNaN(PlayerProgression.difficulty)) PlayerProgression.difficulty = 1;
 
@@ -72,7 +72,24 @@ export class Scores extends Phaser.State {
 
         this.choix_diff[PlayerProgression.difficulty].text.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
     }
-    souligne(sprite) {
+
+    update() {
+        if (this.esc_key.isDown) this.game.state.start(Menu.NAME);
+    }
+
+    choix(sprite) {
+        if (!isNaN(sprite)) {
+            if (sprite >= 0 && sprite < lang[selectedLang].Difficultes.length) {
+                this.souligne(this.choix_diff[sprite]);
+            }
+
+            return;
+        }
+
+        this.souligne(sprite);
+    }
+
+    private souligne(sprite) {
         // Selection
         for (let val in this.choix_diff) {
             this.choix_diff[val].text.setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
@@ -82,8 +99,5 @@ export class Scores extends Phaser.State {
         sprite.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
         this.difficulty = sprite.data.difficulty;
         this.scores[this.difficulty].alpha = 1;
-    }
-    update() {
-        if (this.esc_key.isDown) this.game.state.start(Menu.NAME);
     }
 }

@@ -24,7 +24,7 @@ export class RulesState extends Phaser.State {
         cliquable(BASE_SIZE / 2, BASE_SIZE / 2.5, lang[selectedLang].Presentation, 25, 0.5, 0.5, 0, 500, null, this);
 
         // Difficulté
-        this.choix_diff = difficultes(this);
+        this.choix_diff = difficultes(this, lang[selectedLang].Difficultes);
 
         if (isNaN(PlayerProgression.difficulty)) PlayerProgression.difficulty = 1;
 
@@ -39,7 +39,19 @@ export class RulesState extends Phaser.State {
         if (this.space_key.isDown) this.game.state.start('Play');
     }
 
-    souligne(sprite: any): void {
+    choix(sprite) {
+        if (!isNaN(sprite)) {
+            if (sprite >= 0 && sprite < lang[selectedLang].Difficultes.length) {
+                this.souligne(this.choix_diff[sprite]);
+            }
+
+            return;
+        }
+
+        this.souligne(sprite);
+    }
+
+    private souligne(sprite: any): void {
         for (var val in this.choix_diff) {
             this.choix_diff[val].text.setShadow(0, 0, 'rgba(0, 0, 0, 0)', 5);
         }
