@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/cycle-game/Cycle/compare/v2.4.0...v2.5.0) (2019-07-19)
+
+
+### Features
+
+* remove Language state ([6f271b7](https://github.com/cycle-game/Cycle/commit/6f271b7))
+
 # [2.4.0](https://github.com/cycle-game/Cycle/compare/v2.3.0...v2.4.0) (2019-07-17)
 
 
