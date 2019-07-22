@@ -1,47 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { TheGame } from './the-game';
-import { Language, LanguageSelector } from './components';
+import { SelectLanguage } from './containers';
 import { isEmpty } from 'lodash';
-import { i18nService, SupportedLocale } from '../i18n/I18nService';
+import { i18nService } from '../i18n/I18nService';
 import './App.scss';
 
-type AppProps = {};
+export const App = () => {
+    i18nService.init();
 
-type AppState = {
-    selectedLanguage: string;
-    availableLanguages: Language[];
+    const selectedLanguage = useSelector(state => state.language.selectedLanguage);
+
+    let component = <SelectLanguage />;
+    if (!isEmpty(selectedLanguage)) {
+        component = <TheGame />;
+    }
+
+    return component;
 };
-
-export class App extends Component<AppProps, AppState> {
-    constructor(props: AppProps) {
-        super(props);
-
-        i18nService.init();
-
-        this.state = {
-            selectedLanguage: '',
-            availableLanguages: [{ code: 'en', name: 'English' }, { code: 'fr', name: 'Français' }],
-        };
-    }
-
-    setActiveLanguage(language: SupportedLocale) {
-        this.setState({ ...this.state, selectedLanguage: language });
-        return i18nService.setLanguage(language);
-    }
-
-    render() {
-        let component = (
-            <LanguageSelector
-                languages={this.state.availableLanguages}
-                setActiveLanguage={l => this.setActiveLanguage(l)}
-            />
-        );
-
-        if (!isEmpty(this.state.selectedLanguage)) {
-            component = <TheGame />;
-        }
-
-        return component;
-    }
-}
