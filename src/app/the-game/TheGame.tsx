@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 import { CycleGame } from '../../game';
 
-type TheGameProps = {
-    language: string;
-};
+type TheGameProps = {};
 
 type TheGameState = {
     game: CycleGame;
@@ -17,7 +15,7 @@ export class TheGame extends Component<TheGameProps, TheGameState> {
         super(props);
 
         this.state = {
-            game: new CycleGame(this.props.language, TheGame.CANVAS_ID),
+            game: new CycleGame(TheGame.CANVAS_ID),
         };
     }
 

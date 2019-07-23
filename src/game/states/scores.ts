@@ -1,8 +1,8 @@
 import { BASE_SIZE, platformSizeInPx, PlayerProgression } from '../variables';
 import { cliquable, difficultes, DifficultySelectorVM, ecart, scores } from '../functions';
 import Phaser from 'phaser-ce';
-import { lang } from '../i18n';
 import { Menu } from './menu';
+import { i18nService } from '../../i18n/I18nService';
 
 export class Scores extends Phaser.State {
     static NAME = Scores.prototype.constructor.name;
@@ -13,22 +13,29 @@ export class Scores extends Phaser.State {
     private difficulty: number;
 
     private scores: Phaser.Group[];
+    private readonly difficultyLabels: string[];
 
-    constructor(private readonly selectedLang: string) {
+    constructor() {
         super();
+        this.difficultyLabels = [
+            i18nService.translate('Difficultes.easy'),
+            i18nService.translate('Difficultes.normal'),
+            i18nService.translate('Difficultes.hard'),
+            i18nService.translate('Difficultes.nightmare'),
+        ];
     }
 
     create() {
         const highscores = scores().split('|||');
 
         // Screen title
-        cliquable(BASE_SIZE / 2, platformSizeInPx, lang[this.selectedLang].UnSeul, 22, 0.5, 0.5, 0, 700, null, this);
+        cliquable(BASE_SIZE / 2, platformSizeInPx, i18nService.translate('UnSeul'), 22, 0.5, 0.5, 0, 700, null, this);
 
         // ESC to return to menu
         this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Difficulty
-        this.choix_diff = difficultes(this, lang[this.selectedLang].Difficultes);
+        this.choix_diff = difficultes(this, this.difficultyLabels);
 
         if (isNaN(PlayerProgression.difficulty)) PlayerProgression.difficulty = 1;
 
@@ -82,7 +89,7 @@ export class Scores extends Phaser.State {
 
     choix(sprite) {
         if (!isNaN(sprite)) {
-            if (sprite >= 0 && sprite < lang[this.selectedLang].Difficultes.length) {
+            if (sprite >= 0 && sprite < this.difficultyLabels.length) {
                 this.souligne(this.choix_diff[sprite]);
             }
 
