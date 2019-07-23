@@ -1,8 +1,8 @@
 import Phaser from 'phaser-ce';
 import { cliquable, difficultes, DifficultySelectorVM, reset } from '../functions';
 import { BASE_SIZE, PlayerProgression } from '../variables';
-import { lang } from '../i18n';
 import { Menu } from './menu';
+import { i18nService } from '../../i18n/I18nService';
 
 export class RulesState extends Phaser.State {
     static NAME = RulesState.prototype.constructor.name;
@@ -12,8 +12,17 @@ export class RulesState extends Phaser.State {
     private esc_key: Phaser.Key;
     Stats: typeof PlayerProgression = null;
 
-    constructor(private readonly selectedLang: string) {
+    private readonly difficultyLabels: string[];
+
+    constructor() {
         super();
+
+        this.difficultyLabels = [
+            i18nService.translate('Difficultes.easy'),
+            i18nService.translate('Difficultes.normal'),
+            i18nService.translate('Difficultes.hard'),
+            i18nService.translate('Difficultes.nightmare'),
+        ];
     }
 
     create(): void {
@@ -27,7 +36,7 @@ export class RulesState extends Phaser.State {
         cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 2.5,
-            lang[this.selectedLang].Presentation,
+            i18nService.translate('Presentation'),
             25,
             0.5,
             0.5,
@@ -38,7 +47,7 @@ export class RulesState extends Phaser.State {
         );
 
         // Difficulté
-        this.choix_diff = difficultes(this, lang[this.selectedLang].Difficultes);
+        this.choix_diff = difficultes(this, this.difficultyLabels);
 
         if (isNaN(PlayerProgression.difficulty)) PlayerProgression.difficulty = 1;
 
@@ -55,7 +64,7 @@ export class RulesState extends Phaser.State {
 
     choix(sprite) {
         if (!isNaN(sprite)) {
-            if (sprite >= 0 && sprite < lang[this.selectedLang].Difficultes.length) {
+            if (sprite >= 0 && sprite < this.difficultyLabels.length) {
                 this.souligne(this.choix_diff[sprite]);
             }
 

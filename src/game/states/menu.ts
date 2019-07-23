@@ -1,9 +1,9 @@
 // On crée l'état du menu
 import { cliquable, reset } from '../functions';
 import { BASE_SIZE, platformSizeInPx, PlayerProgression } from '../variables';
-import { lang } from '../i18n';
 import { LOGO_C, LOGO_C_MASK, LOGO_WITHOUT_C } from '../resoucesNames';
 import { RulesState } from './rules';
+import { i18nService } from '../../i18n/I18nService';
 
 // Précédant les explications : choix entre editor et game
 export class Menu extends Phaser.State {
@@ -11,7 +11,7 @@ export class Menu extends Phaser.State {
 
     private logo_c: Phaser.Sprite;
 
-    constructor(private readonly selectedLang: string) {
+    constructor() {
         super();
     }
 
@@ -19,7 +19,7 @@ export class Menu extends Phaser.State {
         const play = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 2.2,
-            lang[this.selectedLang].Jeu,
+            i18nService.translate('Jeu'),
             50,
             0.5,
             0.5,
@@ -31,7 +31,7 @@ export class Menu extends Phaser.State {
         const or = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 1.5,
-            lang[this.selectedLang].Ou,
+            i18nService.translate('Ou'),
             23,
             0.5,
             0.5,
@@ -43,7 +43,7 @@ export class Menu extends Phaser.State {
         const editor = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 1.3,
-            lang[this.selectedLang].Editeur,
+            i18nService.translate('Editeur'),
             30,
             0.5,
             0.5,
@@ -55,7 +55,7 @@ export class Menu extends Phaser.State {
         const come_back = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE - platformSizeInPx,
-            lang[this.selectedLang].HowToBack,
+            i18nService.translate('HowToBack'),
             18,
             0.5,
             1,
@@ -67,7 +67,7 @@ export class Menu extends Phaser.State {
         const raz = cliquable(
             BASE_SIZE - platformSizeInPx,
             platformSizeInPx,
-            lang[this.selectedLang].RaZ,
+            i18nService.translate('RaZ'),
             25,
             1,
             0,
@@ -79,7 +79,7 @@ export class Menu extends Phaser.State {
         const scores = cliquable(
             BASE_SIZE / 2,
             BASE_SIZE / 1.7,
-            lang[this.selectedLang].Scores,
+            i18nService.translate('Scores'),
             27,
             0.5,
             0.5,

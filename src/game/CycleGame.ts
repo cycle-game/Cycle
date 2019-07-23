@@ -12,18 +12,18 @@ import { Scores } from './states/scores';
 export class CycleGame {
     private game: Phaser.Game;
 
-    constructor(private lang: string, private readonly htmlElement: string, public readonly baseSize = BASE_SIZE) {
+    constructor(private readonly htmlElement: string, public readonly baseSize = BASE_SIZE) {
         this.game = new Phaser.Game(this.baseSize, this.baseSize, Phaser.CANVAS, this.htmlElement);
 
         // Les états du jeu
         this.game.state.add(Boot.NAME, new Boot());
         this.game.state.add(Load.NAME, new Load());
-        this.game.state.add(Menu.NAME, new Menu(lang));
-        this.game.state.add(RulesState.NAME, new RulesState(lang));
-        this.game.state.add(Editor.NAME, new Editor(lang));
-        this.game.state.add(Play.NAME, new Play(lang));
-        this.game.state.add(Victory.NAME, new Victory(lang));
-        this.game.state.add(Scores.NAME, new Scores(lang));
+        this.game.state.add(Menu.NAME, new Menu());
+        this.game.state.add(RulesState.NAME, new RulesState());
+        this.game.state.add(Editor.NAME, new Editor());
+        this.game.state.add(Play.NAME, new Play());
+        this.game.state.add(Victory.NAME, new Victory());
+        this.game.state.add(Scores.NAME, new Scores());
     }
 
     start() {

@@ -3,13 +3,13 @@ import { reset, save } from '../functions';
 import { stages } from '../stages';
 import Phaser from 'phaser-ce';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
-import { lang } from '../i18n';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { StageDefinition } from '../stages/StageDefinition';
 import { Menu } from './menu';
 import { Victory } from './victory';
 
 import { mean } from 'lodash';
+import { i18nService } from '../../i18n/I18nService';
 
 const cplan = BASE_SIZE / 1.8;
 let nb_tours = 0;
@@ -61,7 +61,7 @@ export class Play extends Phaser.State {
     private nuit: Phaser.Sprite;
     private plnte: Phaser.Sprite;
 
-    constructor(private readonly selectedLang: string) {
+    constructor() {
         super();
     }
 
@@ -344,7 +344,7 @@ export class Play extends Phaser.State {
         // ----------------------------------------------- Back to the editor //
 
         if (edited_lvl.edited) {
-            this.goBack = this.game.add.text(platformSizeInPx, platformSizeInPx, lang[this.selectedLang].Retour);
+            this.goBack = this.game.add.text(platformSizeInPx, platformSizeInPx, i18nService.translate('Retour'));
             this.goBack.anchor.setTo(0, 0);
 
             this.goBack.inputEnabled = true;
