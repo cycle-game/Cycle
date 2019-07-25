@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { SupportedLocale } from '../../i18n/I18nService';
+import './LanguageSelector.scss';
 
 export type Language = {
     /** Language name to display */
@@ -19,11 +20,11 @@ export type LanguageSelectorProps = {
  * Language selector
  */
 export const LanguageSelector: FunctionComponent<LanguageSelectorProps> = ({ languages, setActiveLanguage }) => (
-    <ul className="selector">
+    <div className="LanguageSelector">
         {languages.map(lang => (
-            <li key={lang.code}>
-                <button onClick={() => setActiveLanguage(lang.code)}>{lang.name}</button>
-            </li>
+            <div key={lang.code} className="option" onClick={() => setActiveLanguage(lang.code)}>
+                <div> {lang.name}</div>
+            </div>
         ))}
-    </ul>
+    </div>
 );
