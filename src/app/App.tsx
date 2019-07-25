@@ -4,6 +4,7 @@ import { TheGame } from './the-game';
 import { Language, LanguageSelector } from './language-selector';
 import { isEmpty } from 'lodash';
 import { i18nService, SupportedLocale } from '../i18n/I18nService';
+import './App.scss';
 
 type AppProps = {};
 
@@ -41,6 +42,6 @@ export class App extends Component<AppProps, AppState> {
             component = <TheGame />;
         }
 
-        return <div>{component}</div>;
+        return component;
     }
 }
