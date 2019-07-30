@@ -1,4 +1,5 @@
 @import '../../node_modules/normalize.css/normalize.css';
+@import '../resources/fonts/font';
 
 body,
 html {
@@ -9,6 +10,7 @@ html {
     position: relative;
     background-color: #ccc;
     color: #555;
+    font-family: 'Xolonium', sans-serif;
 }
 
 #root {
