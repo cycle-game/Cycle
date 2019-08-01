@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { SupportedLocale } from '../../i18n/I18nService';
+import { SupportedLocale } from '../../../i18n/I18nService';
 import './LanguageSelector.scss';
 
 export type Language = {
