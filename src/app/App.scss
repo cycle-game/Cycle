@@ -1,5 +1,6 @@
 @import '../../node_modules/normalize.css/normalize.css';
 @import '../resources/fonts/font';
+@import './variables';
 
 body,
 html {
@@ -8,7 +9,7 @@ html {
     width: 100%;
     height: 100%;
     position: relative;
-    background-color: #ccc;
+    background-color: $accentColor;
     color: #555;
     font-family: 'Xolonium', sans-serif;
 }
