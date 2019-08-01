@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { TheGame } from './the-game';
-import { Language, LanguageSelector } from './language-selector';
+import { Language, LanguageSelector } from './components';
 import { isEmpty } from 'lodash';
 import { i18nService, SupportedLocale } from '../i18n/I18nService';
 import './App.scss';
