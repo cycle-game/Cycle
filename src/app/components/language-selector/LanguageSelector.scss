@@ -15,7 +15,7 @@
         font-size: xx-large;
         transition: background-color 1s linear;
 
-        &:hover {
+        &.hovered {
             color: $accentColor;
             background-color: $primaryColor;
         }
