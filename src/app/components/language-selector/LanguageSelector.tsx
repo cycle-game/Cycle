@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { SupportedLocale } from '../../../i18n/I18nService';
 import './LanguageSelector.scss';
 
@@ -19,12 +19,16 @@ export type LanguageSelectorProps = {
 /**
  * Language selector
  */
-export const LanguageSelector: FunctionComponent<LanguageSelectorProps> = ({ languages, setActiveLanguage }) => (
-    <div className="LanguageSelector">
+export const LanguageSelector: FunctionComponent<LanguageSelectorProps> = ({ languages, setActiveLanguage }) => {
+    const [hoveredLang, setHoveredLang] = useState(languages[0]);
+
+    const classNameComputing = (element: Language) => 'option ' + (element.code === hoveredLang.code ? 'hovered' : '');
+
+    return <div className="LanguageSelector" onClick={() => setActiveLanguage(hoveredLang.code)}>
         {languages.map(lang => (
-            <div key={lang.code} className="option" onClick={() => setActiveLanguage(lang.code)}>
-                <div> {lang.name}</div>
+            <div key={lang.code} className={classNameComputing(lang)} onMouseOver={() => setHoveredLang(lang)}>
+                <div>{lang.name}</div>
             </div>
         ))}
     </div>
-);
+};
