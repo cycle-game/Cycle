@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/cycle-game/Cycle/compare/v2.6.0...v2.7.0) (2019-08-02)
+
+
+### Features
+
+* use redux to select the language ([e95fb8c](https://github.com/cycle-game/Cycle/commit/e95fb8c))
+
 # [2.6.0](https://github.com/cycle-game/Cycle/compare/v2.5.0...v2.6.0) (2019-07-23)
 
 
