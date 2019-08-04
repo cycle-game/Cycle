@@ -1,3 +1,11 @@
+# [2.8.0](https://github.com/cycle-game/Cycle/compare/v2.7.0...v2.8.0) (2019-08-04)
+
+
+### Features
+
+* use keyboard to choose between languages ([073f597](https://github.com/cycle-game/Cycle/commit/073f597))
+* use state for storing hovered language locally ([a9fb4a0](https://github.com/cycle-game/Cycle/commit/a9fb4a0))
+
 # [2.7.0](https://github.com/cycle-game/Cycle/compare/v2.6.0...v2.7.0) (2019-08-02)
 
 
