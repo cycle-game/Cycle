@@ -5,10 +5,8 @@ import i18next from 'i18next';
 export type SupportedLocale = 'fr' | 'en';
 
 class I18nService {
-    constructor() {}
-
-    init() {
-        return i18next.init({
+    constructor() {
+        i18next.init({
             lng: 'en',
             fallbackLng: 'en',
             resources: {
