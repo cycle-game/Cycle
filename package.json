@@ -23,13 +23,13 @@
     "license": "GPL-3.0-only",
     "private": false,
     "scripts": {
-        "build": "webpack --mode=production",
-        "build:dev": "webpack --mode=development",
+        "build": "webpack --config webpack.prod.js",
+        "build:dev": "webpack --config webpack.dev.js",
         "lint:prettier": "yarn prettier -l 'src/**/*.{ts,js,md,json}'",
         "lint:prettier:fix": "yarn prettier --write 'src/**/*.{ts,js,md,json}'",
         "deploy": "yarn build && gh-pages -d dist",
         "release": "semantic-release",
-        "start:dev": "webpack-dev-server --mode=development --open",
+        "start:dev": "webpack-dev-server --open --config webpack.dev.js",
         "storybook:start": "start-storybook -p 6006",
         "storybook:build": "build-storybook --quiet",
         "test": "jest --forceExit --config jest.json"
@@ -95,7 +95,8 @@
         "typescript": "^3.5.3",
         "webpack": "^4.35.3",
         "webpack-cli": "^3.3.5",
-        "webpack-dev-server": "^3.7.2"
+        "webpack-dev-server": "^3.7.2",
+        "webpack-merge": "^4.2.1"
     },
     "dependencies": {
         "i18next": "^17.0.6",
