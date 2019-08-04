@@ -8,8 +8,6 @@ import { i18nService } from '../i18n/I18nService';
 import './App.scss';
 
 export const App = () => {
-    i18nService.init();
-
     const selectedLanguage = useSelector(state => state.language.selectedLanguage);
 
     let component = <SelectLanguage />;

@@ -7,7 +7,6 @@ describe(i18nService.constructor.name, () => {
 
     describe('when locale is set', () => {
         beforeEach(async () => {
-            await i18nService.init();
             await i18nService.setLanguage('fr');
         });
 
