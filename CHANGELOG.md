@@ -1,3 +1,10 @@
+## [2.8.1](https://github.com/cycle-game/Cycle/compare/v2.8.0...v2.8.1) (2019-08-04)
+
+
+### Bug Fixes
+
+* add missing `scss-loader` in storybook webpack config ([eff36cb](https://github.com/cycle-game/Cycle/commit/eff36cb))
+
 # [2.8.0](https://github.com/cycle-game/Cycle/compare/v2.7.0...v2.8.0) (2019-08-04)
 
 
