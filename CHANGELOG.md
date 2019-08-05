@@ -1,3 +1,10 @@
+## [2.8.2](https://github.com/cycle-game/Cycle/compare/v2.8.1...v2.8.2) (2019-08-05)
+
+
+### Bug Fixes
+
+* selected language was overridden by default one (en) for all translation in app ([2cb93e2](https://github.com/cycle-game/Cycle/commit/2cb93e2))
+
 ## [2.8.1](https://github.com/cycle-game/Cycle/compare/v2.8.0...v2.8.1) (2019-08-04)
 
 
