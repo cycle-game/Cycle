@@ -18,7 +18,6 @@ jobs:
           yarn install
           yarn lint:prettier
           yarn test
-          yarn storybook:build
           yarn build
         env:
           CI: true
