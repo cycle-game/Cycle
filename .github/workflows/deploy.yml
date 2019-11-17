@@ -1,0 +1,38 @@
+name: Deploy & Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Cache node modules
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile --silent
+        env:
+          HUSKY_SKIP_INSTALL: true
+      - name: Build, Deploy and Release
+        run: |
+          yarn ci:deploy
+          yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
