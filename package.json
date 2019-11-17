@@ -27,6 +27,7 @@
         "build:dev": "webpack --config webpack.dev.js",
         "lint:prettier": "yarn prettier -l 'src/**/*.{ts,js,md,json}'",
         "lint:prettier:fix": "yarn prettier --write 'src/**/*.{ts,js,md,json}'",
+        "ci:deploy": "yarn build && gh-pages -d dist -m \"Deploy cycle-game/Cycle\" -u \"Deployment Bot (from GH Actions) <john@doe.org>\" --repo https://$GITHUB_TOKEN@github.com/cycle-game/Cycle.git",
         "deploy": "yarn build && gh-pages -d dist",
         "release": "semantic-release",
         "start:dev": "webpack-dev-server --open --config webpack.dev.js",
