@@ -1,6 +1,5 @@
 # Cycle
 
-[![Build Status](https://travis-ci.com/cycle-game/Cycle.svg?branch=master)](https://travis-ci.com/cycle-game/Cycle)
 ![GitHub Build Status](https://github.com/cycle-game/Cycle/workflows/Lint%2C%20Test%20%26%20Build/badge.svg?branch=master)
 
 HTML5 game made with Phaser
