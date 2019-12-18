@@ -1,0 +1,16 @@
+{
+    "name": "cycle-game",
+    "version": 2,
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@now/static-build",
+            "config": { "distDir": "dist" }
+        }
+    ],
+    "github": {
+        "autoJobCancelation": true,
+        "enabled": true,
+        "silent": false
+    }
+}
