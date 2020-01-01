@@ -5,6 +5,10 @@ import { Load } from './load';
 export class Boot extends Phaser.State {
     static NAME = Boot.prototype.constructor.name;
 
+    constructor(private readonly nextStateName: string = Load.NAME) {
+        super();
+    }
+
     preload() {
         this.game.stage.setBackgroundColor(YELLOW);
 
@@ -13,6 +17,6 @@ export class Boot extends Phaser.State {
     }
 
     create() {
-        this.game.state.start(Load.NAME);
+        this.game.state.start(this.nextStateName);
     }
 }

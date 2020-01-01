@@ -21,6 +21,10 @@ import { Menu } from './menu';
 export class Load extends Phaser.State {
     static NAME = Load.prototype.constructor.name;
 
+    constructor(private readonly nextStateName: string = Menu.NAME) {
+        super();
+    }
+
     preload() {
         // Ici on crée deux sprites, un en fond et un au dessus
         this.game.add.sprite(0, 0, LOADER_FULL);
@@ -49,6 +53,6 @@ export class Load extends Phaser.State {
     }
 
     create() {
-        this.game.state.start(Menu.NAME);
+        this.game.state.start(this.nextStateName);
     }
 }
