@@ -12,6 +12,13 @@ html {
     background-color: $accentColor;
     color: #555;
     font-family: 'Xolonium', sans-serif;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
 }
 
 #root {
