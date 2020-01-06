@@ -1,7 +1,6 @@
 import Phaser from 'phaser-ce';
 import { cliquable, difficultes, DifficultySelectorVM, reset } from '../functions';
 import { BASE_SIZE, PlayerProgression } from '../variables';
-import { Menu } from './menu';
 import { i18nService } from '../../i18n/I18nService';
 
 export class RulesState extends Phaser.State {
@@ -9,7 +8,6 @@ export class RulesState extends Phaser.State {
 
     choix_diff: DifficultySelectorVM;
     private space_key: Phaser.Key;
-    private esc_key: Phaser.Key;
     Stats: typeof PlayerProgression = null;
 
     private readonly difficultyLabels: string[];
@@ -28,9 +26,6 @@ export class RulesState extends Phaser.State {
     create(): void {
         // Un équivalent d'écouteur d'évènement (si on veut)
         this.space_key = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-
-        // Retour au menu avec Échap
-        this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Présentation du jeu
         cliquable(
@@ -55,9 +50,6 @@ export class RulesState extends Phaser.State {
     }
 
     update(): void {
-        // Retour au menu
-        if (this.esc_key.isDown) this.game.state.start(Menu.NAME);
-
         // Démarrage du jeu
         if (this.space_key.isDown) this.game.state.start('Play');
     }

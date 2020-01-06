@@ -14,10 +14,12 @@
         justify-content: center;
         font-size: xx-large;
         transition: background-color 1s linear;
+        cursor: pointer;
 
         &.hovered {
             color: $accentColor;
             background-color: $primaryColor;
+            text-decoration: underline;
         }
     }
 }

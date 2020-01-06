@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 
 import { CycleGame } from '../../game';
-import { BASE_SIZE } from '../../game/variables';
+import { BASE_SIZE, PlayerProgression } from '../../game/variables';
 import { CycleStageEditorGame } from '../../game/CycleStageEditorGame';
 import { CycleScoreGame } from '../../game/CycleScoreGame';
 import { i18nService } from '../../i18n/I18nService';
+import './TheGame.scss';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
+import { reset } from '../../game/functions';
 
 type TheGameProps = {};
 
 type TheGameState = {
     game?: CycleGame | CycleStageEditorGame | CycleScoreGame;
+    displayMenu: boolean;
 };
 
 export class TheGame extends Component<TheGameProps, TheGameState> {
@@ -18,20 +22,49 @@ export class TheGame extends Component<TheGameProps, TheGameState> {
     constructor(props: TheGameProps) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            displayMenu: true,
+        };
     }
 
     componentDidMount(): void {}
 
     render() {
+        const { game, displayMenu } = this.state;
+
         const startGame = (game: CycleGame | CycleStageEditorGame | CycleScoreGame) => {
             if (this.state.game) {
                 this.state.game.stop();
             }
 
             game.start();
-            this.setState({ game });
+            this.setState({ game, displayMenu: false });
         };
+
+
+        // TODO: Extract this menu in a new component
+        const menu = (
+            <div className="menu">
+                <img className="logo" src="resources/tiles/logo-without-c.png" />
+                <div className="item game-item" onClick={() => startGame(new CycleGame(TheGame.CANVAS_ID))}>
+                    {i18nService.translate('Jeu')}
+                </div>
+                <div className="item" onClick={() => startGame(new CycleScoreGame(TheGame.CANVAS_ID))}>
+                    {i18nService.translate('Scores')}
+                </div>
+                <div className="item" onClick={() => startGame(new CycleStageEditorGame(TheGame.CANVAS_ID))}>
+                    {i18nService.translate('Editeur')}
+                </div>
+                <div
+                    className="item"
+                    onClick={() => {
+                        reset(PlayerProgression);
+                    }}
+                >
+                    {i18nService.translate('RaZ')}
+                </div>
+            </div>
+        );
 
         const style = {
             width: `${BASE_SIZE}px`,
@@ -39,18 +72,18 @@ export class TheGame extends Component<TheGameProps, TheGameState> {
             margin: 'auto',
         };
 
+        const backToMenu = () => {
+            if (game) {
+                game.stop();
+            }
+            this.setState({ displayMenu: true, game: null });
+        };
+
         return (
-            <div>
-                <button onClick={() => startGame(new CycleStageEditorGame(TheGame.CANVAS_ID))}>
-                    {i18nService.translate('Editeur')}
-                </button>
-                <button onClick={() => startGame(new CycleGame(TheGame.CANVAS_ID))}>
-                    {i18nService.translate('Jeu')}
-                </button>
-                <button onClick={() => startGame(new CycleScoreGame(TheGame.CANVAS_ID))}>
-                    {i18nService.translate('Scores')}
-                </button>
+            <div className="TheGame">
+                {displayMenu ? menu : <div></div>}
                 <div id={TheGame.CANVAS_ID} style={style} />
+                <KeyboardEventHandler handleKeys={['esc']} onKeyEvent={backToMenu} />
             </div>
         );
     }
