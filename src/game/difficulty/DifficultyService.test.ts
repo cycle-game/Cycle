@@ -1,5 +1,5 @@
 import { difficultyService, DifficultyService } from './DifficultyService';
-import { easy, hard, normal } from './Difficulty';
+import { easy, hard, normal } from '../../app/models';
 
 describe(DifficultyService.prototype.constructor.name, () => {
     it('has default value set to easy', () => {

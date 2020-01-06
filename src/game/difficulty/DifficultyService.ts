@@ -1,4 +1,4 @@
-import { Difficulty, easy } from './Difficulty';
+import { Difficulty, easy } from '../../app/models';
 
 export class DifficultyService {
     private currentDifficulty: Difficulty = easy;

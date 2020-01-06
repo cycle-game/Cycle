@@ -1,0 +1,16 @@
+@import '../../variables';
+
+.DifficultySelector {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .option {
+        margin: 12px;
+        cursor: pointer;
+        color: $primaryColor;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
