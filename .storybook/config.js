@@ -8,4 +8,7 @@ function loadStories() {
     req.keys().forEach(filename => req(filename));
 }
 
+// Load app global scss
+import '../src/app/App.scss';
+
 configure(loadStories, module);
