@@ -5,7 +5,6 @@ import Phaser from 'phaser-ce';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { StageDefinition } from '../stages/StageDefinition';
-import { Menu } from './menu';
 import { Victory } from './victory';
 
 import { mean } from 'lodash';
@@ -40,7 +39,6 @@ let starsGroup: any;
 export class Play extends Phaser.State {
     static NAME = Play.prototype.constructor.name;
 
-    private esc_key: Phaser.Key;
     private space_key: Phaser.Key;
     private gauche: Phaser.Key;
     private droite: Phaser.Key;
@@ -135,7 +133,6 @@ export class Play extends Phaser.State {
             this.space_key = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             this.gauche = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
             this.droite = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-            this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
         }
 
         // ------------------------------------------------------------------ //
@@ -474,23 +471,6 @@ export class Play extends Phaser.State {
                 this.create();
                 PlayerProgression.score += this.tours(this.planete.angle) + 50;
             }
-
-            // ------------------------------------------------------------------ //
-            // ------------------------------------------------------------------ //
-            // ------------------------------------------------------------------ //
-            // --------------------------------------------------- Retour au menu //
-
-            if (this.esc_key.isDown) {
-                /*
-        Stats.score += this.tours(this.planete.angle) + 50;
-        save(Stats);*/
-
-                this.zoom(1);
-                this.game.state.start(Menu.NAME);
-            }
-
-            // ------------------------------------------------------------------ //
-            // ------------------------------------------------------------------ //
 
             // ----------- Condition pour l'animation début-fin //
         }

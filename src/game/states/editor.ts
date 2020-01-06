@@ -3,7 +3,6 @@ import { Play } from './play';
 import Phaser from 'phaser-ce';
 import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
 import { polarToCartesian } from '../utils/CoordonateSystem';
-import { Menu } from './menu';
 import { i18nService } from '../../i18n/I18nService';
 
 const alph = 0.5;
@@ -20,8 +19,6 @@ type CycleSprite = {
 
 export class Editor extends Phaser.State {
     static NAME = Editor.prototype.constructor.name;
-
-    private esc_key: Phaser.Key;
 
     private general: Phaser.Group;
     private menu: Phaser.Group;
@@ -42,11 +39,6 @@ export class Editor extends Phaser.State {
         super();
     }
     create() {
-        // ------------------------------------------------------------------ //
-        // --------------------------------------------------- Retour au menu //
-
-        this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
-
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
@@ -417,20 +409,8 @@ export class Editor extends Phaser.State {
             this.etoile_pos.calculLvl = (tmp[0] - BASE_SIZE / 6) / platformSizeInPx - 0.5;
             this.etoile_pos.calculDeg = tmp[1];
         }
-
-        // ------------------------------------------------------------------ //
-        // ------------------------------------------------------------------ //
-        // --------------------------------------------------- Retour au menu //
-
-        if (this.esc_key.isDown) {
-            this.redimensionne(1);
-            edited_lvl.edited = false;
-            this.game.state.start(Menu.NAME);
-        }
-
-        // ------------------------------------------------------------------ //
-        // ------------------------------------------------------------------ //
     }
+
     unPeuDeTrigo(x, y) {
         // Pour l'étoile
 

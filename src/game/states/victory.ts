@@ -1,7 +1,6 @@
 import { cliquable, reset, save, sociaux, toHigh } from '../functions';
 import { BASE_SIZE, pseudo as pseudoVar, PlayerProgression } from '../variables';
 import Phaser from 'phaser-ce';
-import { Menu } from './menu';
 import { i18nService } from '../../i18n/I18nService';
 
 let pseudo = pseudoVar;
@@ -9,7 +8,6 @@ let pseudo = pseudoVar;
 export class Victory extends Phaser.State {
     static NAME = Victory.prototype.constructor.name;
 
-    private esc_key: Phaser.Key;
     private pseudo: Phaser.Text;
 
     constructor() {
@@ -44,9 +42,6 @@ export class Victory extends Phaser.State {
         );
 
         this.pseudo = cliquable(BASE_SIZE / 2, (BASE_SIZE / 4) * 3, pseudo + '_', 25, 0.5, 0.5, 0, 500, null, this);
-
-        // Retour au menu
-        this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Clavier
         this.game.input.keyboard.addCallbacks(this, this.tape);
@@ -97,11 +92,5 @@ export class Victory extends Phaser.State {
 
         this.addToPseudo(letter);
     }
-    update() {
-        // Retour au menu
-        if (this.esc_key.isDown) {
-            reset(PlayerProgression);
-            this.game.state.start(Menu.NAME);
-        }
-    }
+    update() {}
 }

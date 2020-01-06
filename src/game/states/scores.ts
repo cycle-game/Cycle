@@ -1,13 +1,10 @@
 import { BASE_SIZE, platformSizeInPx, PlayerProgression } from '../variables';
 import { cliquable, difficultes, DifficultySelectorVM, ecart, scores } from '../functions';
 import Phaser from 'phaser-ce';
-import { Menu } from './menu';
 import { i18nService } from '../../i18n/I18nService';
 
 export class Scores extends Phaser.State {
     static NAME = Scores.prototype.constructor.name;
-
-    private esc_key: Phaser.Key;
 
     private choix_diff: DifficultySelectorVM;
     private difficulty: number;
@@ -30,9 +27,6 @@ export class Scores extends Phaser.State {
 
         // Screen title
         cliquable(BASE_SIZE / 2, platformSizeInPx, i18nService.translate('UnSeul'), 22, 0.5, 0.5, 0, 700, null, this);
-
-        // ESC to return to menu
-        this.esc_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
         // Difficulty
         this.choix_diff = difficultes(this, this.difficultyLabels);
@@ -83,9 +77,7 @@ export class Scores extends Phaser.State {
         this.choix_diff[PlayerProgression.difficulty].text.setShadow(0, 0, 'rgba(0, 0, 0, 1)', 5);
     }
 
-    update() {
-        if (this.esc_key.isDown) this.game.state.start(Menu.NAME);
-    }
+    update() {}
 
     choix(sprite) {
         if (!isNaN(sprite)) {
