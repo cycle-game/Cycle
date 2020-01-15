@@ -8,6 +8,8 @@ import { i18nService } from '../../i18n/I18nService';
 import './TheGame.scss';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { reset } from '../../game/functions';
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import { ScoresDisplayer } from '../containers';
 
 type TheGameProps = {};
 
@@ -41,29 +43,44 @@ export class TheGame extends Component<TheGameProps, TheGameState> {
             this.setState({ game, displayMenu: false });
         };
 
-
         // TODO: Extract this menu in a new component
         const menu = (
-            <div className="menu">
-                <img className="logo" src="resources/tiles/logo-without-c.png" />
-                <div className="item game-item" onClick={() => startGame(new CycleGame(TheGame.CANVAS_ID))}>
-                    {i18nService.translate('Jeu')}
-                </div>
-                <div className="item" onClick={() => startGame(new CycleScoreGame(TheGame.CANVAS_ID))}>
-                    {i18nService.translate('Scores')}
-                </div>
-                <div className="item" onClick={() => startGame(new CycleStageEditorGame(TheGame.CANVAS_ID))}>
-                    {i18nService.translate('Editeur')}
-                </div>
-                <div
-                    className="item"
-                    onClick={() => {
-                        reset(PlayerProgression);
-                    }}
-                >
-                    {i18nService.translate('RaZ')}
-                </div>
-            </div>
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/scores">
+                        <ScoresDisplayer />
+                    </Route>
+                    <Route path="/">
+                        <div className="menu">
+                            <img className="logo" src="resources/tiles/logo-without-c.png" />
+                            <div className="item game-item" onClick={() => startGame(new CycleGame(TheGame.CANVAS_ID))}>
+                                {i18nService.translate('Jeu')}
+                            </div>
+                            <div className="item" onClick={() => startGame(new CycleScoreGame(TheGame.CANVAS_ID))}>
+                                {i18nService.translate('Scores')}
+                            </div>
+                            <Link to="/scores" style={{ textDecoration: 'none' }}>
+                                <div className="item">{i18nService.translate('Scores')}</div>
+                            </Link>
+
+                            <div
+                                className="item"
+                                onClick={() => startGame(new CycleStageEditorGame(TheGame.CANVAS_ID))}
+                            >
+                                {i18nService.translate('Editeur')}
+                            </div>
+                            <div
+                                className="item"
+                                onClick={() => {
+                                    reset(PlayerProgression);
+                                }}
+                            >
+                                {i18nService.translate('RaZ')}
+                            </div>
+                        </div>
+                    </Route>
+                </Switch>
+            </BrowserRouter>
         );
 
         const style = {
