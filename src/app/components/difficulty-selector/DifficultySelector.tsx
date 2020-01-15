@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Difficulty, normal } from '../../models';
 import './DifficultySelector.scss';
+import { i18nService } from '../../../i18n/I18nService';
 
 type DifficultySelectorProps = {
     difficulties: Difficulty[];
@@ -52,7 +53,7 @@ export class DifficultySelector extends Component<DifficultySelectorProps, Diffi
                                 : { fontWeight: 'normal' }
                         }
                     >
-                        {difficulty.translationKey}
+                      {i18nService.translate('Difficultes.'+difficulty.translationKey)}
                     </div>
                 ))}
             </div>
