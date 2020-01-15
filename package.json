@@ -36,7 +36,8 @@
         "start:dev": "webpack-dev-server --open --config webpack.dev.js",
         "storybook:start": "start-storybook -p 6006",
         "storybook:build": "build-storybook --quiet",
-        "test": "jest --forceExit --config jest.json"
+        "test": "jest --forceExit --config jest.json",
+        "test:cov": "jest --forceExit --config jest.json --ci --coverage"
     },
     "husky": {
         "hooks": {
