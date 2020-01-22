@@ -9,6 +9,7 @@ import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { reset } from '../../game/functions';
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 import { ScoresDisplayer } from '../containers';
+import { StageEditor } from '../containers/stage-editor/StageEditor';
 
 type TheGameProps = {};
 
@@ -49,6 +50,9 @@ export class TheGame extends Component<TheGameProps, TheGameState> {
                     <Route path="/scores">
                         <ScoresDisplayer />
                     </Route>
+                    <Route path="/stage-editor">
+                        <StageEditor />
+                    </Route>
                     <Route path="/">
                         <div className="menu">
                             <img className="logo" src="resources/tiles/logo-without-c.png" />
@@ -59,12 +63,9 @@ export class TheGame extends Component<TheGameProps, TheGameState> {
                                 <div className="item">{i18nService.translate('Scores')}</div>
                             </Link>
 
-                            <div
-                                className="item"
-                                onClick={() => startGame(new CycleStageEditorGame(TheGame.CANVAS_ID))}
-                            >
-                                {i18nService.translate('Editeur')}
-                            </div>
+                            <Link to="/stage-editor" style={{ textDecoration: 'none' }}>
+                                <div className="item">{i18nService.translate('Editeur')}</div>
+                            </Link>
                             <div
                                 className="item"
                                 onClick={() => {
