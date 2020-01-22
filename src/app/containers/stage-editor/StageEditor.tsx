@@ -1,26 +1,23 @@
-import React, { Component } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { BASE_SIZE } from '../../../game/variables';
 import { CycleStageEditorGame } from '../../../game/CycleStageEditorGame';
 import './StageEditor.scss';
 
-export class StageEditor extends Component<{}, {}> {
-    private static CANVAS_ID = 'cycleCanvas';
+const CANVAS_ID = 'cycleCanvas';
+const style = {
+    width: `${BASE_SIZE}px`,
+    height: `${BASE_SIZE}px`,
+    margin: 'auto',
+};
 
-    componentDidMount(): void {
-        new CycleStageEditorGame(StageEditor.CANVAS_ID).start();
-    }
+export const StageEditor: FunctionComponent = () => {
+    useEffect(() => {
+        new CycleStageEditorGame(CANVAS_ID).start();
+    }, []);
 
-    render() {
-        const style = {
-            width: `${BASE_SIZE}px`,
-            height: `${BASE_SIZE}px`,
-            margin: 'auto',
-        };
-
-        return (
-            <div className="StageEditor">
-                <div id={StageEditor.CANVAS_ID} style={style} />
-            </div>
-        );
-    }
-}
+    return (
+        <div className="StageEditor">
+            <div id={CANVAS_ID} style={style} />
+        </div>
+    );
+};
