@@ -13,36 +13,6 @@ export function toHigh(Stats, pseudo) {
     // Save high score
 }
 
-export function scores() {
-    // fetch scores
-    return (
-        'player1_easy::20::2' +
-        '><' +
-        'player2_easy::15::2' +
-        '><' +
-        'player3_easy::10::2' +
-        '|||' +
-        'player1_normal::30::3' +
-        '><' +
-        'player2_normal::20::3' +
-        '><' +
-        'player3_normal::10::3' +
-        '|||' +
-        'player1_hard::31::1' +
-        '><' +
-        'player2_hard::16::1' +
-        '><' +
-        'player3_hard::11::1' +
-        '|||' +
-        'player1_insane::30::1' +
-        '><' +
-        'player2_insane::15::1' +
-        '><' +
-        'player2_insane::10::1' +
-        '|||'
-    );
-}
-
 // Création d'un texte cliquable (ou non)
 export function cliquable(
     x: number,

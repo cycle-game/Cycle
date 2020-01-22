@@ -5,7 +5,6 @@ import { Load } from './states/load';
 import { RulesState } from './states/rules';
 import { Play } from './states/play';
 import { Victory } from './states/victory';
-import { Scores } from './states/scores';
 
 export class CycleGame {
     private game: Phaser.Game;
@@ -19,7 +18,6 @@ export class CycleGame {
         this.game.state.add(RulesState.NAME, new RulesState());
         this.game.state.add(Play.NAME, new Play());
         this.game.state.add(Victory.NAME, new Victory());
-        this.game.state.add(Scores.NAME, new Scores());
     }
 
     start() {
