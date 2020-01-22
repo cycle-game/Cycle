@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { CycleGame } from '../../game';
 import { BASE_SIZE, PlayerProgression } from '../../game/variables';
 import { CycleStageEditorGame } from '../../game/CycleStageEditorGame';
-import { CycleScoreGame } from '../../game/CycleScoreGame';
 import { i18nService } from '../../i18n/I18nService';
 import './TheGame.scss';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
@@ -14,7 +13,7 @@ import { ScoresDisplayer } from '../containers';
 type TheGameProps = {};
 
 type TheGameState = {
-    game?: CycleGame | CycleStageEditorGame | CycleScoreGame;
+    game?: CycleGame | CycleStageEditorGame;
     displayMenu: boolean;
 };
 
@@ -34,7 +33,7 @@ export class TheGame extends Component<TheGameProps, TheGameState> {
     render() {
         const { game, displayMenu } = this.state;
 
-        const startGame = (game: CycleGame | CycleStageEditorGame | CycleScoreGame) => {
+        const startGame = (game: CycleGame | CycleStageEditorGame) => {
             if (this.state.game) {
                 this.state.game.stop();
             }
@@ -55,9 +54,6 @@ export class TheGame extends Component<TheGameProps, TheGameState> {
                             <img className="logo" src="resources/tiles/logo-without-c.png" />
                             <div className="item game-item" onClick={() => startGame(new CycleGame(TheGame.CANVAS_ID))}>
                                 {i18nService.translate('Jeu')}
-                            </div>
-                            <div className="item" onClick={() => startGame(new CycleScoreGame(TheGame.CANVAS_ID))}>
-                                {i18nService.translate('Scores')}
                             </div>
                             <Link to="/scores" style={{ textDecoration: 'none' }}>
                                 <div className="item">{i18nService.translate('Scores')}</div>
