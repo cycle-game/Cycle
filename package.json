@@ -46,12 +46,10 @@
     },
     "lint-staged": {
         "*.{ts,js}": [
-            "prettier --write",
-            "git add"
+            "prettier --write"
         ],
         "*.{json,md}": [
-            "prettier --write",
-            "git add"
+            "prettier --write"
         ]
     },
     "prettier": {
@@ -94,7 +92,7 @@
         "jest": "^24.8.0",
         "jest-environment-enzyme": "^7.1.2",
         "jest-enzyme": "^7.1.2",
-        "lint-staged": "^9.2.0",
+        "lint-staged": "^10.0.8",
         "node-sass": "^4.12.0",
         "prettier": "^1.18.2",
         "react-docgen-typescript-loader": "^3.1.0",
