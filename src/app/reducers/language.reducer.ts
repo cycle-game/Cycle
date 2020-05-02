@@ -7,7 +7,10 @@ export type LanguageState = {
 };
 
 const INITIAL_STATE: LanguageState = {
-    availableLanguages: [{ code: 'en', name: 'English' }, { code: 'fr', name: 'Français' }],
+    availableLanguages: [
+        { code: 'en', name: 'English' },
+        { code: 'fr', name: 'Français' },
+    ],
     selectedLanguage: '',
 };
 

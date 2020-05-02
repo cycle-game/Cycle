@@ -64,7 +64,7 @@ export function ecart(nombre: number, margingInPx: number) {
     return Math.round(gameWidthInPx / (nombre - 1));
 }
 
-export type DifficultySelectorVM = ({ text: Phaser.Text; difficulty: number })[];
+export type DifficultySelectorVM = { text: Phaser.Text; difficulty: number }[];
 
 // Choix de la difficulté
 export function difficultes(contexte, labels: string[]): DifficultySelectorVM {
