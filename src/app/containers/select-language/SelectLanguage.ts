@@ -20,7 +20,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     };
 };
 
-export const SelectLanguage = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(LanguageSelector);
+export const SelectLanguage = connect(mapStateToProps, mapDispatchToProps)(LanguageSelector);
