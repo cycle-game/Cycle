@@ -36,12 +36,7 @@ export function cliquable(
     toReturn.alpha = 0;
 
     // Animation
-    if (speed != null)
-        context.game.add
-            .tween(toReturn)
-            .delay(delay)
-            .to({ alpha: 1 }, speed)
-            .start();
+    if (speed != null) context.game.add.tween(toReturn).delay(delay).to({ alpha: 1 }, speed).start();
 
     // Inputs
     if (onDown != null) {

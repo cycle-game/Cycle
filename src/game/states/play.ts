@@ -100,7 +100,7 @@ export class Play extends Phaser.State {
         // ------------------------------------------------------------ Pause //
 
         const pause = this.game.input.keyboard.addKey(Phaser.Keyboard.P);
-        pause.onDown.add(function() {
+        pause.onDown.add(function () {
             if (this.game.paused == true) this.game.paused = false;
             else this.game.paused = true;
         });
@@ -283,11 +283,11 @@ export class Play extends Phaser.State {
         // Maintenant il faut que toutes les platforms soient immobiles
         // (on a pas besoin de les activer en physique, car elle font partie
         // de this.planete)
-        this.platforms.forEachAlive(function(c) {
+        this.platforms.forEachAlive(function (c) {
             c.body.immovable = true;
         }, this);
 
-        starsGroup.forEachAlive(function(c) {
+        starsGroup.forEachAlive(function (c) {
             c.body.angularVelocity = Math.round(Math.random() * 400) + 100;
         }, this);
 
@@ -301,11 +301,8 @@ export class Play extends Phaser.State {
             this.dude.scale = new Phaser.Point(1, 0.01);
             this.dude.body.gravity.y = 0;
 
-            const t = this.game.add
-                .tween(this.dude.scale)
-                .to({ x: 1, y: 1 }, 350)
-                .start();
-            t.onComplete.add(function() {
+            const t = this.game.add.tween(this.dude.scale).to({ x: 1, y: 1 }, 350).start();
+            t.onComplete.add(function () {
                 this.dude.body.gravity.y = 1000;
                 isLevelPlaying = true;
             }, this);
@@ -346,7 +343,7 @@ export class Play extends Phaser.State {
 
             this.goBack.inputEnabled = true;
             this.goBack.input.useHandCursor = true;
-            this.goBack.events.onInputDown.add(function() {
+            this.goBack.events.onInputDown.add(function () {
                 this.game.state.start('Editor');
             }, this);
         }
@@ -442,7 +439,7 @@ export class Play extends Phaser.State {
             // ------------------------------------------------------------------ //
             // -------------------------------------- Déplacement des prédicteurs //
 
-            this.dudeTest.forEachAlive(function(c) {
+            this.dudeTest.forEachAlive(function (c) {
                 // Impossible à faire marcher?!
                 //BASE_SIZE.pivot.y = (cplan - (this.dude.body.y - this.dude.body.height * (s_invers)) );
                 c.pivot.y = -this.dude.y + this.dude.height / 2;
@@ -484,12 +481,9 @@ export class Play extends Phaser.State {
         /* */
         etoile.alive = false;
         /* */
-        var t = this.game.add
-            .tween(etoile.scale)
-            .to({ x: 0, y: 0 }, 300)
-            .start();
+        var t = this.game.add.tween(etoile.scale).to({ x: 0, y: 0 }, 300).start();
         /* */
-        t.onComplete.add(function() {
+        t.onComplete.add(function () {
             this.kill();
         }, etoile);
 
@@ -508,11 +502,8 @@ export class Play extends Phaser.State {
             // ------------- Animation de fin de niveau //
             this.dude.body.gravity.y = 0;
             isLevelPlaying = false;
-            var t = this.game.add
-                .tween(this.dude.scale)
-                .to({ x: 1, y: 0.01 }, 200)
-                .start();
-            t.onComplete.add(function() {
+            var t = this.game.add.tween(this.dude.scale).to({ x: 1, y: 0.01 }, 200).start();
+            t.onComplete.add(function () {
                 // ------------ ----- Changement d'état //
                 if (edited_lvl.edited)
                     // On vient de l'editeur

@@ -113,7 +113,7 @@ export class Editor extends Phaser.State {
 
         this.menu.forEachAlive(this.menuForeach, this);
 
-        this.platforms.forEachAlive(function(c) {
+        this.platforms.forEachAlive(function (c) {
             c.inputEnabled = true;
             c.input.useHandCursor = true;
             c.events.onInputDown.add(alpha, this);
@@ -121,7 +121,7 @@ export class Editor extends Phaser.State {
             c.events.onInputOut.add(out, this);
         });
 
-        this.traps.forEachAlive(function(c) {
+        this.traps.forEachAlive(function (c) {
             c.inputEnabled = true;
             c.input.useHandCursor = true;
             c.events.onInputDown.add(alpha, this);
@@ -152,7 +152,7 @@ export class Editor extends Phaser.State {
         // ------------------------------------------------------------------ //
         // ----------------------------------------- Écriture des platforms //
 
-        this.platforms.forEachAlive(function(c) {
+        this.platforms.forEachAlive(function (c) {
             if (c.alpha > alph) edited_lvl.platforms.push([c.calculDeg, c.calculLvl]);
         }, this);
 
@@ -161,7 +161,7 @@ export class Editor extends Phaser.State {
         // ------------------------------------------------------------------ //
         // ---------------------------------------------- Écriture des pièges //
 
-        this.traps.forEachAlive(function(c) {
+        this.traps.forEachAlive(function (c) {
             if (c.alpha > alph) edited_lvl.traps.push([c.calculDeg, c.calculLvl]);
         }, this);
 
@@ -171,7 +171,7 @@ export class Editor extends Phaser.State {
         // --------------------------------------------- Écriture des étoiles //
 
         if (this.etoile_pos.alpha > 0) this.stars.getTop().kill(); // Detruit la dernière étoile (position du curseur)
-        this.stars.forEachAlive(function(c) {
+        this.stars.forEachAlive(function (c) {
             if (c.alpha > alph) edited_lvl.stars.push([c.calculDeg, c.calculLvl]);
         }, this);
 
@@ -227,7 +227,7 @@ export class Editor extends Phaser.State {
             let newetoile;
 
             // Vérification : l'étoile existe-t-elle déjà ou non ?
-            this.stars.forEachAlive(function(c) {
+            this.stars.forEachAlive(function (c) {
                 if (c.calculLvl == this.etoile_pos.calculLvl && c.calculDeg == this.etoile_pos.calculDeg) {
                     newetoile = c;
                 }
@@ -280,12 +280,12 @@ export class Editor extends Phaser.State {
         // on cache les sprites correspondant
 
         if (inputEnabled) {
-            group.forEachAlive(function(c) {
+            group.forEachAlive(function (c) {
                 c.inputEnabled = true;
                 c.alpha = c.alpha > alph ? c.alpha : inac;
             });
         } else {
-            group.forEachAlive(function(c) {
+            group.forEachAlive(function (c) {
                 c.inputEnabled = false;
                 c.alpha = c.alpha > alph ? c.alpha : 0;
             });
