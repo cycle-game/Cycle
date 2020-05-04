@@ -2,7 +2,7 @@ name: 'Storybook & Chromatic'
 on: push
 
 jobs:
-  test:
+  build-and-run-chromatic:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
