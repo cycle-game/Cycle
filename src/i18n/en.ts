@@ -21,7 +21,7 @@ export const en: Translations = {
     Difficultes: {
         easy: 'Easy',
         normal: 'Normal',
-        hard: 'hard',
+        hard: 'Hard',
         nightmare: 'Nightmare',
     },
     UnSeul: 'Score / Pseudo / Number of stages',
