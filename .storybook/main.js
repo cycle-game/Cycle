@@ -6,6 +6,7 @@ module.exports = {
             options: { configureJSX: true },
         },
         '@storybook/addon-actions',
+        '@storybook/addon-toolbars',
     ],
     webpackFinal: config => {
         config.module.rules.push({
