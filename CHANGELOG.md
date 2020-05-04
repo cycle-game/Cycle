@@ -1,3 +1,10 @@
+## [2.8.3](https://github.com/cycle-game/Cycle/compare/v2.8.2...v2.8.3) (2020-05-04)
+
+
+### Bug Fixes
+
+* add a missing capital letter in `en` translations ([7da09a6](https://github.com/cycle-game/Cycle/commit/7da09a6161a5d7cf9f47f78f9078c29103dcdcc0))
+
 ## [2.8.2](https://github.com/cycle-game/Cycle/compare/v2.8.1...v2.8.2) (2019-08-05)
 
 
