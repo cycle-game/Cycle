@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 import { PlayerProgression } from '../../game/variables';
 import { i18nService } from '../../i18n/I18nService';
-import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { reset } from '../../game/functions';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import { ScoresDisplayer } from '../containers';
@@ -51,7 +50,6 @@ export class TheGame extends Component<{}, {}> {
                         </Route>
                     </Switch>
                 </BrowserRouter>
-                <KeyboardEventHandler handleKeys={['esc']} onKeyEvent={console.log('esc clicked!')} />
             </div>
         );
     }

@@ -3,6 +3,8 @@ import './GameContainer.scss';
 import React, { FunctionComponent, useEffect } from 'react';
 import { CycleGame } from '../../../game';
 import { BASE_SIZE } from '../../../game/variables';
+import { useHistory } from 'react-router-dom';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 
 const CANVAS_ID = 'cycleCanvas';
 
@@ -20,5 +22,13 @@ export const GameContainer: FunctionComponent = () => {
         return () => game.stop();
     }, []);
 
-    return <div className="GameContainer" id={CANVAS_ID} style={style} />;
+    const history = useHistory();
+    const goToHome = () => history.replace('/');
+
+    return (
+        <div>
+            <div className="GameContainer" id={CANVAS_ID} style={style} />;
+            <KeyboardEventHandler handleKeys={['esc']} onKeyEvent={goToHome} />
+        </div>
+    );
 };
