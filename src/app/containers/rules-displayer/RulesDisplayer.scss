@@ -1,0 +1,12 @@
+.RulesDisplayer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .information {
+        max-width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
