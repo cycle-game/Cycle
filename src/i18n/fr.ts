@@ -5,6 +5,13 @@ export const fr = {
     testKeyNested: { deepTranslation: 'deepTranslationFR' },
     Lang: 'fr',
     Tester: 'Tester',
+    rules: {
+        welcome: 'Bienvenue !',
+        howTo: 'Déplacez-vous avec les flèches du clavier.\nUtilisez espace pour sauter.\nP pour mettre en pause.',
+        end: 'Atteignez le dernier niveau afin de\nsauvegarder et partager votre score !',
+        start: 'Appuyez sur espace pour commencer',
+        runAway: 'Fuyez la nuit !',
+    },
     Presentation:
         'Bienvenue !\n\nDéplacez vous avec les flèches du clavier.\nUtilisez espace pour sauter.\nP pour mettre en pause.\n\nAtteignez le dernier niveau afin de\nsauvegarder et partager votre score !\n\n\nAppuyez sur espace pour commencer\n\nFuyez la nuit !',
     Retour: 'Revenir',

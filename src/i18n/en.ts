@@ -5,6 +5,14 @@ export const en: Translations = {
     testKeyNested: { deepTranslation: 'deepTranslationEN' },
     Lang: 'en',
     Tester: 'Try',
+    rules: {
+        welcome: 'Looking for adventures ?',
+        howTo:
+            'Move yourself with the arrow keys.\nUse space to jump.\nP to pause.\n\nReach the last level for\nsaving & sharing your score !',
+        end: 'Atteignez le dernier niveau afin de\nsauvegarder et partager votre score !',
+        start: 'Push space to start',
+        runAway: "Don't get hit by the night !",
+    },
     Presentation:
         "Looking for adventures ?\nMove yourself with the arrow keys.\nUse space to jump.\nP to pause.\n\nReach the last level for\nsaving & sharing your score !\n\n\nPush space to start\n\nDon't get hit by the night !",
     Retour: 'Back',
