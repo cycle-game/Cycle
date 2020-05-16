@@ -15,7 +15,7 @@ export class CycleStageEditorGame {
         this.game.state.add(Boot.NAME, new Boot(Load.NAME));
         this.game.state.add(Load.NAME, new Load(Editor.NAME));
         this.game.state.add(Editor.NAME, new Editor());
-        this.game.state.add(Play.NAME, new Play());
+        this.game.state.add(Play.NAME, new Play(() => {}));
     }
 
     start() {

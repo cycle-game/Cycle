@@ -5,7 +5,6 @@ import Phaser from 'phaser-ce';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
 import { polarToCartesian } from '../utils/CoordonateSystem';
 import { StageDefinition } from '../stages/StageDefinition';
-import { Victory } from './victory';
 
 import { mean } from 'lodash';
 import { i18nService } from '../../i18n/I18nService';
@@ -59,8 +58,11 @@ export class Play extends Phaser.State {
     private nuit: Phaser.Sprite;
     private plnte: Phaser.Sprite;
 
-    constructor() {
+    private readonly onGameEnds: () => void;
+
+    constructor(onGameEnds: () => void) {
         super();
+        this.onGameEnds = onGameEnds;
     }
 
     create() {
@@ -511,7 +513,7 @@ export class Play extends Phaser.State {
                 else {
                     if (PlayerProgression.stage >= stages.length) {
                         this.zoom(1);
-                        this.game.state.start(Victory.NAME);
+                        this.onGameEnds();
                     } else this.game.state.start('Play');
                 }
                 // ------------ ----------------------- //
