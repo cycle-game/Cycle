@@ -9,6 +9,7 @@ import { ScoresDisplayer } from '../containers';
 import { StageEditor } from '../containers/stage-editor/StageEditor';
 import { GameContainer } from '../containers/game-container';
 import { RulesDisplayer } from '../containers/rules-displayer';
+import { VictoryDisplayer } from '../containers/victory-displayer';
 
 export const TheGame = () => (
     <div className="TheGame">
@@ -25,6 +26,9 @@ export const TheGame = () => (
                 </Route>
                 <Route path="/rules">
                     <RulesDisplayer />
+                </Route>
+                <Route path="/victory">
+                    <VictoryDisplayer score={23} />
                 </Route>
                 <Route path="/">
                     <div className="menu">

@@ -8,13 +8,17 @@ import { Victory } from './states/victory';
 export class CycleGame {
     private game: Phaser.Game;
 
-    constructor(private readonly htmlElement: string, public readonly baseSize = BASE_SIZE) {
+    constructor(
+        private readonly htmlElement: string,
+        public readonly baseSize = BASE_SIZE,
+        private readonly onGameEnds: () => void,
+    ) {
         this.game = new Phaser.Game(this.baseSize, this.baseSize, Phaser.CANVAS, this.htmlElement);
 
         // Les états du jeu
         this.game.state.add(Boot.NAME, new Boot(Load.NAME));
         this.game.state.add(Load.NAME, new Load(Play.NAME));
-        this.game.state.add(Play.NAME, new Play());
+        this.game.state.add(Play.NAME, new Play(onGameEnds));
         this.game.state.add(Victory.NAME, new Victory());
     }
 

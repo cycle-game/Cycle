@@ -15,15 +15,17 @@ const style = {
 };
 
 export const GameContainer: FunctionComponent = () => {
+    const history = useHistory();
+    const goToHome = () => history.replace('/victory');
+
     useEffect(() => {
-        const game = new CycleGame(CANVAS_ID);
+        const game = new CycleGame(CANVAS_ID, BASE_SIZE, () => {
+            goToHome();
+        });
         game.start();
 
         return () => game.stop();
     }, []);
-
-    const history = useHistory();
-    const goToHome = () => history.replace('/');
 
     return (
         <div>
