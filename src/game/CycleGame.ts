@@ -3,7 +3,6 @@ import { BASE_SIZE } from './variables';
 import { Boot } from './states/boot';
 import { Load } from './states/load';
 import { Play } from './states/play';
-import { Victory } from './states/victory';
 
 export class CycleGame {
     private game: Phaser.Game;
@@ -19,7 +18,6 @@ export class CycleGame {
         this.game.state.add(Boot.NAME, new Boot(Load.NAME));
         this.game.state.add(Load.NAME, new Load(Play.NAME));
         this.game.state.add(Play.NAME, new Play(onGameEnds));
-        this.game.state.add(Victory.NAME, new Victory());
     }
 
     start() {
