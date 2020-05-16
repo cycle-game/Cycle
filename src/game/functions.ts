@@ -53,38 +53,3 @@ export function reset(Stats) {
     Stats.score = 0;
     Stats.difficulty = 1;
 }
-
-export function ecart(nombre: number, margingInPx: number) {
-    const gameWidthInPx = BASE_SIZE - 2 * margingInPx;
-    return Math.round(gameWidthInPx / (nombre - 1));
-}
-
-export type DifficultySelectorVM = { text: Phaser.Text; difficulty: number }[];
-
-// Choix de la difficulté
-export function difficultes(contexte, labels: string[]): DifficultySelectorVM {
-    // Mise en place des difficultés
-    const margingInPx = 100;
-    const elementWidthInPx = ecart(labels.length, margingInPx);
-
-    return labels.map((difficulty, index) => {
-        const difficultyTextSprite = cliquable(
-            margingInPx + elementWidthInPx * index,
-            BASE_SIZE - platformSizeInPx,
-            difficulty,
-            25,
-            0.5,
-            0.5,
-            0,
-            500,
-            contexte.choix,
-            contexte,
-        );
-        difficultyTextSprite.data.difficulty = index;
-
-        return {
-            text: difficultyTextSprite,
-            difficulty: index,
-        };
-    });
-}
