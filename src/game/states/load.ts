@@ -16,12 +16,12 @@ import {
     STAR,
     TRAP,
 } from '../resoucesNames';
-import { RulesState } from './rules';
+import { Play } from './play';
 
 export class Load extends Phaser.State {
     static NAME = Load.prototype.constructor.name;
 
-    constructor(private readonly nextStateName: string = RulesState.NAME) {
+    constructor(private readonly nextStateName: string = Play.NAME) {
         super();
     }
 

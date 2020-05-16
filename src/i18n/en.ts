@@ -13,8 +13,6 @@ export const en: Translations = {
         start: 'Push space to start',
         runAway: "Don't get hit by the night !",
     },
-    Presentation:
-        "Looking for adventures ?\nMove yourself with the arrow keys.\nUse space to jump.\nP to pause.\n\nReach the last level for\nsaving & sharing your score !\n\n\nPush space to start\n\nDon't get hit by the night !",
     Retour: 'Back',
     Editeur: 'Make your own level',
     Jeu: 'Play the game',

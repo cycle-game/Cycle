@@ -12,8 +12,6 @@ export const fr = {
         start: 'Appuyez sur espace pour commencer',
         runAway: 'Fuyez la nuit !',
     },
-    Presentation:
-        'Bienvenue !\n\nDéplacez vous avec les flèches du clavier.\nUtilisez espace pour sauter.\nP pour mettre en pause.\n\nAtteignez le dernier niveau afin de\nsauvegarder et partager votre score !\n\n\nAppuyez sur espace pour commencer\n\nFuyez la nuit !',
     Retour: 'Revenir',
     Editeur: 'Créez votre propre niveau',
     Jeu: 'Jouez au jeu',
