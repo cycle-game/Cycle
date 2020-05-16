@@ -1,0 +1,9 @@
+.VictoryDisplayer {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+
+    .score {
+        margin: 26px;
+    }
+}
