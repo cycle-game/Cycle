@@ -22,7 +22,9 @@ export const en: Translations = {
     Enregistrement: 'Save the actual score',
     HowToBack: '(Come back to this menu with Escape)',
     RaZ: 'Reset',
+    points: 'points',
     Pseudo: 'Enter your name and confirm with .. enter!',
+    backToMenu: 'Back to the menu',
     Scores: 'Highscores',
     Difficultes: {
         easy: 'Easy',

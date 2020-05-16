@@ -21,7 +21,9 @@ export const fr = {
     Enregistrement: 'Enregistrement du score actuel',
     HowToBack: '(Revenez sur ce menu avec Échap)',
     RaZ: 'RaZ',
+    points: 'Points',
     Pseudo: 'Entrez votre pseudo et validez par Entrée !',
+    backToMenu: 'Retour au menu',
     Scores: 'Tableau des scores',
     Difficultes: {
         easy: 'Facile',
