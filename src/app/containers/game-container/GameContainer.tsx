@@ -27,7 +27,7 @@ export const GameContainer: FunctionComponent = () => {
 
     return (
         <div>
-            <div className="GameContainer" id={CANVAS_ID} style={style} />;
+            <div className="GameContainer" id={CANVAS_ID} style={style} />
             <KeyboardEventHandler handleKeys={['esc']} onKeyEvent={goToHome} />
         </div>
     );

@@ -8,6 +8,7 @@ import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import { ScoresDisplayer } from '../containers';
 import { StageEditor } from '../containers/stage-editor/StageEditor';
 import { GameContainer } from '../containers/game-container';
+import { RulesDisplayer } from '../containers/rules-displayer';
 
 export class TheGame extends Component<{}, {}> {
     render() {
@@ -24,10 +25,13 @@ export class TheGame extends Component<{}, {}> {
                         <Route path="/game">
                             <GameContainer />
                         </Route>
+                        <Route path="/rules">
+                            <RulesDisplayer />
+                        </Route>
                         <Route path="/">
                             <div className="menu">
                                 <img className="logo" src="resources/tiles/logo-without-c.png" />
-                                <Link to="/game" style={{ textDecoration: 'none' }}>
+                                <Link to="/rules" style={{ textDecoration: 'none' }}>
                                     <div className="item">{i18nService.translate('Jeu')}</div>
                                 </Link>
 
