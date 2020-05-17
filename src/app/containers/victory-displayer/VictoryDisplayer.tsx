@@ -2,8 +2,6 @@ import './VictoryDisplayer.scss';
 import React, { FunctionComponent } from 'react';
 import { i18nService } from '../../../i18n/I18nService';
 import { useHistory } from 'react-router-dom';
-import { reset } from '../../../game/functions';
-import { PlayerProgression } from '../../../game/variables';
 
 type VictoryDisplayerProps = { score: number };
 
@@ -19,7 +17,6 @@ export const VictoryDisplayer: FunctionComponent<VictoryDisplayerProps> = props 
             <div>{i18nService.translate('Pseudo')}</div>
             <button
                 onClick={() => {
-                    reset(PlayerProgression);
                     history.replace('/');
                 }}
             >
