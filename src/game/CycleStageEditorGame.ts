@@ -4,6 +4,7 @@ import { Boot } from './states/boot';
 import { Load } from './states/load';
 import { Editor } from './states/editor';
 import { Play } from './states/play';
+import { easy } from '../app/models';
 
 export class CycleStageEditorGame {
     private game: Phaser.Game;
@@ -15,7 +16,7 @@ export class CycleStageEditorGame {
         this.game.state.add(Boot.NAME, new Boot(Load.NAME));
         this.game.state.add(Load.NAME, new Load(Editor.NAME));
         this.game.state.add(Editor.NAME, new Editor());
-        this.game.state.add(Play.NAME, new Play(() => {}));
+        this.game.state.add(Play.NAME, new Play(easy, () => {}));
     }
 
     start() {

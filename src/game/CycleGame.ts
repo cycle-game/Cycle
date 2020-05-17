@@ -3,6 +3,7 @@ import { BASE_SIZE } from './variables';
 import { Boot } from './states/boot';
 import { Load } from './states/load';
 import { Play } from './states/play';
+import { Difficulty } from '../app/models';
 
 export class CycleGame {
     private game: Phaser.Game;
@@ -10,6 +11,7 @@ export class CycleGame {
     constructor(
         private readonly htmlElement: string,
         public readonly baseSize = BASE_SIZE,
+        readonly selectedDifficulty: Difficulty,
         private readonly onGameEnds: () => void,
     ) {
         this.game = new Phaser.Game(this.baseSize, this.baseSize, Phaser.CANVAS, this.htmlElement);
@@ -17,7 +19,7 @@ export class CycleGame {
         // Les états du jeu
         this.game.state.add(Boot.NAME, new Boot(Load.NAME));
         this.game.state.add(Load.NAME, new Load(Play.NAME));
-        this.game.state.add(Play.NAME, new Play(onGameEnds));
+        this.game.state.add(Play.NAME, new Play(selectedDifficulty, onGameEnds));
     }
 
     start() {

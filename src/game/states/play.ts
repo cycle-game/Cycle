@@ -1,4 +1,4 @@
-import { BLUE, BASE_SIZE, edited_lvl, platformSizeInPx, PlayerProgression } from '../variables';
+import { BLUE, BASE_SIZE, edited_lvl, platformSizeInPx } from '../variables';
 import { reset, save } from '../functions';
 import { stages } from '../stages';
 import Phaser from 'phaser-ce';
@@ -8,6 +8,7 @@ import { StageDefinition } from '../stages/StageDefinition';
 
 import { mean } from 'lodash';
 import { i18nService } from '../../i18n/I18nService';
+import { Difficulty, PlayerProgression } from '../../app/models';
 
 const cplan = BASE_SIZE / 1.8;
 let nb_tours = 0;
@@ -59,17 +60,19 @@ export class Play extends Phaser.State {
     private plnte: Phaser.Sprite;
 
     private readonly onGameEnds: () => void;
+    private readonly playerProgression: PlayerProgression;
 
-    constructor(onGameEnds: () => void) {
+    constructor(selectedDifficulty: Difficulty, onGameEnds: () => void) {
         super();
         this.onGameEnds = onGameEnds;
+        this.playerProgression = new PlayerProgression(selectedDifficulty);
     }
 
     create() {
         if (edited_lvl.edited) {
             currentStage = edited_lvl;
         } else {
-            currentStage = stages[PlayerProgression.stage];
+            currentStage = stages[this.playerProgression.currentStage()];
         }
 
         this.game.paused = true;
@@ -83,18 +86,16 @@ export class Play extends Phaser.State {
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------- Difficulté //
 
-        if (PlayerProgression.difficulty < 3) {
-            nuit_rotat = nuit_rotat_diff[PlayerProgression.difficulty];
-        } else {
-            nuit_rotat = nuit_rotat_diff[nuit_rotat_diff.length - 1];
-        }
+        nuit_rotat = this.playerProgression.isInHardMode()
+            ? nuit_rotat_diff[nuit_rotat_diff.length - 1]
+            : nuit_rotat_diff[this.playerProgression.getDifficultyLevel()];
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
         // --------------------------------------------------- Sauvegarde PHP //
 
-        save(PlayerProgression);
+        save(this.playerProgression);
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
@@ -116,8 +117,7 @@ export class Play extends Phaser.State {
 
         this.game.time.events.loop(Phaser.Timer.SECOND, this.fpsAdapt, this);
 
-        if (PlayerProgression.difficulty >= 3) this.fps_moy = 2;
-        else this.fps_moy = 10;
+        this.fps_moy = this.playerProgression.isInHardMode() ? 2 : 10;
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
@@ -184,7 +184,7 @@ export class Play extends Phaser.State {
         this.label_lvl = this.game.add.text(
             0,
             -platformSizeInPx,
-            `${PlayerProgression.stage + 1}`,
+            `${this.playerProgression.currentStage() + 1}`,
             {
                 font: '30px Arial',
                 fill: '#' + BLUE,
@@ -196,7 +196,7 @@ export class Play extends Phaser.State {
         this.label_score = this.game.add.text(
             0,
             +platformSizeInPx,
-            `${PlayerProgression.score}`,
+            `${this.playerProgression.totalScore()}`,
             {
                 font: '20px Arial',
                 fill: '#' + BLUE,
@@ -371,7 +371,9 @@ export class Play extends Phaser.State {
         let fps = this.game.time.fps;
 
         // Rajout d'une difficulté : en mode hardcore (3), on change la vitesse
-        if (PlayerProgression.difficulty >= 3) fps += Math.round((Math.random() - 0.5) * 55);
+        if (this.playerProgression.isInHardMode()) {
+            fps += Math.round((Math.random() - 0.5) * 55);
+        }
 
         if (fps > 0) fps_array.push(fps);
 
@@ -390,8 +392,10 @@ export class Play extends Phaser.State {
             // ------------------------------------------------------------------ //
             // ------------------------------------------------------------ Score //
 
-            this.label_score.text = `${Math.round(PlayerProgression.score + this.tours(this.planete.angle))}`;
-            PlayerProgression.score += 0.05;
+            this.label_score.text = `${Math.round(
+                this.playerProgression.totalScore() + this.tours(this.planete.angle),
+            )}`;
+            this.playerProgression.addToScore(0.05);
 
             // ------------------------------------------------------------------ //
             // ------------------------------------------------------------------ //
@@ -458,7 +462,7 @@ export class Play extends Phaser.State {
             if (this.nuit.angle >= 87 || this.nuit.angle <= -87) {
                 // Rajouter le côté droit
                 this.create();
-                PlayerProgression.score += this.tours(this.planete.angle) + 50;
+                this.playerProgression.addToScore(this.tours(this.planete.angle) + 50);
             }
 
             // ------------------------------------------------------------------ //
@@ -468,7 +472,7 @@ export class Play extends Phaser.State {
 
             if (this.game.physics.arcade.overlap(this.dude, trapsGroup)) {
                 this.create();
-                PlayerProgression.score += this.tours(this.planete.angle) + 50;
+                this.playerProgression.addToScore(this.tours(this.planete.angle) + 50);
             }
 
             // ----------- Condition pour l'animation début-fin //
@@ -499,7 +503,7 @@ export class Play extends Phaser.State {
             // Lorsqu'on a atteint 0, on revient à l'éditeur ou on passe
             // au niveau suivant/écran de victoire
 
-            PlayerProgression.stage += 1;
+            this.playerProgression.goToNextStage();
 
             // ------------- Animation de fin de niveau //
             this.dude.body.gravity.y = 0;
@@ -511,9 +515,9 @@ export class Play extends Phaser.State {
                     // On vient de l'editeur
                     this.game.state.start('Editor');
                 else {
-                    if (PlayerProgression.stage >= stages.length) {
+                    if (this.playerProgression.currentStage() >= stages.length) {
                         this.zoom(1);
-                        this.onGameEnds();
+                        this.onGameEnds(this.playerProgression);
                     } else this.game.state.start('Play');
                 }
                 // ------------ ----------------------- //
@@ -559,13 +563,13 @@ export class Play extends Phaser.State {
         let plateformes;
         // En fonction on est en édition ou on est en jeu ..
         if (edited_lvl.edited) plateformes = edited_lvl.platforms;
-        else if (stages[PlayerProgression.stage])
+        else if (stages[this.playerProgression.currentStage()])
             // Vérification de l'existence du level
-            plateformes = stages[PlayerProgression.stage].platforms;
+            plateformes = stages[this.playerProgression.currentStage()].platforms;
         else {
             // S'il n'existe pas il y a une erreur; reboot du début
             plateformes = stages[0].platforms;
-            reset(PlayerProgression);
+            reset(this.playerProgression);
         }
 
         // Hauteur maximale des plateformes

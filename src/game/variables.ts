@@ -14,17 +14,5 @@ export let edited_lvl: EditableStageDefinition = { edited: false, platforms: [],
 
 // -- \\
 
-// Current level
-export const PlayerProgression = { stage: 0, score: 0, difficulty: 1 };
-// 4 difficulty levels :
-// _ 0 = easy
-// _ 1 = normal
-// _ 2 = difficult
-// _ 3 = insane
-
 // platform size
 export const platformSizeInPx = 20;
-
-// -- \\
-
-export const pseudo = '';

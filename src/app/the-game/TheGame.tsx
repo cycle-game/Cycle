@@ -1,9 +1,7 @@
 import './TheGame.scss';
 import React from 'react';
 
-import { PlayerProgression } from '../../game/variables';
 import { i18nService } from '../../i18n/I18nService';
-import { reset } from '../../game/functions';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import { ScoresDisplayer } from '../containers';
 import { StageEditor } from '../containers/stage-editor/StageEditor';
@@ -44,14 +42,6 @@ export const TheGame = () => (
                         <Link to="/stage-editor" style={{ textDecoration: 'none' }}>
                             <div className="item">{i18nService.translate('Editeur')}</div>
                         </Link>
-                        <div
-                            className="item"
-                            onClick={() => {
-                                reset(PlayerProgression);
-                            }}
-                        >
-                            {i18nService.translate('RaZ')}
-                        </div>
                     </div>
                 </Route>
             </Switch>
