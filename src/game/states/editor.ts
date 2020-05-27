@@ -1,4 +1,4 @@
-import { BASE_SIZE, platformSizeInPx, edited_lvl, pi180 } from '../variables';
+import { BASE_SIZE, edited_lvl, platformSizeInPx } from '../variables';
 import { Play } from './play';
 import Phaser from 'phaser-ce';
 import { PLANET, PLATFORM, PLAYER, STAR, TRAP } from '../resoucesNames';
@@ -7,7 +7,7 @@ import { i18nService } from '../../i18n/I18nService';
 
 const alph = 0.5;
 const inac = 0.05;
-const pi180_invers = 1 / pi180;
+const pi180_invers = 1 / (Math.PI / 180);
 const PLATFORMS_HEIGHT_NUMBER = 10;
 
 let invert_redim = 1;

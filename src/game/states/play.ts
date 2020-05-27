@@ -1,4 +1,4 @@
-import { BLUE, BASE_SIZE, edited_lvl, platformSizeInPx } from '../variables';
+import { BASE_SIZE, edited_lvl, platformSizeInPx } from '../variables';
 import { stages } from '../stages';
 import Phaser from 'phaser-ce';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
@@ -8,6 +8,7 @@ import { StageDefinition } from '../stages/StageDefinition';
 import { mean } from 'lodash';
 import { i18nService } from '../../i18n/I18nService';
 import { Difficulty, PlayerProgression } from '../../app/models';
+import { darkBlue } from '../../resources/colors';
 
 const cplan = BASE_SIZE / 1.8;
 let nb_tours = 0;
@@ -177,7 +178,7 @@ export class Play extends Phaser.State {
             `${this.playerProgression.currentStage() + 1}`,
             {
                 font: '30px Arial',
-                fill: '#' + BLUE,
+                fill: darkBlue,
                 align: 'center',
             },
             this.general,
@@ -189,7 +190,7 @@ export class Play extends Phaser.State {
             `${this.playerProgression.totalScore()}`,
             {
                 font: '20px Arial',
-                fill: '#' + BLUE,
+                fill: darkBlue,
                 align: 'center',
             },
             this.general,
