@@ -1,5 +1,4 @@
 import { BLUE, BASE_SIZE, edited_lvl, platformSizeInPx } from '../variables';
-import { reset, save } from '../functions';
 import { stages } from '../stages';
 import Phaser from 'phaser-ce';
 import { NIGHT_MASK, PLANET, PLATFORM, PLAYER, SELECTOR, STAR, TRAP } from '../resoucesNames';
@@ -33,9 +32,7 @@ let currentStage: StageDefinition;
 
 let trapsGroup: any;
 let starsGroup: any;
-// Attention,  ici on a une grosse partie du jeu
-// C'est l'état (state) où tout les niveaux seront
-// mis en place.
+
 export class Play extends Phaser.State {
     static NAME = Play.prototype.constructor.name;
 
@@ -89,13 +86,6 @@ export class Play extends Phaser.State {
         nuit_rotat = this.playerProgression.isInHardMode()
             ? nuit_rotat_diff[nuit_rotat_diff.length - 1]
             : nuit_rotat_diff[this.playerProgression.getDifficultyLevel()];
-
-        // ------------------------------------------------------------------ //
-        // ------------------------------------------------------------------ //
-        // ------------------------------------------------------------------ //
-        // --------------------------------------------------- Sauvegarde PHP //
-
-        save(this.playerProgression);
 
         // ------------------------------------------------------------------ //
         // ------------------------------------------------------------------ //
@@ -568,8 +558,7 @@ export class Play extends Phaser.State {
             plateformes = stages[this.playerProgression.currentStage()].platforms;
         else {
             // S'il n'existe pas il y a une erreur; reboot du début
-            plateformes = stages[0].platforms;
-            reset(this.playerProgression);
+            throw new Error('Error with stage selection');
         }
 
         // Hauteur maximale des plateformes
@@ -642,22 +631,5 @@ export class Play extends Phaser.State {
             trapVM.anchor.set(0.5, 1);
             trapVM.angle = trap[0];
         });
-    }
-
-    render() {
-        // this.game.debug.spriteBounds(this.dude);
-        // game.debug.body(this.plnte);
-        // game.debug.body(this.nuit);
-        // game.debug.body(this.dude);
-        // this.platforms.forEachAlive((platform) =>
-        //     game.debug.body(platform)
-        // );
-        // this.dudeTest.forEachAlive((dudeT) =>
-        //     game.debug.body(dudeT)
-        // );
-        // game.debug.cameraInfo(game.camera, 32, 32);
-        // game.debug.spriteInfo(this.platforms.getFirstAlive(), 32, 32);
-        // game.debug.spriteCoords(this.dudeTest.getAt(0), 32, 300);
-        // game.debug.spriteCoords(this.dude, 32, 200);
     }
 }
