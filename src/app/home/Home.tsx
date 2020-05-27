@@ -1,4 +1,4 @@
-import './TheGame.scss';
+import './Home.scss';
 import React from 'react';
 
 import { i18nService } from '../../i18n/I18nService';
@@ -9,8 +9,8 @@ import { GameContainer } from '../containers/game-container';
 import { RulesDisplayer } from '../containers/rules-displayer';
 import { VictoryDisplayer } from '../containers/victory-displayer';
 
-export const TheGame = () => (
-    <div className="TheGame">
+export const Home = () => (
+    <div className="Home">
         <BrowserRouter>
             <Switch>
                 <Route path="/scores">
