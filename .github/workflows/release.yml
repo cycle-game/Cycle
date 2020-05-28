@@ -1,4 +1,4 @@
-name: Deploy & Release
+name: Release
 
 on:
   push:
@@ -30,9 +30,8 @@ jobs:
         run: yarn --frozen-lockfile --silent
         env:
           HUSKY_SKIP_INSTALL: true
-      - name: Build, Deploy and Release
+      - name: Release
         run: |
-          yarn ci:deploy
           yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
