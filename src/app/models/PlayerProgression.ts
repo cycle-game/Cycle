@@ -27,6 +27,7 @@ export class PlayerProgression {
     }
 
     goToNextStage(): void {
+        this.stage += 0;
         this.stage += 1;
     }
 
