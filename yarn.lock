@@ -2079,17 +2079,17 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@storybook/addon-actions@6.0.0-beta.2":
-  version "6.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.0.0-beta.2.tgz#a5c7856ad74b70f3a28dbf2778c926843bdda03d"
-  integrity sha512-eKa5Hvg6NV493y7891a62B57aj/cHvc1ljla2db28L9ek5X7LIbOdso+lY1N8qn3D0O+jV4a9X4f+ISiVY1jtw==
+"@storybook/addon-actions@6.0.0-beta.28":
+  version "6.0.0-beta.28"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.0.0-beta.28.tgz#6ea24f8ea8f1a850c470e7f715fdbfa1baf24e2c"
+  integrity sha512-wHxBgzEdWDFbq7xRbn+PtTSf5Om2rz2+1Y0xjIFVFrN4slgF4zrxgNpZDTiZTVvqObmrhNh7GqAQojhuJmBA2g==
   dependencies:
-    "@storybook/addons" "6.0.0-beta.2"
-    "@storybook/api" "6.0.0-beta.2"
-    "@storybook/client-api" "6.0.0-beta.2"
-    "@storybook/components" "6.0.0-beta.2"
-    "@storybook/core-events" "6.0.0-beta.2"
-    "@storybook/theming" "6.0.0-beta.2"
+    "@storybook/addons" "6.0.0-beta.28"
+    "@storybook/api" "6.0.0-beta.28"
+    "@storybook/client-api" "6.0.0-beta.28"
+    "@storybook/components" "6.0.0-beta.28"
+    "@storybook/core-events" "6.0.0-beta.28"
+    "@storybook/theming" "6.0.0-beta.28"
     core-js "^3.0.1"
     fast-deep-equal "^3.1.1"
     global "^4.3.2"
