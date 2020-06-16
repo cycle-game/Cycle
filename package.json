@@ -65,7 +65,7 @@
         "@semantic-release/git": "9.0.0",
         "@semantic-release/github": "7.0.7",
         "@storybook/addon-actions": "6.0.0-beta.30",
-        "@storybook/addon-docs": "6.0.0-beta.29",
+        "@storybook/addon-docs": "6.0.0-beta.30",
         "@storybook/addon-toolbars": "6.0.0-beta.30",
         "@storybook/react": "6.0.0-beta.30",
         "@types/enzyme": "3.10.5",
