@@ -108,7 +108,7 @@
         "webpack-merge": "4.2.2"
     },
     "dependencies": {
-        "i18next": "19.4.5",
+        "i18next": "19.5.4",
         "lodash": "4.17.15",
         "normalize.css": "8.0.1",
         "phaser-ce": "2.15.1",
