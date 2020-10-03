@@ -13315,10 +13315,10 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
-phaser-ce@2.15.1:
-  version "2.15.1"
-  resolved "https://registry.yarnpkg.com/phaser-ce/-/phaser-ce-2.15.1.tgz#d3bdeda80444f3b7f88ade102a8dd007462f2364"
-  integrity sha512-bbUIMnszLa7g52dUVdoKgr/AsDwqr2xA9ccBRDjbMNE/g/VrJoeNTfj4v320qY8LxLx9Vq233+BBlLJb+/gRYQ==
+phaser-ce@2.16.0:
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/phaser-ce/-/phaser-ce-2.16.0.tgz#44d5240826425ea3b737c9c34e5d8b79d9209f66"
+  integrity sha512-bnDBm/+j6uGI7TGfLUxgfRuyKDgD+eRHcUvNNlLa/9ZA9DlVB0xGdcLPwLanZoliRWpnoxyyov8VzZNDM4NtzA==
 
 picomatch@2.2.2, picomatch@^2.0.4, picomatch@^2.0.5, picomatch@^2.2.1:
   version "2.2.2"
