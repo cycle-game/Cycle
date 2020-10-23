@@ -1,6 +1,6 @@
 import { i18nService } from '../src/i18n/I18nService';
 
-export const globalArgTypes = {
+export const globalTypes = {
     locale: {
         name: 'Locale',
         description: 'Internationalization locale',
@@ -16,7 +16,7 @@ export const globalArgTypes = {
     },
 };
 
-const styledComponentsThemeDecorator = (storyFn, { globalArgs: { locale } }) => {
+const styledComponentsThemeDecorator = (storyFn, { globals: { locale } }) => {
     i18nService.setLanguage(locale);
     return storyFn();
 };
