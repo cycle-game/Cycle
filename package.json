@@ -96,7 +96,7 @@
         "react-is": "16.13.1",
         "redux-devtools-extension": "2.13.8",
         "sass": "1.27.0",
-        "sass-loader": "8.0.2",
+        "sass-loader": "10.0.4",
         "semantic-release": "17.2.1",
         "style-loader": "1.2.1",
         "ts-jest": "26.4.1",
