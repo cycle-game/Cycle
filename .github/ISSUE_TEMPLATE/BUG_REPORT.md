@@ -1,5 +1,5 @@
 ---
-name: ':beetle: Bug Report'
+name: '🐞 Bug Report'
 about: Report a problem
 title: ''
 labels: 'type:Bug :beetle:'

@@ -1,5 +1,5 @@
 ---
-name: ':rocket: Feature Request'
+name: '🚀 Feature Request'
 about: Suggest a new idea/feature for improving the game
 title: ''
 labels: 'type:Feature :rocket:'
