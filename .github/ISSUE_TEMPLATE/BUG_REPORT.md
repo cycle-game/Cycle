@@ -18,7 +18,7 @@ Found a bug? Please fill out the sections below. :blush:
 
 ## Possible Solution
 
-<!--- Not obligatory, but suggest a fix/reason for the bug, -->
+<!--- Not obligatory, but suggest a fix/reason for the bug -->
 
 ## Steps to Reproduce
 

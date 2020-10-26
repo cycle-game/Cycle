@@ -1,14 +1,16 @@
 ---
 name: ':rocket: Feature Request'
 about: Suggest a new idea/feature for improving the game
-labels: 'c.Feature :rocket:'
+title: ''
+labels: 'type:Feature :rocket:'
+assignees: ''
 ---
 
 <!--
   Before opening a new issue, please search existing issues:  https://github.com/cycle-game/Cycle/issues
 -->
 
-**Is your request related to a problem?**
+## Is your request related to a problem?
 
 <!--
   Provide a clear and concise description of what the problem is.
@@ -17,7 +19,7 @@ labels: 'c.Feature :rocket:'
 
 (Write your answer here.)
 
-**Describe the solution you'd like**
+## Describe the solution you'd like
 
 <!--
   Provide a clear and concise description of what you want to happen.
@@ -25,7 +27,7 @@ labels: 'c.Feature :rocket:'
 
 (Describe your proposed solution here.)
 
-**Describe alternatives you've considered**
+## Describe alternatives you've considered
 
 <!--
   Let us know about other solutions you've tried or researched.
@@ -33,7 +35,7 @@ labels: 'c.Feature :rocket:'
 
 (Write your answer here.)
 
-**Additional context**
+## Additional context
 
 <!--
   Is there anything else you can add about the proposal?
