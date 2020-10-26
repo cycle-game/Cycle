@@ -109,7 +109,7 @@
     },
     "dependencies": {
         "i18next": "19.8.2",
-        "lodash": "4.17.19",
+        "lodash": "4.17.20",
         "normalize.css": "8.0.1",
         "phaser-ce": "2.16.0",
         "prop-types": "15.7.2",
