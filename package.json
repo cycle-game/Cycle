@@ -113,7 +113,7 @@
         "normalize.css": "8.0.1",
         "phaser-ce": "2.16.0",
         "prop-types": "15.7.2",
-        "react": "16.13.1",
+        "react": "16.14.0",
         "react-dom": "16.13.1",
         "react-keyboard-event-handler": "1.5.4",
         "react-redux": "7.2.2",
