@@ -1,60 +1,54 @@
 import React from 'react';
 import { DifficultySelector } from './DifficultySelector';
-import { difficulties, easy, nightmare } from '../../models';
-import { shallow } from 'enzyme';
+import { difficulties, easy, hard, nightmare } from '../../models';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('DifficultySelector', () => {
-    describe('selectDifficulty', () => {
-        it('should call `onDifficultySelected` with selected difficulty', () => {
-            const onDifficultySelected = jest.fn();
+    it('should call `onDifficultySelected` when selecting a difficulty', () => {
+        const onDifficultySelected = jest.fn();
 
-            const wrapper = shallow<DifficultySelector, DifficultySelector['props'], DifficultySelector['state']>(
-                <DifficultySelector difficulties={difficulties} onDifficultySelected={onDifficultySelected} />,
-            );
+        render(<DifficultySelector difficulties={difficulties} onDifficultySelected={onDifficultySelected} />);
 
-            wrapper.instance().selectDifficulty(easy);
-            expect(onDifficultySelected).toHaveBeenCalledWith(easy);
-        });
-
-        it('should not call `onDifficultySelected` if clicked difficulty is already selected', () => {
-            const onDifficultySelected = jest.fn();
-
-            const wrapper = shallow<DifficultySelector, DifficultySelector['props'], DifficultySelector['state']>(
-                <DifficultySelector difficulties={difficulties} onDifficultySelected={onDifficultySelected} />,
-            );
-
-            wrapper.instance().setState({ selectedDifficulty: nightmare });
-            wrapper.instance().selectDifficulty(nightmare);
-            expect(onDifficultySelected).not.toHaveBeenCalledWith(nightmare);
-        });
-
-        it('should set `selectedDifficulty` property of the state', () => {
-            const wrapper = shallow<DifficultySelector, DifficultySelector['props'], DifficultySelector['state']>(
-                <DifficultySelector difficulties={difficulties} onDifficultySelected={jest.fn()} />,
-            );
-
-            wrapper.instance().selectDifficulty(nightmare);
-            expect(wrapper.state().selectedDifficulty).toEqual(nightmare);
-        });
+        userEvent.click(screen.getByTestId('option-easy'));
+        userEvent.click(screen.getByTestId('option-hard'));
+        expect(onDifficultySelected).nthCalledWith(1, easy);
+        expect(onDifficultySelected).nthCalledWith(2, hard);
     });
 
-    describe('isCurrentlySelectedDifficulty', () => {
-        it('should return true when input difficulty is the state selected difficulty', () => {
-            const wrapper = shallow<DifficultySelector, DifficultySelector['props'], DifficultySelector['state']>(
-                <DifficultySelector difficulties={difficulties} onDifficultySelected={jest.fn()} />,
-            );
+    it('should not call `onDifficultySelected` when selecting difficulty already selected', () => {
+        const onDifficultySelected = jest.fn();
 
-            wrapper.instance().setState({ selectedDifficulty: nightmare });
-            expect(wrapper.instance().isCurrentlySelectedDifficulty(nightmare)).toEqual(true);
+        render(
+            <DifficultySelector
+                difficulties={difficulties}
+                onDifficultySelected={onDifficultySelected}
+                initialDifficulty={nightmare}
+            />,
+        );
+
+        userEvent.click(screen.getByTestId('option-nightmare'));
+
+        expect(onDifficultySelected).not.toHaveBeenCalledWith(nightmare);
+    });
+
+    it('should set text of selected option to bold', () => {
+        render(
+            <DifficultySelector
+                difficulties={difficulties}
+                onDifficultySelected={jest.fn()}
+                initialDifficulty={easy}
+            />,
+        );
+
+        expect(screen.getByTestId('option-nightmare')).toHaveStyle({
+            fontWeight: 'normal',
         });
 
-        it('should return false when input difficulty is not the state selected difficulty', () => {
-            const wrapper = shallow<DifficultySelector, DifficultySelector['props'], DifficultySelector['state']>(
-                <DifficultySelector difficulties={difficulties} onDifficultySelected={jest.fn()} />,
-            );
+        userEvent.click(screen.getByTestId('option-nightmare'));
 
-            wrapper.instance().setState({ selectedDifficulty: nightmare });
-            expect(wrapper.instance().isCurrentlySelectedDifficulty(easy)).toEqual(false);
+        expect(screen.getByTestId('option-nightmare')).toHaveStyle({
+            fontWeight: 'bold',
         });
     });
 });
