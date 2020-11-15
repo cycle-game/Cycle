@@ -44,6 +44,7 @@ export class DifficultySelector extends Component<DifficultySelectorProps, Diffi
             <div className="DifficultySelector">
                 {difficulties.map(difficulty => (
                     <div
+                        data-testid={`option-${difficulty.translationKey}`}
                         key={difficulty.level}
                         className="option"
                         onClick={() => this.selectDifficulty(difficulty)}
@@ -53,7 +54,7 @@ export class DifficultySelector extends Component<DifficultySelectorProps, Diffi
                                 : { fontWeight: 'normal' }
                         }
                     >
-                      {i18nService.translate('Difficultes.'+difficulty.translationKey)}
+                        {i18nService.translate('Difficultes.' + difficulty.translationKey)}
                     </div>
                 ))}
             </div>
