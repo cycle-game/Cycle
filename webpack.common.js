@@ -47,9 +47,12 @@ module.exports = {
     ],
     module: {
         rules: [
-            { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
-            { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
-            { test: /p2\.js/, use: ['expose-loader?p2'] },
+            {
+                test: /pixi\.js/,
+                use: { loader: 'expose-loader', options: { exposes: ['PIXI'] } },
+            },
+            { test: /phaser-split\.js$/, use: { loader: 'expose-loader', options: { exposes: ['Phaser'] } } },
+            { test: /p2\.js/, use: { loader: 'expose-loader', options: { exposes: ['p2'] } } },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
